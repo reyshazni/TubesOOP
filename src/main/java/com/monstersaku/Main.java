@@ -15,6 +15,7 @@ public class Main {
             "configs/element-type-effectivity-chart.csv"));
 
     public static void main(String[] args) {
+        // tes tes
         // read config file
         for (String fileName : CSV_FILE_PATHS) {
             try {
