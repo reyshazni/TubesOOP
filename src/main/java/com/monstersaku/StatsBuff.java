@@ -38,7 +38,7 @@ public class StatsBuff {
 
     // Setter
     public void setAttack(int attack){
-        this.Attack = attack;
+        this.attack = attack;
     }
 
     public void setDefense(int defense){

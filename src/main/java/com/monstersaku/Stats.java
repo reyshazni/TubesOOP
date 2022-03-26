@@ -47,7 +47,7 @@ public class Stats {
     }
 
     public void setAttack(double attack){
-        this.Attack = attack;
+        this.attack = attack;
     }
 
     public void setDefense(double defense){
