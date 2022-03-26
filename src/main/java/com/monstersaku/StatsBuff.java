@@ -40,22 +40,75 @@ public class StatsBuff {
 
     // Setter
     public void setAttack(int attack){
-        this.attack = attack;
+        if (attack > 4) {
+            this.attack = 4;
+        } else if (attack < -4) {
+            this.attack = -4;
+        } else {
+            this.attack = attack;
+        }
     }
 
     public void setDefense(int defense){
-        this.defense = defense;
+        if (defense > 4) {
+            this.defense = 4;
+        } else if (defense < -4) {
+            this.defense = -4;
+        } else {
+            this.defense = defense;
+        }
     }
 
     public void setSpecialAttack(int specialAttack){
-        this.specialAttack = specialAttack;
+        if (specialAttack > 4) {
+            this.specialAttack = 4;
+        } else if (specialAttack < -4) {
+            this.specialAttack = -4;
+        } else {
+            this.specialAttack = specialAttack;
+        }
     }
 
     public void setSpecialDefense(int specialDefense){
-        this.specialDefense = specialDefense;
+        if (specialDefense > 4) {
+            this.specialDefense = 4;
+        } else if (specialDefense < -4) {
+            this.specialDefense = -4;
+        } else {
+            this.specialDefense = specialDefense;
+        }
     }
 
     public void setSpeed(int speed){
-        this.speed = speed;
+        if (speed > 4) {
+            this.speed = 4;
+        } else if (speed < -4) {
+            this.speed = -4;
+        } else {
+            this.speed = speed;
+        }
+    }
+
+    // Other Method
+    public double factor(int num) {
+        if (num == -4) {
+            return (double)(2/6);
+        } else if (num == -3) {
+            return (double)(2/5);
+        } else if (num == -2) {
+            return (double)(2/4);
+        } else if (num == -1) {
+            return (double)(2/3);
+        } else if (num == 0) {
+            return (double)(1);
+        } else if (num == 1) {
+            return (double)(3/2);
+        } else if (num == 2) {
+            return (double)(4/2);
+        } else if (num == 3) {
+            return (double)(5/2);
+        } else if (num == 4) {
+            return (double)(6/2);
+        }
     }
 }   

@@ -2,6 +2,7 @@ package com.monstersaku;
 
 import com.monstersaku.util.CSVReader;
 
+import java.io.*;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,5 +36,8 @@ public class Main {
                 // do nothing
             }
         }
+
+        StatsBuff sb = new StatsBuff();
+        // printf("%f",sb.factor(2));
     }
 }
