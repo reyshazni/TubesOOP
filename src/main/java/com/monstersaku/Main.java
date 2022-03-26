@@ -18,7 +18,7 @@ public class Main {
         // read config file
         for (String fileName : CSV_FILE_PATHS) {
             try {
-                System.out.printf("Nama File : %s\n", fileName);
+                System.out.printf("Filename : %s\n", fileName);
                 CSVReader reader = new CSVReader(new File(Main.class.getResource(fileName).toURI()), ";");
                 reader.setSkipHeader(true);
                 List<String[]> lines = reader.read();
