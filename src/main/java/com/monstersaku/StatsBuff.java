@@ -92,23 +92,25 @@ public class StatsBuff {
     // Other Method
     public double factor(int num) {
         if (num == -4) {
-            return (double)(2/6);
+            return ((double) 2/6);
         } else if (num == -3) {
-            return (double)(2/5);
+            return ((double) 2/5);
         } else if (num == -2) {
-            return (double)(2/4);
+            return ((double) 2/4);
         } else if (num == -1) {
-            return (double)(2/3);
+            return ((double) 2/3);
         } else if (num == 0) {
             return (double)(1);
         } else if (num == 1) {
-            return (double)(3/2);
+            return ((double) 3/2);
         } else if (num == 2) {
-            return (double)(4/2);
+            return ((double) 4/2);
         } else if (num == 3) {
-            return (double)(5/2);
+            return ((double) 5/2);
         } else if (num == 4) {
-            return (double)(6/2);
+            return ((double) 6/2);
+        } else {
+            return ((double) 1);
         }
     }
 }   
