@@ -36,8 +36,5 @@ public class Main {
                 // do nothing
             }
         }
-
-        StatsBuff sb = new StatsBuff();
-        System.out.printf("%f\n",sb.factor(4));
     }
 }
