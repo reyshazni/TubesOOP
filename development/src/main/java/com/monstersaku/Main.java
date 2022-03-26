@@ -13,7 +13,7 @@ public class Main {
             "configs/monsterpool.csv",
             "configs/movepool.csv",
             "configs/element-type-effectivity-chart.csv"));
-
+            
     public static void main(String[] args) {
         // read config file
         for (String fileName : CSV_FILE_PATHS) {
