@@ -1,6 +1,6 @@
 public class Stats {
     // Atribut
-    private double healtPoint;
+    private double healthPoint;
     private double attack;
     private double defense;
     private double specialAttack;
@@ -9,7 +9,7 @@ public class Stats {
 
     // Konstruktor
     public Stats() {
-        healtPoint = 0.0;
+        healthPoint = 0.0;
         attack = 0.0;
         defense = 0.0;
         specialAttack = 0.0;
@@ -18,7 +18,7 @@ public class Stats {
 
     // Getter
     public double getHealthPoint() {
-        return healtPoint;
+        return healthPoint;
     }
 
     public double getAttack() {
@@ -42,8 +42,8 @@ public class Stats {
     }
 
     // Setter
-    public void setHealthPoint(double healtPoint){
-        this.healtPoint = healtPoint;
+    public void setHealthPoint(double healthPoint){
+        this.healthPoint = healthPoint;
     }
 
     public void setAttack(double attack){
