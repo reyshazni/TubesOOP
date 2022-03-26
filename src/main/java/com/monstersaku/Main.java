@@ -2,11 +2,12 @@ package com.monstersaku;
 
 import com.monstersaku.util.CSVReader;
 
+import java.lang.System;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Main {
     private static final List<String> CSV_FILE_PATHS = Collections.unmodifiableList(Arrays.asList(
@@ -35,5 +36,8 @@ public class Main {
                 // do nothing
             }
         }
+
+        StatsBuff sb = new StatsBuff();
+        System.out.printf("%f\n",sb.factor(4));
     }
 }

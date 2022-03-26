@@ -19,27 +19,27 @@ public class Stats {
     }
 
     // Getter
-    public double getHealthPoint() {
+    public double getBaseHealthPoint() {
         return healthPoint;
     }
 
-    public double getAttack() {
+    public double getBaseAttack() {
         return attack;
     }
 
-    public double getDefense() {
+    public double getBaseDefense() {
         return defense;
     }
 
-    public double getSpecialAttack() {
+    public double getBaseSpecialAttack() {
         return specialAttack;
     }
 
-    public double getSpecialDefense() {
+    public double getBaseSpecialDefense() {
         return specialDefense;
     }
 
-    public double getSpeed() {
+    public double getBaseSpeed() {
         return speed;
     }
 
