@@ -40,9 +40,12 @@ public class Main {
         // Instansiasi class player
         Player player1 = new Player(1);
         Player player2 = new Player(2);
+        
+        // Membuat command awal
+        System.out.println("\nSelamat datang di Mobilemon!!\nPilih command berikut!!");
+        System.out.println("\n1.START GAME\n2.EXIT GAME\n");
 
-        System.out.println("\nSelamat di Mobilemon!!");
-        System.out.println("\nSTART GAME\nEXIT GAME\n");
+        // Membuat 
         
     }   
 }
