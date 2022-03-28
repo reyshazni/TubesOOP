@@ -36,5 +36,13 @@ public class Main {
                 // do nothing
             }
         }
-    }
+        
+        // Instansiasi class player
+        Player player1 = new Player(1);
+        Player player2 = new Player(2);
+
+        System.out.println("\nSelamat di Mobilemon!!");
+        System.out.println("\nSTART GAME\nEXIT GAME\n");
+        
+    }   
 }
