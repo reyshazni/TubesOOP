@@ -61,10 +61,6 @@ public class Stats {
     }
 
     // Setter
-    public void setMaxHealthPoint(double maxHealthPoint){
-        this.maxHealthPoint = maxHealthPoint;
-    }
-
     public void setHealthPoint(double healthPoint){
         this.healthPoint = healthPoint;
     }
