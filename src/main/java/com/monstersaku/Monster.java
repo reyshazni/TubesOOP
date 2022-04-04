@@ -44,6 +44,10 @@ public class Monster {
     public Stats getBaseStats() {
         return baseStats;
     }
+
+    public boolean getIsAlive() {
+        return isAlive;
+    }
     
     public void setNama(String nama) {
         this.nama = nama;
