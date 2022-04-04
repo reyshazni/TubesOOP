@@ -5,6 +5,7 @@ import java.lang.System;
 public class Player {
     private static int turn = 1;
     private int number;
+    private 
 
     public Player(int number) {
         this.number = number;
