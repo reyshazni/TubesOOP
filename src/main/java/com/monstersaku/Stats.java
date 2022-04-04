@@ -2,6 +2,7 @@ package com.monstersaku;
 
 public class Stats {
     // Atribut
+    private double maxHealthPoint;
     private double healthPoint;
     private double attack;
     private double defense;
@@ -18,32 +19,51 @@ public class Stats {
         speed = 0.0;
     }
 
+    public Stats(double maxHealthPoint, double healthPoint, double attack, double defense, double specialAttack, double specialDefense, double speed) {
+        this.maxHealthPoint = maxHealthPoint;
+        this.healthPoint = healthPoint;
+        this.attack = attack;
+        this.defense = defense;
+        this.specialAttack = specialAttack;
+        this.specialDefense = specialDefense;
+        this.speed = speed;
+    }
+
     // Getter
-    public double getBaseHealthPoint() {
+
+    public double getMaxHealthPoint() {
+        return maxHealthPoint;
+    }
+
+    public double getHealthPoint() {
         return healthPoint;
     }
 
-    public double getBaseAttack() {
+    public double getAttack() {
         return attack;
     }
 
-    public double getBaseDefense() {
+    public double getDefense() {
         return defense;
     }
 
-    public double getBaseSpecialAttack() {
+    public double getSpecialAttack() {
         return specialAttack;
     }
 
-    public double getBaseSpecialDefense() {
+    public double getSpecialDefense() {
         return specialDefense;
     }
 
-    public double getBaseSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
     // Setter
+    public void setMaxHealthPoint(double maxHealthPoint){
+        this.maxHealthPoint = maxHealthPoint;
+    }
+
     public void setHealthPoint(double healthPoint){
         this.healthPoint = healthPoint;
     }
