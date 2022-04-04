@@ -5,17 +5,16 @@ import java.util.List;
 
 public class Monster {
     private int id;
-    private String nama;
+    private String name;
     private List<ElementType> elementTypes = new ArrayList<ElementType>();
     private Stats baseStats;
     private List<Move> moves = new ArrayList<Move>();
     private boolean isAlive;
 
-
-    //Konstruktor for read
-    public Monster(int id, String nama, List<ElementType> elementTypes, Stats basesStats) {
+    //Konstruktor untuk read
+    public Monster(int id, String name, List<ElementType> elementTypes, Stats basesStats) {
         this.id = id;
-        this.nama = nama;
+        this.name = name;
         this.elementTypes = elementTypes;
         this.baseStats = basesStats;
         isAlive = true;
@@ -29,8 +28,8 @@ public class Monster {
         this.id = id;
     }
 
-    public String getNama() {
-        return nama;
+    public String getname() {
+        return name;
     }
 
     public List<ElementType> getElementTypes() {
@@ -49,8 +48,8 @@ public class Monster {
         return isAlive;
     }
     
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setname(String name) {
+        this.name = name;
     }
 
     public void setElementTypes(List<ElementType> elementTypes) {
