@@ -9,6 +9,7 @@ public class Monster {
     private List<ElementType> elementTypes = new ArrayList<ElementType>();
     private Stats baseStats;
     private List<Move> moves = new ArrayList<Move>();
+    private boolean isAlive;
 
 
     //Konstruktor for read
@@ -17,6 +18,7 @@ public class Monster {
         this.nama = nama;
         this.elementTypes = elementTypes;
         this.baseStats = basesStats;
+        isAlive = true;
     }
 
     public int getId() {
@@ -57,5 +59,9 @@ public class Monster {
 
     public void setBaseStats(Stats baseStats) {
         this.baseStats = baseStats;
+    }
+
+    public void killMonster() {
+        this.isAlive = false;
     }
 }
