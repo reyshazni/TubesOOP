@@ -1,5 +1,5 @@
 package com.monstersaku;
 
 public enum ElementType {
-    NORMAL, FIRE, WATER, GRASS
+    NORMAL, FIRE, WATER, GRASS, FIGHTING, FLYING, POISON, GROUND, ROCK, BUG, GHOST, STEEL, ELECTRIC, PHYSIC, ICE, DRAGON, DARK
 }
