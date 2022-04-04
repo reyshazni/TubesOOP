@@ -12,6 +12,7 @@ import com.monstersaku.Monster;
 import com.monstersaku.Stats;
 import com.monstersaku.ElementType;
 import com.monstersaku.ElementTypeEff;
+import com.monstersaku.Move;
 
 public class MonsterPoolImporter {
     private static String fileName = "configs/monsterpool.csv";
@@ -42,8 +43,8 @@ public class MonsterPoolImporter {
                 for (int i=0;i<6;i++){
                     baseStats[i] = Integer.valueOf(bs[i]);
                 }
-                Stats fixBaseStats = new Stats(baseStats[0], baseStats[1], baseStats[2], baseStats[3], baseStats[4], baseStats[5]);
-                Monster readMonster = new Monster(id, name, elementTypes, fixBaseStats, fixBaseStats);
+                Stats readBaseStats = new Stats(baseStats[0], baseStats[0], baseStats[1], baseStats[2], baseStats[3], baseStats[4], baseStats[5]);
+                Monster readMonster = new Monster(id, name, eltype, readBaseStats);
                 //MOVE
                 String[] movstr = ((line[4]).split(","));
                 //mau ubah string array to int array

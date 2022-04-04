@@ -10,7 +10,13 @@ public class Monster {
     private Stats baseStats;
     private List<Move> moves = new ArrayList<Move>();
 
-    public Monster(int id, String nama, List<ElementType> elementTypes, Stats baseStats, Stats fixBaseStats2) {
+
+    //Konstruktor for read
+    public Monster(int id, String nama, List<ElementType> elementTypes, Stats basesStats) {
+        this.id = id;
+        this.nama = nama;
+        this.elementTypes = elementTypes;
+        this.baseStats = basesStats;
     }
 
     public int getId() {

@@ -2,7 +2,7 @@ package com.monstersaku;
 
 public class Stats {
     // Atribut
-    private double maxHealthPoint;
+    public final double maxHealthPoint;
     private double healthPoint;
     private double attack;
     private double defense;
@@ -12,6 +12,7 @@ public class Stats {
 
     // Konstruktor
     public Stats() {
+        maxHealthPoint = 0.0;
         healthPoint = 0.0;
         attack = 0.0;
         defense = 0.0;
