@@ -30,28 +30,48 @@ public class GameView implements TurnOutput {
         boolean going = true;
         Turn turn = new Turn(this);
         while (going){
-            turn.startTurn();
+            turn.startTurn(myObj);
             turn.increaseRound();
         }
 
     }
 
     @Override
-    public void didStartAttacking() {
-        // TODO Auto-generated method stub
-        
+    public void didStartAttacking() {        
     }
 
     @Override
-    public void playerOneTurn() {
-        // TODO Auto-generated method stub
+    public void playerOneTurn(Scanner myObj) {
         Display.menuDalamTurn();
+        String Turn1 = myObj.next();
+        switch(Turn1) {
+            case "1":
+                // Move
+                break;
+            case "2":
+                // Switch
+                break;
+            case "3":
+                // Monster Info
+                break;
+            case "4":
+                // Game Info
+                break;
+            case "5":
+                // Help
+                Display.help();
+                break;
+            case "6":
+                // Exit
+                System.exit(0);
+                break;
+        }
     }
 
     @Override
-    public void playerTwoTurn() {
-        // TODO Auto-generated method stub
+    public void playerTwoTurn(Scanner myObj) {
         Display.menuDalamTurn();
+        String Turn2 = myObj.next();
         
     }
 

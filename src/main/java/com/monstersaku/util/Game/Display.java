@@ -20,4 +20,17 @@ public class Display {
         System.out.println("6. EXIT");
         System.out.printf("Masukkan Command: ");
     }
+
+    public static void help() {
+        System.out.println("Show Help");
+    }
+
+    public static void gameInfo() {
+        System.out.println("Show Game Info");
+    }
+
+    public static void monsterInfo() {
+        System.out.println("Show Monster Info");
+    }
 }
+

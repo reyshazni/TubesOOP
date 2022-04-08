@@ -16,7 +16,7 @@ import java.util.List;
 //import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main implements TurnOutput{
+public class Main{
     private static final List<String> CSV_FILE_PATHS = Collections.unmodifiableList(Arrays.asList(
             "configs/monsterpool.csv",
             "configs/movepool.csv",
@@ -68,23 +68,4 @@ public class Main implements TurnOutput{
             }
         }
     }
-
-    @Override
-    public void didStartAttacking() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void playerOneTurn() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void playerTwoTurn() {
-        // TODO Auto-generated method stub
-        
-    }
-
 }

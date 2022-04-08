@@ -4,6 +4,7 @@ import com.monstersaku.Main;
 import com.monstersaku.Monster;
 import com.monstersaku.Stats;
 import com.monstersaku.StatusMove;
+import com.monstersaku.util.Game.Effect;
 
 import java.util.ArrayList;
 import java.util.List;

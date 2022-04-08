@@ -1,6 +1,6 @@
 package com.monstersaku.util.Game;
 
-import javax.lang.model.element.Element;
+import java.util.Scanner;
 
 public class Turn {
     private int round = 1;
@@ -19,12 +19,12 @@ public class Turn {
         this.output = output;
     }
 
-    public void startTurn() {
+    public void startTurn(Scanner myObj) {
         if (this.round == 1){
-            this.output.playerOneTurn();
+            this.output.playerOneTurn(myObj);
         }
         if (this.round == 2) {
-            this.output.playerTwoTurn();
+            this.output.playerTwoTurn(myObj);
         }
         if (this.round == 3){
             this.output.didStartAttacking();
