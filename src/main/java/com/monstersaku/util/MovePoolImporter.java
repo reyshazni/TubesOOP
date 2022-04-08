@@ -11,6 +11,7 @@ import com.monstersaku.ElementType;
 import com.monstersaku.ElementTypeEff;
 import com.monstersaku.Move;
 
+/*
 public class MovePoolImporter {
     private static String fileName = "configs/movepool.csv";
 
@@ -69,3 +70,5 @@ public class MovePoolImporter {
         return moves;
     }
 }
+
+*/

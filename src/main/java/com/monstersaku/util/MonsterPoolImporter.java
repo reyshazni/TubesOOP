@@ -15,7 +15,13 @@ import com.monstersaku.ElementTypeEff;
 import com.monstersaku.Move;
 
 public class MonsterPoolImporter {
-    private static String fileName = "configs/monsterpool.csv";
+    //Membuat wadah untuk menempatkan fileName
+    private static String fileName;
+
+    //Membaca nama filename
+    public static void setFileName(String fn) {
+        fileName = fn;
+    };
 
     public static List<Monster> create() {
         List<Monster> monsterlist = new ArrayList<Monster>();
