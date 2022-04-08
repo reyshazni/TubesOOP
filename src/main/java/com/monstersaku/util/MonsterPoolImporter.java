@@ -62,8 +62,7 @@ public class MonsterPoolImporter {
                     moves[idx] = Integer.valueOf(movstr[idx]);
                 }
                 //SET UP MOVE MILIK MONSTER
-                List<Move> movePool = new ArrayList<Move>();
-                movePool = CreateObjectMovePool.create();
+                List<Move> movePool = MovePoolImporter.create();
                 AddListMove.add(readMonster, moves, movePool);
                 monsterlist.add(readMonster);
                 

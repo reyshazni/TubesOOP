@@ -1,7 +1,12 @@
 package com.monstersaku;
 
 import com.monstersaku.*;
+import com.monstersaku.util.AddListMonsterPool;
 import com.monstersaku.util.MonsterPoolImporter;
+import com.monstersaku.util.Game.Display;
+import com.monstersaku.util.Game.GameView;
+import com.monstersaku.util.Game.Turn;
+import com.monstersaku.util.Game.TurnOutput;
 
 import java.lang.System;
 import java.io.File;
@@ -11,7 +16,7 @@ import java.util.List;
 //import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class Main implements TurnOutput{
     private static final List<String> CSV_FILE_PATHS = Collections.unmodifiableList(Arrays.asList(
             "configs/monsterpool.csv",
             "configs/movepool.csv",
@@ -30,38 +35,56 @@ public class Main {
         // Membaca Configuration
         readConfig();
 
-        // Membuat command awal
-        System.out.println("\nSelamat datang di Mobilemon!!\nPilih command berikut!!");
-        System.out.println("\n1.START GAME\n2.HELP\n3.EXIT GAME\n");
+        
 
         // Membuat Masukan Game Menu
         
         // Membuat while untuk run game
         while (true) {
-            System.out.print("Masukkan Command: ");
+            // Membuat command awal
+            Display.menuAwal();
             String inputGameMenu = myObj.next();
             switch (inputGameMenu) {
                 case "1":
-                    // Memasukkan nama player
-                    System.out.print("Masukkan Nama Player 1: ");
-                    String namePlayer1 = myObj.next();
-                    System.out.print("Masukkan Nama Player 2: ");
-                    String namePlayer2 = myObj.next();
+                    // Memasukkan List Monster
+                    GameView gameView = new GameView();
+                    gameView.startGame(myObj);
                     break;
                 case "2":
-                    //Show Help
+                    // Show Help
                     System.out.println("Show Help");
                     break;
                 case "3":
+                    // Exit
                     System.out.println("Terima kasih sudah bermain!");
                     System.exit(0);
                     break;
                 default:
+                    // Invalid
                     System.out.println("Command Tidak Sesuai");
-                    System.out.print("Masukkan Command: ");
+                    Display.menuAwal();
                     inputGameMenu = myObj.next();
                     break;
             }
         }
     }
+
+    @Override
+    public void didStartAttacking() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void playerOneTurn() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void playerTwoTurn() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

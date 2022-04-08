@@ -11,16 +11,15 @@ public class Player{
     private int numOfMonster;
 
     //Konstruktor
-    public Player(String name, List<Monster> listOfMonster){
-        this.name = name;
-        this.listOfMonster = listOfMonster;
-        
-    }
-
     public Player(String name){
         this.name = name;
     }
-    
+
+    public Player(String name, List<Monster> listOfMonster){
+        this.name = name;
+        this.listOfMonster = listOfMonster; 
+    }
+
     //Getter
     public Monster getCurrentMonster() {
         return currentMonster;
