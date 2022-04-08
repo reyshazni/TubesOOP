@@ -1,18 +1,17 @@
 package com.monstersaku;
 import java.util.*;
 
-public class NormalMove extends Move {
+public class DefaultMove extends Move {
     private int basePower;
 
-    public NormalMove (int id, String name, ElementType elementType, int accuracy, int priority, int ammunition, int basePower) {
-        super(id, name, elementType, accuracy, priority, ammunition);
+    public DefaultMove() {
+        super(1, "Default Move", ElementType.NORMAL, 100, 0, 9999);
         this.basePower = basePower;
     }
 
     public int getBasePower() {
         return basePower;
     }
-
     public void setDamage (Monster source, Monster target, ElementTypeEff eleff) {
         Random rdm = new Random();
         double rdmNumber = (rdm.nextInt(85 + 1 - 100) + 85) / 100;
@@ -29,21 +28,26 @@ public class NormalMove extends Move {
         Math.floor((getBasePower() * (source.getBaseStats().getAttack() / target.getBaseStats().getDefense() + 2)
         * rdmNumber * effective * burnEffect ));
 
-        double currentHP;
-        currentHP = 
-        target.getBaseStats().getHealthPoint() - damageAttack;
+        double currentEnemyHP;
+        double currentSourceHP;
 
-        if (currentHP <= 0) {
+        currentEnemyHP = 
+        target.getBaseStats().getHealthPoint() - damageAttack;
+        if (currentEnemyHP <= 0) {
             target.killMonster();
-        } 
-        else {
+        } else {
             if (target.getStatusCondition() == StatusCondition.burn) {
-                currentHP = Math.floor(currentHP * 0.125);
+                currentEnemyHP = Math.floor(currentEnemyHP * 0.125);
             } else if (target.getStatusCondition() == StatusCondition.poison) {
-                currentHP = Math.floor(currentHP * 0.0625);
-            } else { // currentHP > 0
-                target.getBaseBaseStats().setHealthPoint(currentHP);
+                currentEnemyHP = Math.floor(currentEnemyHP * 0.0625);
+            } else { // currentEnemyHP >= 0
+                target.getBaseStats().setHealthPoint(currentEnemyHP);
             }
+        }
+        currentSourceHP = 
+        Math.floor(0.75 * source.getBaseStats().getHealthPoint());
+        if (currentSourceHP >= 0) {
+            source.getBaseStats().setHealthPoint(currentSourceHP);
         }
     }
 }
