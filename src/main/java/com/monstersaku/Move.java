@@ -19,7 +19,6 @@ public abstract class Move {
         this.priority = 0;
         this.ammunition = 0;
         this.currentAmmo = ammunition;
-
     }
 
     // Getter

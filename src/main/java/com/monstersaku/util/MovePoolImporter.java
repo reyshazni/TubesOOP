@@ -3,15 +3,19 @@ package com.monstersaku.util;
 import com.monstersaku.Main;
 import com.monstersaku.Monster;
 import com.monstersaku.Stats;
+import com.monstersaku.StatusMove;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.monstersaku.DefaultMove;
 import com.monstersaku.ElementType;
 import com.monstersaku.ElementTypeEff;
 import com.monstersaku.Move;
+import com.monstersaku.NormalMove;
+import com.monstersaku.SpecialMove;
 
-/*
+
 public class MovePoolImporter {
     private static String fileName = "configs/movepool.csv";
 
@@ -70,5 +74,3 @@ public class MovePoolImporter {
         return moves;
     }
 }
-
-*/

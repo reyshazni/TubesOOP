@@ -17,15 +17,10 @@ public class Monster {
         this.name = name;
         this.elementTypes = elementTypes;
         this.baseStats = basesStats;
-        isAlive = true;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getname() {
@@ -35,7 +30,7 @@ public class Monster {
     public List<ElementType> getElementTypes() {
         return elementTypes;
     }
-
+    
     public List<Move> getMoves() {
         return moves;
     }
@@ -44,8 +39,8 @@ public class Monster {
         return baseStats;
     }
 
-    public boolean getIsAlive() {
-        return isAlive;
+    public void setId(int id) {
+        this.id = id;
     }
     
     public void setname(String name) {
@@ -62,9 +57,5 @@ public class Monster {
 
     public void setBaseStats(Stats baseStats) {
         this.baseStats = baseStats;
-    }
-
-    public void killMonster() {
-        this.isAlive = false;
     }
 }

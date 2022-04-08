@@ -24,8 +24,6 @@ public class Main {
     }        
 
     public static void main(String[] args) {
-
-        
         // Membuat scanner
         Scanner myObj = new Scanner(System.in);
 
@@ -34,23 +32,36 @@ public class Main {
 
         // Membuat command awal
         System.out.println("\nSelamat datang di Mobilemon!!\nPilih command berikut!!");
-        System.out.println("\n1.START GAME\n2.HELP\n2.EXIT GAME");
+        System.out.println("\n1.START GAME\n2.HELP\n3.EXIT GAME\n");
 
         // Membuat Masukan Game Menu
-        System.out.print("Masukkan Command: ");
-        int inputGameMenu = myObj.nextInt();
-
+        
         // Membuat while untuk run game
-        while (inputGameMenu == 1) {
-            // Memasukkan nama player
-            System.out.print("Masukkan Nama Player 1: ");
-            String namePlayer1 = myObj.next();
-            System.out.print("Masukkan Nama Player 2: ");
-            String namePlayer2 = myObj.next();
-
-            
-        } 
-        
-        
-    }   
+        while (true) {
+            System.out.print("Masukkan Command: ");
+            String inputGameMenu = myObj.next();
+            switch (inputGameMenu) {
+                case "1":
+                    // Memasukkan nama player
+                    System.out.print("Masukkan Nama Player 1: ");
+                    String namePlayer1 = myObj.next();
+                    System.out.print("Masukkan Nama Player 2: ");
+                    String namePlayer2 = myObj.next();
+                    break;
+                case "2":
+                    //Show Help
+                    System.out.println("Show Help");
+                    break;
+                case "3":
+                    System.out.println("Terima kasih sudah bermain!");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Command Tidak Sesuai");
+                    System.out.print("Masukkan Command: ");
+                    inputGameMenu = myObj.next();
+                    break;
+            }
+        }
+    }
 }
