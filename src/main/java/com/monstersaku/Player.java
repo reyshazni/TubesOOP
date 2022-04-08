@@ -7,25 +7,54 @@ import java.util.List;
 public class Player{
     private String name;
     private List<Monster> listOfMonster = new ArrayList<Monster>();
+    private Monster currentMonster;
     private int numOfMonster;
 
+    //Konstruktor
     public Player(String name, List<Monster> listOfMonster){
         this.name = name;
         this.listOfMonster = listOfMonster;
+        
     }
+
     public Player(String name){
         this.name = name;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    
+    //Getter
+    public Monster getCurrentMonster() {
+        return currentMonster;
     }
+
     public String getName(){
         return this.name;
     }
+
+    public int getNumOfMonster(){
+        return this.numOfMonster;
+    }
+    //Setter
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMonsterList(Monster monster){
+        listOfMonster.add(monster);
+    }
+
+    public void setMonsters(List<Monster> monsters){
+        this.listOfMonster = monsters;
+    }
+
+    public void setCurrentMonster(Monster currentMonster) {
+        this.currentMonster = currentMonster;
+    }
+    //Method
     public void addMonster(Monster monster){
         listOfMonster.add(monster);
     }
+
+    //Method return jumlah monster yang masih hidup (update otomatis ketika dirun)
     public int countMonster(){
         for(Monster monster:listOfMonster){
             if (monster.getBaseStats().getHealthPoint() != 0) {
@@ -33,16 +62,10 @@ public class Player{
             } else {
                 numOfMonster += 0;
             }
-           
         }
         return numOfMonster;
     }
-    public int outputCount(){
-        return this.numOfMonster;
-    }
-    public void setMonsterList(Monster monster){
-        listOfMonster.add(monster);
-    }
+
     public void printMyMonster(){
         System.out.println();
         System.out.println("JUMLAH MONSTER "+ this.getName().toUpperCase()+" : " + countMonster());
@@ -64,10 +87,6 @@ public class Player{
                 System.out.println(" ");              
             }
         }
-    }
-
-    public void setMonsters(List<Monster> monsters){
-        this.listOfMonster = monsters;
     }
 
     public List<Monster> getListOfMonsters(){
