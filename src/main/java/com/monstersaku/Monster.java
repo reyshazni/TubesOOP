@@ -39,6 +39,10 @@ public class Monster {
         return baseStats;
     }
 
+    public boolean getIsAlive() {
+        return isAlive;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -57,5 +61,9 @@ public class Monster {
 
     public void setBaseStats(Stats baseStats) {
         this.baseStats = baseStats;
+    }
+
+    public void setIsAlive(boolean isAlive) {
+        this.isAlive = isAlive;
     }
 }
