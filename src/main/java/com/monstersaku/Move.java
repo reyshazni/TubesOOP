@@ -1,44 +1,60 @@
 package com.monstersaku;
 
-public class Move {
+public abstract class Move {
     // Atribut
+    private int id;
     private String name;
     private ElementType elementType;
     private int accuracy;
     private int priority;
     private int ammunition;
+    private int currentAmmo;
 
     // Konstruktor
-    public Move(String name, ElementType elementType, int accuracy, int priority, int ammunition) {
+    public Move(int id, String name, ElementType elementType, int accuracy, int priority, int ammunition) {
+        this.id = id;
         this.name = name;
         this.elementType = elementType;
         this.accuracy = 0;
         this.priority = 0;
         this.ammunition = 0;
+        this.currentAmmo = ammunition;
     }
 
     // Getter
-    public String name() {
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public ElementType elementType() {
+    public ElementType getElementType() {
         return elementType;
     }
 
-    public int accuracy() {
+    public int getAccuracy() {
         return accuracy;
     }
 
-    public int priority() {
+    public int getPriority() {
         return priority;
     }
 
-    public int ammunition() {
+    public int getAmmunition() {
         return ammunition;
     }
 
+    public int getCurrentAmmo() {
+        return currentAmmo;
+    }
+
     // Setter
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -57,9 +73,5 @@ public class Move {
 
     public void setAmmunition(int ammunition) {
         this.ammunition = ammunition;
-    }
-
-    public void setDamage() { // Butuh class Monster
-
     }
 }

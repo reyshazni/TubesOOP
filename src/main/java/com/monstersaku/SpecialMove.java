@@ -1,13 +1,14 @@
 package com.monstersaku;
 import java.util.*;
 
-public class NormalMove extends Move {
+public class SpecialMove extends Move {
     private int basePower;
 
-    public NormalMove () {
+    public SpecialMove(){
+        
     }
 
-    public NormalMove (int id, String name, ElementType elementType, int accuracy, int priority, int ammunition, int basePower) {
+    public SpecialMove (int id, String name, ElementType elementType, int accuracy, int priority, int ammunition, int basePower) {
         super(id, name, elementType, accuracy, priority, ammunition);
         this.basePower = basePower;
     }
@@ -28,9 +29,9 @@ public class NormalMove extends Move {
         if (source.getStatusCondition() == StatusCondition.burn) {
             burnEffect = 0.5;
         }
-        double damageAttack = 
-        Math.floor((getBasePower() * (source.getBaseStats().getAttack() / target.getBaseStats().getDefense() + 2)
-        * rdmNumber * effective * burnEffect ));
+        double damageAttack =
+        Math.floor(getBasePower() * (source.getBaseStats().getSpecialAttack() / target.getBaseStats().getSpecialDefense() + 2) 
+        * rdmNumber * effective * burnEffect);
 
         double currentHP;
         currentHP = 
@@ -38,8 +39,7 @@ public class NormalMove extends Move {
 
         if (currentHP <= 0) {
             target.killMonster();
-        } 
-        else {
+        } else {
             if (target.getStatusCondition() == StatusCondition.burn) {
                 currentHP = Math.floor(currentHP * 0.125);
             } else if (target.getStatusCondition() == StatusCondition.poison) {
@@ -48,5 +48,5 @@ public class NormalMove extends Move {
                 target.getBaseBaseStats().setHealthPoint(currentHP);
             }
         }
-    }
+    }       
 }
