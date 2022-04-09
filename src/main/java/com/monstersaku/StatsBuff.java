@@ -17,6 +17,14 @@ public class StatsBuff {
         speed = 0;
     }
 
+    public StatsBuff(int attack, int defense, int specialAttack, int specialDefense, int speed) {
+        this.attack = attack;
+        this.defense = defense;
+        this.specialAttack = specialAttack;
+        this.specialDefense = specialDefense;
+        this.speed = speed;
+    }
+
     // Getter
     public int getAttack() {
         return attack;

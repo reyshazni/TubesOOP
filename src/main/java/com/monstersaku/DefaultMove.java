@@ -50,4 +50,16 @@ public class DefaultMove extends Move {
             source.getBaseStats().setHealthPoint(currentSourceHP);
         }
     }
+    
+    public double getDamageAttack(Monster source, Monster target){
+        Random rdm = new Random();
+        double rdmNumber = (rdm.nextInt(85 + 1 - 100) + 85) / 100;
+        double effective = 1;
+        double burnEffect = 1;
+        double damageAttack = 
+        Math.floor((getBasePower() * (source.getBaseStats().getAttack() / target.getBaseStats().getDefense() + 2)
+        * rdmNumber * effective * burnEffect ));
+        return damageAttack;
+    }
 }
+
