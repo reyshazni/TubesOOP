@@ -3,7 +3,7 @@ package com.monstersaku;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Monster {
+public class Monster implements StatusCondition{
     private int id;
     private String name;
     private List<ElementType> elementTypes = new ArrayList<ElementType>();
