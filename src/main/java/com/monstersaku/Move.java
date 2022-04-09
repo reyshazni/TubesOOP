@@ -1,30 +1,45 @@
 package com.monstersaku;
+import com.monstersaku.util.Game.Effect;
 
 public abstract class Move {
     // Atribut
     private int id;
+    private String moveType;
     private String name;
     private ElementType elementType;
     private int accuracy;
     private int priority;
     private int ammunition;
     private int currentAmmo;
+    private String target;
+    private Effect effect;
+
+    public Move() {
+        
+    }
 
     // Konstruktor
-    public Move(int id, String name, ElementType elementType, int accuracy, int priority, int ammunition) {
+    public void move(int id, String moveType, String name, ElementType elementType, int accuracy, int priority, 
+    int ammunition, String target, Effect effect) {
         this.id = id;
+        this.moveType = moveType;
         this.name = name;
         this.elementType = elementType;
-        this.accuracy = 0;
-        this.priority = 0;
-        this.ammunition = 0;
+        this.accuracy = accuracy;
+        this.priority = priority;
+        this.ammunition = ammunition;
         this.currentAmmo = ammunition;
-
+        this.target = target;
+        this.effect = effect;
     }
 
     // Getter
     public int getId() {
         return id;
+    }
+    
+    public String getMoveType() {
+        return moveType;
     }
 
     public String getName() {
@@ -51,9 +66,21 @@ public abstract class Move {
         return currentAmmo;
     }
 
+    public String getTarget() {
+        return target;
+    }
+
+    public Effect getEffect() {
+        return effect;
+    }
+
     // Setter
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setMoveType(String moveType) {
+        this.moveType = moveType;
     }
 
     public void setName(String name) {
@@ -76,5 +103,12 @@ public abstract class Move {
         this.ammunition = ammunition;
     }
 
+    public void setTarget(String target) {
+        this.target = target;
+    }
+
+    public void setEffect(Effect effect) {
+        this.effect = effect;
+    }
 }
 

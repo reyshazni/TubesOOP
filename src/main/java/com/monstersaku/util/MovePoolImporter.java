@@ -47,11 +47,11 @@ public class MovePoolImporter {
                     int powerBase = Integer.valueOf(line[8]);
                     Effect effect = new Effect(powerBase);
                     if (moveType.equals("NORMAL")) {
-                        normalMove.setMove(id, moveType, name, elementType, accuracy, priority, ammunition, target,
+                        normalMove.move(id, moveType, name, elementType, accuracy, priority, ammunition, target,
                                 effect);
                         moves.add(normalMove);
                     } else if (moveType.equals("SPECIAL")) {
-                        specialMove.setMove(id, moveType, name, elementType, accuracy, priority, ammunition, target,
+                        specialMove.move(id, moveType, name, elementType, accuracy, priority, ammunition, target,
                                 effect);
                         moves.add(specialMove);
                     }
@@ -63,7 +63,7 @@ public class MovePoolImporter {
                         statsPoint[i] = Integer.valueOf(stats[i]);
                     }
                     Effect effect = new Effect(statusCondition, statsPoint);
-                    statusMove.setMove(id, moveType, name, elementType, accuracy, priority, ammunition, target, effect);
+                    statusMove.move(id, moveType, name, elementType, accuracy, priority, ammunition, target, effect);
                     moves.add(statusMove);
                 }
             }

@@ -1,5 +1,6 @@
 package com.monstersaku;
 import java.util.*;
+import com.monstersaku.util.Game.*;
 
 public class SpecialMove extends Move {
     private int basePower;
@@ -8,8 +9,9 @@ public class SpecialMove extends Move {
         
     }
 
-    public SpecialMove (int id, String name, ElementType elementType, int accuracy, int priority, int ammunition, int basePower) {
-        super(id, name, elementType, accuracy, priority, ammunition);
+    public SpecialMove (int id, String moveType, String name, ElementType elementType, int accuracy, int priority, 
+    int ammunition, String target, Effect effect, int basePower) {
+        move(id, moveType, name, elementType, accuracy, priority, ammunition, target, effect);
         this.basePower = basePower;
     }
 
@@ -17,16 +19,16 @@ public class SpecialMove extends Move {
         return basePower;
     }
 
-    public void setDamage (Monster source, Monster target, ElementTypeEff eleff) {
+    public void setDamage (Monster source, Monster target, ElementTypeEff elementeffective) {
         Random rdm = new Random();
         double rdmNumber = (rdm.nextInt(85 + 1 - 100) + 85) / 100;
         double effective = 1;
         double burnEffect = 1;
         
         for (ElementType et: target.getElementTypes()) {
-            effective *= eleff.getEffectivity(this.elementTypes, eleff);
+            effective *= elementeffective.getEffectivity(elementType, elementeffective);
         }
-        if (source.getStatusCondition() == StatusCondition.burn) {
+        if (source.getStatusCondition() == "BURN") {
             burnEffect = 0.5;
         }
         double damageAttack =
@@ -38,14 +40,14 @@ public class SpecialMove extends Move {
         target.getBaseStats().getHealthPoint() - damageAttack;
 
         if (currentHP <= 0) {
-            target.killMonster();
+            System.out.println("Enemy has died.");
         } else {
-            if (target.getStatusCondition() == StatusCondition.burn) {
+            if (target.getStatusCondition() == "BURN") {
                 currentHP = Math.floor(currentHP * 0.125);
-            } else if (target.getStatusCondition() == StatusCondition.poison) {
+            } else if (target.getStatusCondition() == "POISON") {
                 currentHP = Math.floor(currentHP * 0.0625);
             } else { // currentHP > 0
-                target.getBaseBaseStats().setHealthPoint(currentHP);
+                target.getBaseStats().setHealthPoint(currentHP);
             }
         }
     }       
