@@ -40,6 +40,10 @@ public class Monster implements StatusCondition{
         return baseStats;
     }
 
+    public boolean getIsAlive() {
+        return isAlive;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -59,6 +63,36 @@ public class Monster implements StatusCondition{
     public void setBaseStats(Stats baseStats) {
         this.baseStats = baseStats;
     }
+
+    public void setIsAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
+
+    public void showMonsterInfo(){
+        System.out.println("Id Monster : " + this.id);
+        System.out.println("Nama : " + this.name);
+        System.out.println("Elements : ");
+        for (int i=0; i<this.elementTypes.size(); i++){
+            System.out.printf("(%d) %s\n", i+1, this.elementTypes.get(i));
+        }
+        System.out.println("Stats : "); 
+        this.baseStats.showStats();
+        System.out.println("Moves : "); 
+        this.showMove();
+    }
+
+    public void showMove(){
+        for (int i=0; i<this.moves.size(); i++) {
+            System.out.printf("(%d) %s\n", i+1, this.moves.get(i).getName());
+        }
+    }
+
+    public void takeDamage(double damageAttack){
+        double healthPointAfter = this.baseStats.getHealthPoint() - damageAttack;
+        this.baseStats.setHealthPoint(healthPointAfter);
+        if (healthPointAfter<=0){
+            this.isAlive = false;
+        }
 
     public void setStatusCondiiton(String statusCondition){
         this.statusCondition = statusCondition;
@@ -105,6 +139,5 @@ public class Monster implements StatusCondition{
         if (randomNum == 1){
             // gabisa gerak
         }
-
     }
 }
