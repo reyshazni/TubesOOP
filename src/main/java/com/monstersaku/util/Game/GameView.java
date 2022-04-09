@@ -72,7 +72,28 @@ public class GameView implements TurnOutput {
     public void playerTwoTurn(Scanner myObj) {
         Display.menuDalamTurn();
         String Turn2 = myObj.next();
-        
+        switch(Turn2) {
+            case "1":
+                // Move
+                break;
+            case "2":
+                // Switch
+                break;
+            case "3":
+                // Monster Info
+                break;
+            case "4":
+                // Game Info
+                break;
+            case "5":
+                // Help
+                Display.help();
+                break;
+            case "6":
+                // Exit
+                System.exit(0);
+                break;
+        }
     }
 
     @Override
