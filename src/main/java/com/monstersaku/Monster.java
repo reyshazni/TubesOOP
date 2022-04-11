@@ -24,7 +24,7 @@ public class Monster implements StatusCondition {
         return id;
     }
 
-    public String getname() {
+    public String getName() {
         return name;
     }
 
@@ -91,12 +91,13 @@ public class Monster implements StatusCondition {
         }
     }
 
-    public void takeDamage(double damageAttack){
+    public void takeDamage(double damageAttack) {
         double healthPointAfter = this.baseStats.getHealthPoint() - damageAttack;
         this.baseStats.setHealthPoint(healthPointAfter);
-        if (healthPointAfter<=0){
+        if (healthPointAfter <= 0) {
             this.isAlive = false;
         }
+    }
 
     public void setStatusCondiiton(String statusCondition) {
         this.statusCondition = statusCondition;

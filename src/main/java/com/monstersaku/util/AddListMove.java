@@ -1,5 +1,6 @@
 package com.monstersaku.util;
 
+import com.monstersaku.DefaultMove;
 import com.monstersaku.Main;
 import com.monstersaku.Monster;
 import com.monstersaku.Move;
@@ -17,21 +18,19 @@ import java.util.ArrayList;
 public class AddListMove {
     public static void add(Monster monster, int[] moves, List<Move> movePool) {
         List<Move> mimic = new ArrayList<Move>();
-        mimic.add(movePool.get(0));
+        DefaultMove df = new DefaultMove();
+        mimic.add(df);
         for (int i = 0; i < moves.length; i++) {
             int index = moves[i];
             Move move = movePool.get(index);
             if (move instanceof NormalMove) {
-                NormalMove nm = new NormalMove();
-                nm.copyMove(move);
+                NormalMove nm = new NormalMove(move);
                 mimic.add(nm);
             } else if (move instanceof SpecialMove) {
-                SpecialMove specialMove = new SpecialMove();
-                specialMove.copyMove(move);
+                SpecialMove specialMove = new SpecialMove(move);
                 mimic.add(specialMove);
             } else if (move instanceof StatusMove) {
-                StatusMove statusMove = new StatusMove();
-                statusMove.copyMove(move);
+                StatusMove statusMove = new StatusMove(move);
                 mimic.add(statusMove);
             }
         }

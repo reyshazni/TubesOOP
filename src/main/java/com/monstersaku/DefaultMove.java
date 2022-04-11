@@ -1,4 +1,5 @@
 package com.monstersaku;
+
 import java.util.*;
 import com.monstersaku.util.Game.*;
 
@@ -13,28 +14,28 @@ public class DefaultMove extends Move {
     public int getBasePower() {
         return basePower;
     }
-    public void setDamage (Monster source, Monster target, ElementTypeEff elementeffective) {
+
+    public void setDamage(Monster source, Monster target, ElementTypeEff elementeffective) {
         Random rdm = new Random();
         double rdmNumber = (rdm.nextInt(85 + 1 - 100) + 85) / 100;
         double effective = 1;
         double burnEffect = 1;
-        
-        for (ElementType et: target.getElementTypes()) {
-            effective *= elementeffective.getEffectivity(this.elementTypes, elementeffective);
+
+        for (ElementType et : target.getElementTypes()) {
+            effective *= elementeffective.getEffectivity();
         }
         if (source.getStatusCondition() == "BURN") {
             burnEffect = 0.5;
         }
-        double damageAttack = 
-        Math.floor((getBasePower() * (source.getBaseStats().getAttack() / target.getBaseStats().getDefense() + 2)
-        * rdmNumber * effective * burnEffect ));
+        double damageAttack = Math
+                .floor((getBasePower() * (source.getBaseStats().getAttack() / target.getBaseStats().getDefense() + 2)
+                        * rdmNumber * effective * burnEffect));
 
         double currentEnemyHP;
         double currentSourceHP;
 
         // Enemy
-        currentEnemyHP = 
-        target.getBaseStats().getHealthPoint() - damageAttack;
+        currentEnemyHP = target.getBaseStats().getHealthPoint() - damageAttack;
         if (currentEnemyHP <= 0) {
             System.out.println("Enemy has died.");
         } else {
@@ -48,22 +49,20 @@ public class DefaultMove extends Move {
         }
 
         // Source
-        currentSourceHP = 
-        Math.floor(0.75 * source.getBaseStats().getHealthPoint());
+        currentSourceHP = Math.floor(0.75 * source.getBaseStats().getHealthPoint());
         if (currentSourceHP >= 0) {
             source.getBaseStats().setHealthPoint(currentSourceHP);
         }
     }
-    
-    public double getDamageAttack(Monster source, Monster target){
+
+    public double getDamageAttack(Monster source, Monster target) {
         Random rdm = new Random();
         double rdmNumber = (rdm.nextInt(85 + 1 - 100) + 85) / 100;
         double effective = 1;
         double burnEffect = 1;
-        double damageAttack = 
-        Math.floor((getBasePower() * (source.getBaseStats().getAttack() / target.getBaseStats().getDefense() + 2)
-        * rdmNumber * effective * burnEffect ));
+        double damageAttack = Math
+                .floor((getBasePower() * (source.getBaseStats().getAttack() / target.getBaseStats().getDefense() + 2)
+                        * rdmNumber * effective * burnEffect));
         return damageAttack;
     }
 }
-
