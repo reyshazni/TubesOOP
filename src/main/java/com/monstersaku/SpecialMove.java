@@ -26,7 +26,7 @@ public class SpecialMove extends Move {
         double burnEffect = 1;
         
         for (ElementType et: target.getElementTypes()) {
-            effective *= elementeffective.getEffectivity(elementType, elementeffective);
+            effective = com.monstersaku.util.EffectivityConfig.getEffectivity(this.getElementType(), et);
         }
         if (source.getStatusCondition() == "BURN") {
             burnEffect = 0.5;
