@@ -97,6 +97,7 @@ public class Monster implements StatusCondition {
         if (healthPointAfter<=0){
             this.isAlive = false;
         }
+    }
 
     public void setStatusCondiiton(String statusCondition) {
         this.statusCondition = statusCondition;
