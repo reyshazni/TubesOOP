@@ -93,9 +93,12 @@ public class Monster implements StatusCondition {
 
     public void takeDamage(double damageAttack){
         double healthPointAfter = this.baseStats.getHealthPoint() - damageAttack;
-        this.baseStats.setHealthPoint(healthPointAfter);
         if (healthPointAfter<=0){
             this.isAlive = false;
+            System.out.println(this.name + " has died");
+        } else {
+            this.baseStats.setHealthPoint(healthPointAfter);;
+            System.out.println("Current health point of " + this.name + " = " + healthPointAfter);
         }
     }
 
@@ -106,12 +109,16 @@ public class Monster implements StatusCondition {
     public void EffectStatusCondition() {
         if (statusCondition.equals("BURN")) {
             burn();
+            System.out.println(this.name + " got burn");
         } else if (statusCondition.equals("POISON")) {
             poison();
+            System.out.println(this.name + " got poison");
         } else if (statusCondition.equals("SLEEP")) {
             sleep();
+            System.out.println(this.name + " got sleep");
         } else if (statusCondition.equals("PARALYZE")) {
             paralyze();
+            System.out.println(this.name + " got paralyze");
         }
     }
 
@@ -119,7 +126,7 @@ public class Monster implements StatusCondition {
         double damage = (baseStats.getMaxHealthPoint()) * (1 / 8);
         baseStats.setHealthPoint(baseStats.getHealthPoint() - damage);
 
-        // terus ini damage outputnya berkurang 50% tapi bingung gimana
+        // terus ini damage outputnya berkurang 50% tapi bingung gimana  -- bantu jawab uda diimplementasiin di move
     }
 
     public void poison() {
