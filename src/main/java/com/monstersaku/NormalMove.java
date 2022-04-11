@@ -27,7 +27,7 @@ public class NormalMove extends Move {
 
         double effective = 1;
         for (ElementType et : target.getElementTypes()) {
-            effective = effective * elementeffective.getEffectivity();
+            effective = com.monstersaku.util.EffectivityConfig.getEffectivity(this.getElementType(), et);
         }
         if (source.getStatusCondition() == "BURN") {
             burnEffect = 0.5;

@@ -22,7 +22,7 @@ public class DefaultMove extends Move {
         double burnEffect = 1;
 
         for (ElementType et : target.getElementTypes()) {
-            effective *= elementeffective.getEffectivity();
+            effective = com.monstersaku.util.EffectivityConfig.getEffectivity(this.getElementType(), et);
         }
         if (source.getStatusCondition() == "BURN") {
             burnEffect = 0.5;
