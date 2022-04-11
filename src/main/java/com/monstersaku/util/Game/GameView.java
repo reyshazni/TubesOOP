@@ -43,7 +43,10 @@ public class GameView implements TurnOutput {
     }
 
     @Override
-    public void playerOneTurn(Scanner myObj) {
+    public void playerOneTurn(Scanner myObj, Player Player1) {
+        GameConfig ConfigPlayer1 = new
+
+        GameConfig.enterRound(myObj, Player1);
         System.out.println("Masukkan inputmu, Player 1 !!");
         Display.menuDalamTurn();
         String Turn1 = myObj.next();
