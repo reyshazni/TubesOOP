@@ -1,4 +1,5 @@
 package com.monstersaku;
+
 import com.monstersaku.util.Game.Effect;
 
 public abstract class Move {
@@ -14,13 +15,20 @@ public abstract class Move {
     private String target;
     private Effect effect;
 
+    // Konstruktor
+    // Kosong
     public Move() {
-        
+
     }
 
-    // Konstruktor
-    public void move(int id, String moveType, String name, ElementType elementType, int accuracy, int priority, 
-    int ammunition, String target, Effect effect) {
+    // Mengcopy move lain
+    public Move(Move move) {
+        this.copyMove(move);
+    }
+
+    // Konstruktor Penuh
+    public void move(int id, String moveType, String name, ElementType elementType, int accuracy, int priority,
+            int ammunition, String target, Effect effect) {
         this.id = id;
         this.moveType = moveType;
         this.name = name;
@@ -33,11 +41,23 @@ public abstract class Move {
         this.effect = effect;
     }
 
+    public void copyMove(Move move) {
+        this.id = move.getId();
+        this.moveType = move.getMoveType();
+        this.name = move.getName();
+        this.elementType = move.getElementType();
+        this.accuracy = move.getAccuracy();
+        this.priority = move.getPriority();
+        this.ammunition = move.getAmmunition();
+        this.target = move.getTarget();
+        this.effect = move.getEffect();
+    }
+
     // Getter
     public int getId() {
         return id;
     }
-    
+
     public String getMoveType() {
         return moveType;
     }
@@ -111,4 +131,3 @@ public abstract class Move {
         this.effect = effect;
     }
 }
-

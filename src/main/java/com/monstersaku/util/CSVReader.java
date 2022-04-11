@@ -27,7 +27,8 @@ public class CSVReader {
 
     /**
      * Creates a new reader from a file, using a separator
-     * @param csvFile file csv
+     * 
+     * @param csvFile   file csv
      * @param separator separator of csv file
      */
     public CSVReader(File csvFile, String separator) {
@@ -39,6 +40,7 @@ public class CSVReader {
     /**
      * Set the reader to skip the first line, because the first line
      * is the header of csv
+     * 
      * @param isSkippingHeader true if header should be skipped
      */
     public void setSkipHeader(boolean isSkippingHeader) {
@@ -47,8 +49,9 @@ public class CSVReader {
 
     /**
      * Reads the csv file into list of string array.
+     * 
      * @throws IOException exception when reading csv file.
-     *         for example: file not found error
+     *                     for example: file not found error
      * @return list of string array. Each list item represent a row.
      */
     public List<String[]> read() throws IOException {
@@ -72,6 +75,8 @@ public class CSVReader {
             }
             firstLine = false;
         }
+        // close scanner
+        br.close();
         return list;
     }
 }

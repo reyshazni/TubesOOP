@@ -1,10 +1,7 @@
 package com.monstersaku;
 
-import java.lang.System;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.monstersaku.*;
 
 public class Player {
     private String name;
@@ -79,7 +76,7 @@ public class Player {
                 monster.showMonsterInfo();
                 System.out.println("");
                 System.out.println("----- Current Stats Monster " + monster.getName() + " -----");
-                monster.getStatusCondition().showStats();
+                monster.getBaseStats().showStats();
                 System.out.println("");
                 System.out.println("----- Moves of " + monster.getName() + " -----");
                 for (Move move : monster.getMoves()) {

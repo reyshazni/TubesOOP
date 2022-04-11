@@ -6,6 +6,7 @@ import java.util.List;
 //import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.monstersaku.util.EffectivityConfig;
 import com.monstersaku.util.MonsterPoolImporter;
 import com.monstersaku.util.MovePoolImporter;
 import com.monstersaku.util.Game.Display;
@@ -20,7 +21,7 @@ public class Main {
     public static void readConfig() {
         MonsterPoolImporter.setFileName(CSV_FILE_PATHS.get(0));
         MovePoolImporter.setFileName(CSV_FILE_PATHS.get(1));
-        // FindEffectivity.setFileName(CSV_FILE_PATHS.get(2));
+        EffectivityConfig.setFileName(CSV_FILE_PATHS.get(2));
     }
 
     public static void main(String[] args) {

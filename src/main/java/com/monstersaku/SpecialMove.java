@@ -10,6 +10,10 @@ public class SpecialMove extends Move {
 
     }
 
+    public SpecialMove(Move move) {
+        super(move);
+    }
+
     public SpecialMove(int id, String moveType, String name, ElementType elementType, int accuracy, int priority,
             int ammunition, String target, Effect effect, int basePower) {
         move(id, moveType, name, elementType, accuracy, priority, ammunition, target, effect);

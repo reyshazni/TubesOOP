@@ -72,7 +72,7 @@ public class MovePoolImporter {
 
         } catch (Exception e) {
             // do nothing
-            System.out.println("Error getValue effectivity");
+            System.out.println("Error Import MovePool");
         }
         return moves;
     }

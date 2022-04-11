@@ -1,39 +1,36 @@
 package com.monstersaku.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.monstersaku.DefaultMove;
-import com.monstersaku.Main;
 import com.monstersaku.Monster;
 import com.monstersaku.Move;
 import com.monstersaku.NormalMove;
 import com.monstersaku.SpecialMove;
 import com.monstersaku.StatusMove;
 
-import com.monstersaku.util.CSVReader;
-import java.io.File;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
-
 public class AddListMove {
+    // Menambahkan List Move ke monster
     public static void add(Monster monster, int[] moves, List<Move> movePool) {
-        List<Move> mimic = new ArrayList<Move>();
+        // Membuat List Dummy
+        List<Move> dummyMoves = new ArrayList<Move>();
         DefaultMove df = new DefaultMove();
-        mimic.add(df);
+        dummyMoves.add(df);
         for (int i = 0; i < moves.length; i++) {
             int index = moves[i];
             Move move = movePool.get(index);
             if (move instanceof NormalMove) {
-                NormalMove nm = new NormalMove(move);
-                mimic.add(nm);
+                NormalMove normalMove = new NormalMove(move);
+                dummyMoves.add(normalMove);
             } else if (move instanceof SpecialMove) {
                 SpecialMove specialMove = new SpecialMove(move);
-                mimic.add(specialMove);
+                dummyMoves.add(specialMove);
             } else if (move instanceof StatusMove) {
                 StatusMove statusMove = new StatusMove(move);
-                mimic.add(statusMove);
+                dummyMoves.add(statusMove);
             }
         }
-        monster.setMoves(mimic);
+        monster.setMoves(dummyMoves);
     }
 }
