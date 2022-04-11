@@ -14,10 +14,12 @@ public class GameView implements TurnOutput {
         List<Monster> monsterPool = MonsterPoolImporter.create();
 
         // Memasukkan nama player
+        System.out.println("\n--- Memulai Game Baru! ---");
         System.out.print("Masukkan Nama Player 1: ");
         String namePlayer1 = myObj.next();
         System.out.print("Masukkan Nama Player 2: ");
         String namePlayer2 = myObj.next();
+        Display.lineBreak();
 
         // Membuat Objek Player Kosong
         Player Player1 = new Player(namePlayer1);
@@ -29,7 +31,7 @@ public class GameView implements TurnOutput {
 
         boolean going = true;
         Turn turn = new Turn(this);
-        while (going){
+        while (going) {
             turn.startTurn(myObj);
             turn.increaseRound();
         }
@@ -37,14 +39,14 @@ public class GameView implements TurnOutput {
     }
 
     @Override
-    public void didStartAttacking() {        
+    public void didStartAttacking() {
     }
 
     @Override
     public void playerOneTurn(Scanner myObj) {
         Display.menuDalamTurn();
         String Turn1 = myObj.next();
-        switch(Turn1) {
+        switch (Turn1) {
             case "1":
                 // Move
                 break;
@@ -72,7 +74,7 @@ public class GameView implements TurnOutput {
     public void playerTwoTurn(Scanner myObj) {
         Display.menuDalamTurn();
         String Turn2 = myObj.next();
-        switch(Turn2) {
+        switch (Turn2) {
             case "1":
                 // Move
                 break;
@@ -98,6 +100,6 @@ public class GameView implements TurnOutput {
 
     @Override
     public void checkIfEndGame() {
-        
+
     }
 }

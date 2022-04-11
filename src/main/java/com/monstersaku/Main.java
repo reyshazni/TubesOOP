@@ -46,7 +46,7 @@ public class Main {
                     break;
                 case "2":
                     // Show Help
-                    System.out.println("Show Help");
+                    Display.help();
                     break;
                 case "3":
                     // Exit

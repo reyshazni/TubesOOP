@@ -24,7 +24,7 @@ public class Display {
     }
 
     public static void help() {
-        System.out.println("Show Help");
+        System.out.println("Show Help\n");
     }
 
     public static void gameInfo() {
@@ -39,5 +39,8 @@ public class Display {
         System.out.println("--- GAME OVER ---");
         System.out.println(players.getName() + " WON");
     }
-}
 
+    public static void lineBreak() {
+        System.out.println("");
+    }
+}
