@@ -44,20 +44,25 @@ public class GameView implements TurnOutput {
 
     @Override
     public void playerOneTurn(Scanner myObj) {
+        System.out.println("Masukkan inputmu, Player 1 !!");
         Display.menuDalamTurn();
         String Turn1 = myObj.next();
         switch (Turn1) {
             case "1":
                 // Move
+                System.out.println("Monster 1 Move\n");
                 break;
             case "2":
                 // Switch
+                System.out.println("Monster 1 Switch\n");
                 break;
             case "3":
                 // Monster Info
+                System.out.println("Monster 1 Info\n");
                 break;
             case "4":
                 // Game Info
+                System.out.println("Game 1 Info\n");
                 break;
             case "5":
                 // Help
@@ -72,20 +77,24 @@ public class GameView implements TurnOutput {
 
     @Override
     public void playerTwoTurn(Scanner myObj) {
+        System.out.println("Masukkan inputmu, Player 2 !!");
         Display.menuDalamTurn();
         String Turn2 = myObj.next();
         switch (Turn2) {
             case "1":
                 // Move
+                System.out.println("Monster 2 Move\n");
                 break;
             case "2":
                 // Switch
+                System.out.println("Monster 2 Switch\n");
                 break;
             case "3":
                 // Monster Info
-                break;
+                System.out.println("Monster 2 Info\n");
             case "4":
                 // Game Info
+                System.out.println("Game 2 Info\n");
                 break;
             case "5":
                 // Help
