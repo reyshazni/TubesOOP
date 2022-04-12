@@ -25,7 +25,6 @@ public class Turn {
         }
         if (this.round == 2) {
             this.output.playerTurn(myObj, GameView.getPlayerList().get(1), round);
-            // this.output.playerTwoTurn(myObj);
         }
         if (this.round == 3) {
             this.output.didStartAttacking();
