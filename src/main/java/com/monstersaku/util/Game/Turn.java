@@ -41,4 +41,14 @@ public class Turn {
             this.round = 1;
         }
     }
+    
+    public void decreaseRound() {
+        if (this.round == 1) {
+            this.round = 3;
+        } else if (this.round == 2) {
+            this.round = 1;
+        } else {
+            this.round = 3;
+        }
+    }
 }

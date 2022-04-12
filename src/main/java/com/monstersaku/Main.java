@@ -27,8 +27,6 @@ public class Main {
         // Membuat scanner
         Scanner myObj = new Scanner(System.in);
 
-        // Membuat list pemain yang bermain
-
         // Membaca Configuration
         readConfig();
 

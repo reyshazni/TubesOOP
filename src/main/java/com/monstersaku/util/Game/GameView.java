@@ -13,6 +13,8 @@ import com.monstersaku.util.MonsterPoolImporter;
 public class GameView implements TurnOutput {
     private static List<Player> playerList = new ArrayList<Player>();
 
+    public boolean isNotInfo = true;
+
     public void addPlayer(Player player) {
         playerList.add(player);
     }
@@ -40,12 +42,18 @@ public class GameView implements TurnOutput {
         Turn turn = new Turn(this);
         while (going) {
             turn.startTurn(myObj);
-            turn.increaseRound();
+            if (isNotInfo){
+                turn.increaseRound();
+            } else {
+                isNotInfo = true;
+            }
+            
         }
     }
 
     @Override
     public void didStartAttacking() {
+        // Get currentmove lalu apply move
         Move move1 = playerList.get(0).getCurrentMove();
         Move move2 = playerList.get(1).getCurrentMove();
         if (move1 != null && move2 != null) {
@@ -61,8 +69,7 @@ public class GameView implements TurnOutput {
 
         System.out.printf("Masukkan inputmu, %s !!\n", currPlayer.getName());
         Display.menuDalamTurn();
-        String Turn = myObj.next();
-        switch (Turn) {
+        switch (myObj.next()) {
             case "1":
                 // Moves
                 System.out.printf("--- Pilihe move ---\n");
@@ -84,18 +91,21 @@ public class GameView implements TurnOutput {
                 Display.lineBreak();
                 currPlayer.showAvailableMonster();
                 Display.lineBreak();
+                this.isNotInfo = false;
                 break;
             case "4":
                 // Game Info
                 Display.lineBreak();
                 System.out.printf("Game %d Info\n\n", round);
                 Display.lineBreak();
+                this.isNotInfo = false;
                 break;
             case "5":
                 // Help
                 Display.lineBreak();
                 Display.help();
                 Display.lineBreak();
+                this.isNotInfo = false;
                 break;
             case "6":
                 // Exit
@@ -103,7 +113,9 @@ public class GameView implements TurnOutput {
                 System.exit(0);
                 break;
             default:
-                System.out.printf("This player name is %s\n", player.getName());
+                // CAUTION : bikin biar bisa ngulang kalo salah input
+                System.out.printf("\nMasukkan input dengan benar!\n");
+                this.isNotInfo = false;
                 break;
         }
     }
