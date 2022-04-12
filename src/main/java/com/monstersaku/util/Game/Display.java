@@ -1,5 +1,7 @@
 package com.monstersaku.util.Game;
 
+import com.monstersaku.Player;
+
 public class Display {
     public static void menuAwal() {
         System.out.println("\nSelamat datang di Mobilemon!!");
@@ -22,7 +24,7 @@ public class Display {
     }
 
     public static void help() {
-        System.out.println("Show Help");
+        System.out.println("Show Help\n");
     }
 
     public static void gameInfo() {
@@ -32,5 +34,13 @@ public class Display {
     public static void monsterInfo() {
         System.out.println("Show Monster Info");
     }
-}
 
+    public static void endGame(Player players) {
+        System.out.println("--- GAME OVER ---");
+        System.out.println(players.getName() + " WON");
+    }
+
+    public static void lineBreak() {
+        System.out.println("");
+    }
+}

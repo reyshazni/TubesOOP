@@ -1,24 +1,26 @@
 package com.monstersaku.util;
 
-import com.monstersaku.Main;
-import com.monstersaku.Monster;
-import com.monstersaku.Stats;
-import com.monstersaku.StatusMove;
-import com.monstersaku.util.Game.Effect;
-
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.monstersaku.DefaultMove;
 import com.monstersaku.ElementType;
-import com.monstersaku.ElementTypeEff;
+import com.monstersaku.Main;
 import com.monstersaku.Move;
 import com.monstersaku.NormalMove;
 import com.monstersaku.SpecialMove;
-
+import com.monstersaku.StatusMove;
+import com.monstersaku.util.Game.Effect;
 
 public class MovePoolImporter {
-    private static String fileName = "configs/movepool.csv";
+    // Membuat wadah untuk menempatkan fileName
+    private static String fileName;
+
+    // Membaca nama filename
+    public static void setFileName(String fn) {
+        fileName = fn;
+    };
 
     public static List<Move> create() {
         List<Move> moves = new ArrayList<Move>();
@@ -47,11 +49,11 @@ public class MovePoolImporter {
                     int powerBase = Integer.valueOf(line[8]);
                     Effect effect = new Effect(powerBase);
                     if (moveType.equals("NORMAL")) {
-                        normalMove.setMove(id, moveType, name, elementType, accuracy, priority, ammunition, target,
+                        normalMove.move(id, moveType, name, elementType, accuracy, priority, ammunition, target,
                                 effect);
                         moves.add(normalMove);
                     } else if (moveType.equals("SPECIAL")) {
-                        specialMove.setMove(id, moveType, name, elementType, accuracy, priority, ammunition, target,
+                        specialMove.move(id, moveType, name, elementType, accuracy, priority, ammunition, target,
                                 effect);
                         moves.add(specialMove);
                     }
@@ -63,14 +65,14 @@ public class MovePoolImporter {
                         statsPoint[i] = Integer.valueOf(stats[i]);
                     }
                     Effect effect = new Effect(statusCondition, statsPoint);
-                    statusMove.setMove(id, moveType, name, elementType, accuracy, priority, ammunition, target, effect);
+                    statusMove.move(id, moveType, name, elementType, accuracy, priority, ammunition, target, effect);
                     moves.add(statusMove);
                 }
             }
 
         } catch (Exception e) {
             // do nothing
-            System.out.println("Error getValue effectivity");
+            System.out.println("Error Import MovePool");
         }
         return moves;
     }

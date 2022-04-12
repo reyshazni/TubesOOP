@@ -8,7 +8,7 @@ public class Turn {
     private TurnOutput output;
 
     public int getRound() {
-        return this.round;
+        return this.round; 
     }
 
     public void configure(TurnOutput output) {
