@@ -8,6 +8,7 @@ import com.monstersaku.Monster;
 import com.monstersaku.Player;
 import com.monstersaku.Move;
 import com.monstersaku.util.AddListMonsterPool;
+import com.monstersaku.util.EffectivityConfig;
 import com.monstersaku.util.MonsterPoolImporter;
 
 public class GameView implements TurnOutput {
@@ -52,15 +53,30 @@ public class GameView implements TurnOutput {
     }
 
     @Override
-    public void didStartAttacking() {
+    public void didStartAttacking(Scanner myObj) {
         // Get currentmove lalu apply move
-        Move move1 = playerList.get(0).getCurrentMove();
-        Move move2 = playerList.get(1).getCurrentMove();
-        if (move1 != null && move2 != null) {
+        Player player1 = playerList.get(0);
+        Player player2 = playerList.get(1);
+        // Move move1 = playerList.get(0).getCurrentMove();
+        // Move move2 = playerList.get(1).getCurrentMove();
+        if (player1.getCurrentMove() != null && player2.getCurrentMove() != null) {
             // Cek prioritas setiap move
-            System.out.println("opke");
+            // Asumsi kalo samadengan kita lebih besar move1
+            if (player1.getCurrentMove().getPriority() >= player2.getCurrentMove().getPriority()){
+                // Priority 1 >= 2
+                player1.getCurrentMove().setDamage(player1, player2, myObj);
+                player2.getCurrentMove().setDamage(player2, player1, myObj);
+            } else {
+                // Priority 1 < 2
+                player2.getCurrentMove().setDamage(player2, player1, myObj);
+                player1.getCurrentMove().setDamage(player1, player2, myObj);
+            }
+        } else if (player1.getCurrentMove() != null) {
+            player1.getCurrentMove().setDamage(player1, player2, myObj);
+        } else if (player2.getCurrentMove() != null) {
+            player2.getCurrentMove().setDamage(player2, player1, myObj);
         }
-        System.out.printf("Player memilih untuk move\n");
+        System.out.printf("\nMove dilakukan\n");
     }
 
     @Override
@@ -74,7 +90,7 @@ public class GameView implements TurnOutput {
                 // Moves
                 System.out.printf("--- Pilihe move ---\n");
                 currPlayer.getCurrentMonster().showMove();
-                currPlayer.setCurrentMove(currPlayer.getCurrentMonster().selectMove(myObj));
+                currPlayer.setCurrentMove(myObj);
                 System.out.printf("\n\n GERAKAN YG KAMU PILIH ADALAH %s\n\n", currPlayer.getCurrentMove().getName());
                 break;
             case "2":
@@ -82,9 +98,9 @@ public class GameView implements TurnOutput {
                 System.out.printf("Monster %d Switch\n\n", round);
                 System.out.printf("Monster yang sedang digunakan adalah: %s\n", currPlayer.getCurrentMonster().getName());
                 currPlayer.showAvailableMonster();
-                currPlayer.setCurrentMonster(currPlayer.switchMonster(myObj));
-                System.out.printf("Monster yg kamu pakai sekarang adalah %s\n",
-                        currPlayer.getCurrentMonster().getName());
+                currPlayer.switchMonster(myObj);
+                System.out.printf("Monster baru yang digunakan sekarang adalah: %s dari index ke %d\n\n",
+                        currPlayer.getCurrentMonster().getName(), currPlayer.getListOfMonsters().indexOf(currPlayer.getCurrentMonster()));
                 break;
             case "3":
                 // Monster Info

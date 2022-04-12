@@ -15,43 +15,53 @@ public class DefaultMove extends Move {
         return basePower;
     }
 
-    public void setDamage(Monster source, Monster target, ElementTypeEff elementeffective) {
-        Random rdm = new Random();
-        double rdmNumber = (rdm.nextInt(85 + 1 - 100) + 85) / 100;
-        double effective = 1;
-        double burnEffect = 1;
+    public void setDamage(Player playerAttack, Player playerDefend, Scanner myObj) {
+        
+        Monster source = playerAttack.getCurrentMonster();
+        Monster target = playerDefend.getCurrentMonster();
 
-        for (ElementType et : target.getElementTypes()) {
-            effective = com.monstersaku.util.EffectivityConfig.getEffectivity(this.getElementType(), et);
+        System.out.printf("Monster milik %s bernama %d.%s MENYERANG %d.%s \n\n", playerAttack.getName(), playerAttack.getListOfMonsters().indexOf(source), source.getName(), playerDefend.getListOfMonsters().indexOf(target), target.getName());
+
+        if (source.getBaseStats().getHealthPoint() <= 0) {
+            ifMonsterAlive(source, playerAttack, myObj);
         }
-        if (source.getStatusCondition() == "BURN") {
-            burnEffect = 0.5;
-        }
-        double damageAttack = Math
-                .floor((getBasePower() * (source.getBaseStats().getAttack() / target.getBaseStats().getDefense() + 2)
-                        * rdmNumber * effective * burnEffect));
-
-        double currentEnemyHP;
-        double currentSourceHP;
-
-        // Enemy
-        currentEnemyHP = target.getBaseStats().getHealthPoint() - damageAttack;
-        if (currentEnemyHP <= 0) {
-            System.out.println("Enemy has died.");
-        } else {
-            if (target.getStatusCondition() == "BURN") {
-                currentEnemyHP = Math.floor(currentEnemyHP * 0.125);
-            } else if (target.getStatusCondition() == "POISON") {
-                currentEnemyHP = Math.floor(currentEnemyHP * 0.0625);
-            } else { // currentEnemyHP >= 0
-                target.getBaseStats().setHealthPoint(currentEnemyHP);
+        else {
+            double rdmNumber = (Math.random()*(1-0.85+1)+0.85);
+            double effective = 1;
+            double burnEffect = 1;
+    
+            for (ElementType et : target.getElementTypes()) {
+                effective = com.monstersaku.util.EffectivityConfig.getEffectivity(this.getElementType(), et);
             }
-        }
-
-        // Source
-        currentSourceHP = Math.floor(0.75 * source.getBaseStats().getHealthPoint());
-        if (currentSourceHP >= 0) {
-            source.getBaseStats().setHealthPoint(currentSourceHP);
+            if (source.getStatusCondition() == "BURN") {
+                burnEffect = 0.5;
+            }
+            double damageAttack = Math
+                    .floor((getBasePower() * (source.getBaseStats().getAttack() / target.getBaseStats().getDefense() + 2)
+                            * rdmNumber * effective * burnEffect));
+    
+            double currentEnemyHP;
+            double currentSourceHP;
+    
+            // Enemy
+            currentEnemyHP = target.getBaseStats().getHealthPoint() - damageAttack;
+            if (currentEnemyHP <= 0) {
+                System.out.println("Enemy has died.");
+            } else {
+                if (target.getStatusCondition() == "BURN") {
+                    currentEnemyHP = Math.floor(currentEnemyHP * 0.125);
+                } else if (target.getStatusCondition() == "POISON") {
+                    currentEnemyHP = Math.floor(currentEnemyHP * 0.0625);
+                } else { // currentEnemyHP >= 0
+                    target.getBaseStats().setHealthPoint(currentEnemyHP);
+                }
+            }
+    
+            // Source
+            currentSourceHP = Math.floor(0.75 * source.getBaseStats().getHealthPoint());
+            if (currentSourceHP >= 0) {
+                source.getBaseStats().setHealthPoint(currentSourceHP);
+            }
         }
     }
 

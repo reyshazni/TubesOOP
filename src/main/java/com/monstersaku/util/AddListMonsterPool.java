@@ -17,10 +17,11 @@ public class AddListMonsterPool {
         int i;
         for (i = 0; i < 6; i++) { // Mengeluarkan 6 monster secara random
             Collections.shuffle(monsterListFull);
-            monsterList.add(monsterListFull.get(0));
+            Monster m = Monster.copyMonster(monsterListFull.get(0));
+            monsterList.add(m);
         }
         player.setCurrentMonster(monsterList.get(0));
-
+        System.out.printf("MONSTER PERTAMA YANG DIGUNAKAN OLEH %s ADALAH ->> %s\n", player.getName().toUpperCase(), monsterList.get(0).getName().toUpperCase());
         player.setMonsters(monsterList);
     }
 }

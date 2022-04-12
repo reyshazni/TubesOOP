@@ -108,7 +108,7 @@ public class Player {
         }
     }
 
-    public Monster switchMonster(Scanner myObj) {
+    public void switchMonster(Scanner myObj) {
         System.out.printf("Kamu mau pilih monster nomor berapa?? -> ");
         int num;
         while (true) {
@@ -122,14 +122,16 @@ public class Player {
         // Belom tambahin kondisi kalo nyawa monster 0, gabisa ganti monster tsb.
         Monster monster = listOfMonster.get(num - 1);
 
-        return monster;
+        currentMonster = monster;
     }
 
-    public void setCurrentMove(Move move) {
-        this.currMove = move;
+    public void setCurrentMove(Scanner myObj) {
+        System.out.printf("Pilih nomor berapa? --> ");
+        int num = myObj.nextInt();
+        this.currMove = currentMonster.getMoves().get(num-1);
     }
 
     public Move getCurrentMove() {
-        return currMove;
+        return this.currMove;
     }
 }

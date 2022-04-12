@@ -3,6 +3,7 @@ package com.monstersaku.util;
 import java.io.File;
 import java.util.List;
 
+import com.monstersaku.Main;
 import com.monstersaku.ElementType;
 
 public class EffectivityConfig {
@@ -16,7 +17,7 @@ public class EffectivityConfig {
         double value = 1;
 
         try {
-            CSVReader reader = new CSVReader(new File(EffectivityConfig.class.getResource(fileName).toURI()), ";");
+            CSVReader reader = new CSVReader(new File(Main.class.getResource(fileName).toURI()), ";");
             reader.setSkipHeader(true);
             List<String[]> lines = reader.read();
             for (String[] line : lines) {

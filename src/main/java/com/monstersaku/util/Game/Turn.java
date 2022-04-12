@@ -27,7 +27,7 @@ public class Turn {
             this.output.playerTurn(myObj, GameView.getPlayerList().get(1), round);
         }
         if (this.round == 3) {
-            this.output.didStartAttacking();
+            this.output.didStartAttacking(myObj);
             this.output.checkIfEndGame();
         }
     }

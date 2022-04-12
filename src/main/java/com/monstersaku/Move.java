@@ -1,6 +1,7 @@
 package com.monstersaku;
 
 import com.monstersaku.util.Game.Effect;
+import java.util.Scanner;
 
 public abstract class Move {
     // Atribut
@@ -18,7 +19,7 @@ public abstract class Move {
     // Konstruktor
     // Kosong
     public Move() {
-
+        super();
     }
 
     // Mengcopy move lain
@@ -130,4 +131,16 @@ public abstract class Move {
     public void setEffect(Effect effect) {
         this.effect = effect;
     }
+
+    public void ifMonsterAlive(Monster monster, Player currPlayer, Scanner myObj) {
+        if (!monster.getIsAlive()) {
+            System.out.printf("Monster yang sedang digunakan adalah: %s\n", currPlayer.getCurrentMonster().getName());
+            currPlayer.showAvailableMonster();
+            currPlayer.switchMonster(myObj);
+            System.out.printf("Monster baru yang digunakan sekarang adalah: %s\n\n",
+                    currPlayer.getCurrentMonster().getName());
+        }
+    }
+
+    public abstract void setDamage(Player playerAttack, Player playerDefend, Scanner myObj);
 }

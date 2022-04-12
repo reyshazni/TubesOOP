@@ -21,6 +21,12 @@ public class Monster implements StatusCondition {
         this.baseStats = basesStats;
     }
 
+    public static Monster copyMonster(Monster m) {
+        Monster newMonster = new Monster(m.getId(), m.getName(), m.getElementTypes(), m.getBaseStats());
+        newMonster.setMoves(m.getMoves());
+        return newMonster;
+    }
+
     public int getId() {
         return id;
     }
@@ -90,13 +96,6 @@ public class Monster implements StatusCondition {
         for (int i = 0; i < this.moves.size(); i++) {
             System.out.printf("(%d) %s\n", i + 1, this.moves.get(i).getName());
         }
-    }
-
-    public Move selectMove(Scanner myObj) {
-        System.out.printf("Pilih nomor berapa? --> ");
-        int num = myObj.nextInt();
-        return moves.get(num - 1);
-
     }
 
     public void takeDamage(double damageAttack) {
