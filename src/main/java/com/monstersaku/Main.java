@@ -3,7 +3,6 @@ package com.monstersaku;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-//import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.monstersaku.util.EffectivityConfig;
@@ -27,6 +26,8 @@ public class Main {
     public static void main(String[] args) {
         // Membuat scanner
         Scanner myObj = new Scanner(System.in);
+
+        // Membuat list pemain yang bermain
 
         // Membaca Configuration
         readConfig();

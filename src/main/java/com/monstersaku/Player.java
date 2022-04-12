@@ -2,12 +2,17 @@ package com.monstersaku;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+import com.monstersaku.Monster;
+import com.monstersaku.*;
 
 public class Player {
     private String name;
     private List<Monster> listOfMonster = new ArrayList<Monster>();
     private Monster currentMonster;
     private int numOfMonster;
+    private Move currMove;
 
     // Konstruktor
     public Player(String name) {
@@ -93,4 +98,38 @@ public class Player {
         return this.listOfMonster;
     }
 
+    public void showAvailableMonster() {
+        System.out.printf("Monster-monster yang kamu miliki : \n");
+        for (int i = 0; i < listOfMonster.size(); i++) {
+            System.out.printf("--- Monster nomor %d ---\n", i + 1);
+            System.out.printf("Nama : %s\n", listOfMonster.get(i).getName());
+            System.out.printf("HP : %.1f\n", listOfMonster.get(i).getBaseStats().getHealthPoint());
+            System.out.printf("-----------------------\n");
+        }
+    }
+
+    public Monster switchMonster(Scanner myObj) {
+        System.out.printf("Kamu mau pilih monster nomor berapa?? -> ");
+        int num;
+        while (true) {
+            num = myObj.nextInt();
+            if (listOfMonster.get(num - 1).getBaseStats().getHealthPoint() > 0) {
+                break;
+            }
+        }
+
+        // CAUTION!!!
+        // Belom tambahin kondisi kalo nyawa monster 0, gabisa ganti monster tsb.
+        Monster monster = listOfMonster.get(num - 1);
+
+        return monster;
+    }
+
+    public void setCurrentMove(Move move) {
+        this.currMove = move;
+    }
+
+    public Move getCurrentMove() {
+        return currMove;
+    }
 }
