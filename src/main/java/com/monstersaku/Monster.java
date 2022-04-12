@@ -2,6 +2,7 @@ package com.monstersaku;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Monster implements StatusCondition {
     private int id;
@@ -89,6 +90,13 @@ public class Monster implements StatusCondition {
         for (int i = 0; i < this.moves.size(); i++) {
             System.out.printf("(%d) %s\n", i + 1, this.moves.get(i).getName());
         }
+    }
+
+    public Move selectMove(Scanner myObj) {
+        System.out.printf("Pilih nomor berapa? --> ");
+        int num = myObj.nextInt();
+        return moves.get(num - 1);
+
     }
 
     public void takeDamage(double damageAttack) {

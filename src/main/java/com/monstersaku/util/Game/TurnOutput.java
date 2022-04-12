@@ -7,9 +7,9 @@ import com.monstersaku.Player;
 public interface TurnOutput {
     public void didStartAttacking();
 
-    public void playerOneTurn(Scanner myObj, Player Player1);
+    public void playerTurn(Scanner myObj, Player player, int round);
 
-    public void playerTwoTurn(Scanner myObj);
+    // public void playerTwoTurn(Scanner myObj);
 
     public void checkIfEndGame();
 }
