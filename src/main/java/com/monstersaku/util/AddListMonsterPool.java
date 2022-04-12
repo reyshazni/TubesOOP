@@ -19,6 +19,7 @@ public class AddListMonsterPool {
             Collections.shuffle(monsterListFull);
             monsterList.add(monsterListFull.get(0));
         }
+        player.setCurrentMonster(monsterList.get(0));
 
         player.setMonsters(monsterList);
     }
