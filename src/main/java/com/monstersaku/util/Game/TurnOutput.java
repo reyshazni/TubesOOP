@@ -9,7 +9,5 @@ public interface TurnOutput {
 
     public void playerTurn(Scanner myObj, Player player, int round);
 
-    // public void playerTwoTurn(Scanner myObj);
-
     public void checkIfEndGame();
 }

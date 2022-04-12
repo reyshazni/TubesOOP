@@ -52,20 +52,20 @@ public class GameView implements TurnOutput {
             // Cek prioritas setiap move
             System.out.println("opke");
         }
-        System.out.printf("A player choses to move\n");
+        System.out.printf("Player memilih untuk move\n");
     }
 
     @Override
     public void playerTurn(Scanner myObj, Player player, int round) {
         Player currPlayer = player;
 
-        System.out.printf("Masukkan inputmu, Player %d !!\n", round);
+        System.out.printf("Masukkan inputmu, %s !!\n", currPlayer.getName());
         Display.menuDalamTurn();
         String Turn = myObj.next();
         switch (Turn) {
             case "1":
-                // MoveS
-                System.out.printf("--- Tolong pilih gerakanmu dik ---\n");
+                // Moves
+                System.out.printf("--- Pilihe move ---\n");
                 currPlayer.getCurrentMonster().showMove();
                 currPlayer.setCurrentMove(currPlayer.getCurrentMonster().selectMove(myObj));
                 System.out.printf("\n\n GERAKAN YG KAMU PILIH ADALAH %s\n\n", currPlayer.getCurrentMove().getName());
@@ -73,6 +73,7 @@ public class GameView implements TurnOutput {
             case "2":
                 // Switch
                 System.out.printf("Monster %d Switch\n\n", round);
+                System.out.printf("Monster yang sedang digunakan adalah: %s\n", currPlayer.getCurrentMonster().getName());
                 currPlayer.showAvailableMonster();
                 currPlayer.setCurrentMonster(currPlayer.switchMonster(myObj));
                 System.out.printf("Monster yg kamu pakai sekarang adalah %s\n",
@@ -80,18 +81,25 @@ public class GameView implements TurnOutput {
                 break;
             case "3":
                 // Monster Info
-                System.out.printf("Monster %d Info\n\n", round);
+                Display.lineBreak();
+                currPlayer.showAvailableMonster();
+                Display.lineBreak();
                 break;
             case "4":
                 // Game Info
+                Display.lineBreak();
                 System.out.printf("Game %d Info\n\n", round);
+                Display.lineBreak();
                 break;
             case "5":
                 // Help
+                Display.lineBreak();
                 Display.help();
+                Display.lineBreak();
                 break;
             case "6":
                 // Exit
+                System.out.println("Terima kasih sudah bermain!");
                 System.exit(0);
                 break;
             default:
@@ -99,38 +107,6 @@ public class GameView implements TurnOutput {
                 break;
         }
     }
-
-    // @Override
-    // public void playerTwoTurn(Scanner myObj) {
-    // System.out.println("Masukkan inputmu, Player 2 !!");
-    // Display.menuDalamTurn();
-    // String Turn2 = myObj.next();
-    // switch (Turn2) {
-    // case "1":
-    // // Move
-    // System.out.println("Monster 2 Move\n");
-    // break;
-    // case "2":
-    // // Switch
-    // System.out.println("Monster 2 Switch\n");
-    // break;
-    // case "3":
-    // // Monster Info
-    // System.out.println("Monster 2 Info\n");
-    // case "4":
-    // // Game Info
-    // System.out.println("Game 2 Info\n");
-    // break;
-    // case "5":
-    // // Help
-    // Display.help();
-    // break;
-    // case "6":
-    // // Exit
-    // System.exit(0);
-    // break;
-    // }
-    // }
 
     @Override
     public void checkIfEndGame() {
