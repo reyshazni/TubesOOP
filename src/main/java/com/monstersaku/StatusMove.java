@@ -5,7 +5,7 @@ import java.util.*;
 
 public class StatusMove extends Move {
     private String target;
-    private StatusCondition statCondition;
+    private String statusCondition;
     private Stats statMove;
 
     public StatusMove() {
@@ -17,9 +17,9 @@ public class StatusMove extends Move {
     }
 
     public StatusMove(int id, String moveType, String name, ElementType elementType, int accuracy, int priority,
-            int ammunition, String target, Effect effect, StatusCondition statCondition, Stats statMove) {
+            int ammunition, String target, Effect effect, String statusCondition, Stats statMove) {
         move(id, moveType, name, elementType, accuracy, priority, ammunition, target, effect);
-        this.statCondition = statCondition;
+        this.statusCondition = statusCondition;
         this.statMove = statMove;
     }
 
@@ -27,8 +27,8 @@ public class StatusMove extends Move {
         return target;
     }
 
-    public StatusCondition getStatCondition() {
-        return statCondition;
+    public String getStatCondition() {
+        return statusCondition;
     }
 
     public Stats getStatMove() {

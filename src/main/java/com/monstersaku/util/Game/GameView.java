@@ -136,13 +136,13 @@ public class GameView implements TurnOutput {
             case "5":
                 // Help
                 Display.lineBreak();
-                Display.help();
+                Display.helpTurn();
                 Display.lineBreak();
                 this.isNotInfo = false;
                 break;
             case "6":
                 // Exit
-                System.out.println("Terima kasih sudah bermain!");
+                System.out.println("##### Terima kasih sudah bermain! #####");
                 System.exit(0);
                 break;
             default:

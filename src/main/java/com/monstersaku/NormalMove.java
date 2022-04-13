@@ -49,12 +49,15 @@ public class NormalMove extends Move {
                 System.out.println("Enemy has died.");
                 target.getBaseStats().setHealthPoint(0);
             } else {
+                // bingung
                 if (target.getStatusCondition() == "BURN") {
-                    currentHP = Math.floor(currentHP * 0.125);
-                    target.getBaseStats().setHealthPoint(currentHP);
+                    target.burn();
+                    //currentHP = Math.floor(currentHP * 0.125);
+                    //target.getBaseStats().setHealthPoint(currentHP);
                 } else if (target.getStatusCondition() == "POISON") {
-                    currentHP = Math.floor(currentHP * 0.0625);
-                    target.getBaseStats().setHealthPoint(currentHP);
+                    target.poison();
+                    //currentHP = Math.floor(currentHP * 0.0625);
+                    //target.getBaseStats().setHealthPoint(currentHP);
                 } else { // currentHP > 0
                     target.getBaseStats().setHealthPoint(currentHP);
                 }

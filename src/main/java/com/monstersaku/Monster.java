@@ -11,7 +11,9 @@ public class Monster implements StatusCondition {
     private Stats baseStats;
     private List<Move> moves = new ArrayList<Move>();
     private boolean isAlive;
-    private String statusCondition;
+    private String statusCondition = "NONE";
+    private boolean isSleeping;
+    private int sleepDuration;
 
     // Konstruktor untuk read
     public Monster() {
@@ -121,55 +123,80 @@ public class Monster implements StatusCondition {
         }
     }
 
-    public void setStatusCondiiton(String statusCondition) {
+    public void setStatusConditon(String statusCondition) {
         this.statusCondition = statusCondition;
     }
 
-    public void EffectStatusCondition() {
-        if (statusCondition.equals("BURN")) {
-            burn();
-            System.out.println(this.name + " got burn");
-        } else if (statusCondition.equals("POISON")) {
-            poison();
-            System.out.println(this.name + " got poison");
-        } else if (statusCondition.equals("SLEEP")) {
-            sleep();
-            System.out.println(this.name + " got sleep");
-        } else if (statusCondition.equals("PARALYZE")) {
-            paralyze();
-            System.out.println(this.name + " got paralyze");
+    public void EffectStatusCondition(String statusCondition) {
+        double maxHP = baseStats.getMaxHealthPoint();
+        switch (statusCondition) {
+            case "NONE" :
+                System.out.println();
+            case "BURN" :
+                System.out.println(this.name + " terkena BURN!");
+                System.out.printf("Health Point %s yang terkena BURN akan berkurang %d setiap Turn!\n", this.name, (int) maxHP * (1/8));
+                burn();
+            case "POISON" :
+                System.out.println(this.name + "terkena POISON!");
+                System.out.printf("Health Point %s yang terkena POISON akan berkurang %d setiap Turn!\n", this.name, (int) maxHP * (1/16));
+                poison();
+            case "SLEEP" :
+                System.out.println(this.name + "terkena SLEEP!");
+                System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", this.name);
+                sleep();
+            case "PARALYZE" :
+                System.out.println(this.name + "terkena PARALYZE");
+                System.out.printf("Speed %s yang terkena PARALYZE akan berkurang 50% menjadi %d\n", this.name, (int) maxHP * (1/16));
+                System.out.printf("Terdapat 25% kemungkinan %s tidak dapat bergerak!\n", this.name);
+                paralyze();
         }
     }
 
     public void burn() {
-        double damage = (baseStats.getMaxHealthPoint()) * (1 / 8);
-        baseStats.setHealthPoint(baseStats.getHealthPoint() - damage);
+        double damage =Math.floor((baseStats.getMaxHealthPoint()) * (1 / 8));
+        double healthPoint = (baseStats.getHealthPoint());
+        if (damage > healthPoint)
+        {
+            damage = healthPoint;
+        }
 
-        // terus ini damage outputnya berkurang 50% tapi bingung gimana -- bantu jawab
-        // uda diimplementasiin di move
+        // Set healthPoint setelah terkena damage burn
+        baseStats.setHealthPoint(baseStats.getHealthPoint() - damage);
     }
 
     public void poison() {
-        double damage = (baseStats.getMaxHealthPoint()) * (1 / 16);
-        baseStats.setHealthPoint(baseStats.getHealthPoint() - damage);
+        double damage = Math.floor((baseStats.getMaxHealthPoint()) * (1 / 16));
+        double healthPoint = (baseStats.getHealthPoint());
+        if (damage > healthPoint)
+        {
+            damage = healthPoint;
+        }
+
+        // Set healthPoint setelah terkena damage poison
+        baseStats.setHealthPoint(healthPoint - damage);
     }
 
-    public int sleep() {
-        int sleepTurn = 1 + (int) (Math.random() * 7);
-        return sleepTurn;
+    public void sleep() {
+        int sleepDuration = 1 + (int) (Math.random() * 7);
+        this.isSleeping = true;
+        this.sleepDuration = sleepDuration;
+        System.out.printf("%s akan terkena SLEEP selama %d Turn.\n", this.name, sleepDuration);
     }
 
     public void paralyze() {
+        // Set speed setelah terkena paralyze
         double speed = (baseStats.getSpeed() * 0.5);
         baseStats.setSpeed(speed);
 
         int randomNum = 1 + (int) (Math.random() * 4);
         if (randomNum == 1) {
-            // gabisa gerak
+            this.isSleeping = true;
+            this.sleepDuration = 1;
+            System.out.printf("%s tidak dapat bergerak!\n", this.name);
         }
     }
 
-    public void setStatusCondition(String statusCondition) {
-        this.statusCondition = statusCondition;
+    public void reduceSleepDuration(){
+        this.sleepDuration--;
     }
 }
