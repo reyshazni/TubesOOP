@@ -27,7 +27,7 @@ public class Turn {
             this.output.playerTurn(myObj, GameView.getPlayerList().get(1), round);
         }
         if (this.round == 3) {
-            this.output.didStartAttacking();
+            this.output.didStartAttacking(myObj);
             this.output.checkIfEndGame();
         }
     }
@@ -39,6 +39,16 @@ public class Turn {
             this.round = 3;
         } else {
             this.round = 1;
+        }
+    }
+    
+    public void decreaseRound() {
+        if (this.round == 1) {
+            this.round = 3;
+        } else if (this.round == 2) {
+            this.round = 1;
+        } else {
+            this.round = 3;
         }
     }
 }

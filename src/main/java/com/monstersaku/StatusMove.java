@@ -1,6 +1,7 @@
 package com.monstersaku;
 
 import com.monstersaku.util.Game.*;
+import java.util.*;
 
 public class StatusMove extends Move {
     private String target;
@@ -8,7 +9,7 @@ public class StatusMove extends Move {
     private Stats statMove;
 
     public StatusMove() {
-
+        super();
     }
 
     public StatusMove(Move move) {
@@ -32,5 +33,19 @@ public class StatusMove extends Move {
 
     public Stats getStatMove() {
         return statMove;
+    }
+
+    // CAUTION!!! belom ada efek samsek
+    public void setDamage(Player playerAttack, Player playerDefend, Scanner myObj) {
+        
+        Monster source = playerAttack.getCurrentMonster();
+        Monster target = playerDefend.getCurrentMonster();
+
+        if (source.getBaseStats().getHealthPoint() <= 0) {
+            ifMonsterAlive(source, playerAttack, myObj);
+        }
+        else {
+            System.out.println("BELOM ADA EFEK");
+        }
     }
 }

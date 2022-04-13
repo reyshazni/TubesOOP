@@ -48,6 +48,8 @@ public class Player {
 
     public void setMonsters(List<Monster> monsters) {
         this.listOfMonster = monsters;
+        System.out.printf("MONSTER PERTAMA YANG DIGUNAKAN OLEH %s ->> %s\n\n", getName().toUpperCase(), monsters.get(0).getName().toUpperCase());
+        setCurrentMonster(monsters.get(0));
     }
 
     public void setCurrentMonster(Monster currentMonster) {
@@ -100,15 +102,15 @@ public class Player {
 
     public void showAvailableMonster() {
         System.out.printf("Monster-monster yang kamu miliki : \n");
-        for (int i = 0; i < listOfMonster.size(); i++) {
-            System.out.printf("--- Monster nomor %d ---\n", i + 1);
-            System.out.printf("Nama : %s\n", listOfMonster.get(i).getName());
-            System.out.printf("HP : %.1f\n", listOfMonster.get(i).getBaseStats().getHealthPoint());
+        for (Monster m : listOfMonster) {
+            System.out.printf("--- Monster nomor %d ---\n", listOfMonster.indexOf(m) + 1);
+            System.out.printf("Nama : %s\n", m.getName());
+            System.out.printf("HP : %.1f\n", m.getBaseStats().getHealthPoint());
             System.out.printf("-----------------------\n");
         }
     }
 
-    public Monster switchMonster(Scanner myObj) {
+    public void switchMonster(Scanner myObj) {
         System.out.printf("Kamu mau pilih monster nomor berapa?? -> ");
         int num;
         while (true) {
@@ -122,14 +124,17 @@ public class Player {
         // Belom tambahin kondisi kalo nyawa monster 0, gabisa ganti monster tsb.
         Monster monster = listOfMonster.get(num - 1);
 
-        return monster;
+        currentMonster = monster;
+        currMove = null;
     }
 
-    public void setCurrentMove(Move move) {
-        this.currMove = move;
+    public void setCurrentMove(Scanner myObj) {
+        System.out.printf("Pilih nomor berapa? --> ");
+        int num = myObj.nextInt();
+        this.currMove = currentMonster.getMoves().get(num-1);
     }
 
     public Move getCurrentMove() {
-        return currMove;
+        return this.currMove;
     }
 }

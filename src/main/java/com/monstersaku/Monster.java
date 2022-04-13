@@ -14,12 +14,28 @@ public class Monster implements StatusCondition {
     private String statusCondition;
 
     // Konstruktor untuk read
+    public Monster() {
+
+    }
+
     public Monster(int id, String name, List<ElementType> elementTypes, Stats basesStats) {
         this.id = id;
         this.name = name;
         this.elementTypes = elementTypes;
         this.baseStats = basesStats;
     }
+
+    // public void copyMonster(Monster m) {
+    //     setId(m.getId());
+    //     setname(m.getName());
+    //     setElementTypes(m.getElementTypes());
+    //     setBaseStats(m.getBaseStats());
+    //     setMoves(m.getMoves());
+    //     setIsAlive(m.getIsAlive());
+    //     setStatusCondiiton(m.getStatusCondition());
+    // }
+
+    
 
     public int getId() {
         return id;
@@ -92,18 +108,12 @@ public class Monster implements StatusCondition {
         }
     }
 
-    public Move selectMove(Scanner myObj) {
-        System.out.printf("Pilih nomor berapa? --> ");
-        int num = myObj.nextInt();
-        return moves.get(num - 1);
-
-    }
-
     public void takeDamage(double damageAttack) {
         double healthPointAfter = this.baseStats.getHealthPoint() - damageAttack;
         if (healthPointAfter <= 0) {
             this.isAlive = false;
             System.out.println(this.name + " has died");
+            this.baseStats.setHealthPoint(0);
         } else {
             this.baseStats.setHealthPoint(healthPointAfter);
             ;
