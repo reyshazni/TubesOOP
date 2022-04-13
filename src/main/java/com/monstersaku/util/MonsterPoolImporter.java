@@ -67,7 +67,7 @@ public class MonsterPoolImporter {
             }
         } catch (Exception e) {
             // do nothing
-            System.out.println("Unable to make monster list");
+            System.out.printf("Unable to make monster list because of %s\n", e.toString());
         }
         return monsterlist;
     }

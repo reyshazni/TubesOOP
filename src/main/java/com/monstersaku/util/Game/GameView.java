@@ -1,15 +1,13 @@
 package com.monstersaku.util.Game;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 import com.monstersaku.Monster;
 import com.monstersaku.Player;
-import com.monstersaku.Move;
 import com.monstersaku.util.AddListMonsterPool;
-import com.monstersaku.util.EffectivityConfig;
 import com.monstersaku.util.MonsterPoolImporter;
 
 public class GameView implements TurnOutput {
@@ -90,13 +88,20 @@ public class GameView implements TurnOutput {
             player2.getCurrentMove().setDamage(player2, player1, myObj);
         }
         System.out.printf("\nMove dilakukan\n");
+        if (player1.getCurrentMove() != null) {
+            System.out.printf("Move yang dilakukan Player 1 : %s\n", player1.getCurrentMove().getName());
+        }
+        if (player2.getCurrentMove() != null) {
+
+            System.out.printf("Move yang dilakukan Player 2 : %s\n", player2.getCurrentMove().getName());
+        }
     }
 
     @Override
     public void playerTurn(Scanner myObj, Player player, int round) {
         Player currPlayer = player;
 
-        System.out.printf("Masukkan inputmu, %s !!\n", currPlayer.getName());
+        System.out.printf("\nMasukkan inputmu, %s !!\n", currPlayer.getName());
         Display.menuDalamTurn();
         switch (myObj.next()) {
             case "1":
@@ -104,7 +109,6 @@ public class GameView implements TurnOutput {
                 System.out.printf("--- Pilihe move ---\n");
                 currPlayer.getCurrentMonster().showMove();
                 currPlayer.setCurrentMove(myObj);
-                System.out.printf("\n\n GERAKAN YG KAMU PILIH ADALAH %s\n\n", currPlayer.getCurrentMove().getName());
                 break;
             case "2":
                 // Switch
@@ -112,8 +116,8 @@ public class GameView implements TurnOutput {
                 System.out.printf("Monster yang sedang digunakan adalah: %s\n", currPlayer.getCurrentMonster().getName());
                 currPlayer.showAvailableMonster();
                 currPlayer.switchMonster(myObj);
-                System.out.printf("Monster baru yang digunakan sekarang adalah: %s dari index ke %d\n\n",
-                        currPlayer.getCurrentMonster().getName(), currPlayer.getListOfMonsters().indexOf(currPlayer.getCurrentMonster()));
+                System.out.printf("Monster baru yang digunakan sekarang adalah: %s, monster ke %d\n\n",
+                        currPlayer.getCurrentMonster().getName(), currPlayer.getListOfMonsters().indexOf(currPlayer.getCurrentMonster())+1);
                 break;
             case "3":
                 // Monster Info

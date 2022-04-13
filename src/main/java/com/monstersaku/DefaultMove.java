@@ -4,7 +4,7 @@ import java.util.*;
 import com.monstersaku.util.Game.*;
 
 public class DefaultMove extends Move {
-    private int basePower;
+    private int basePower = 50;
 
     public DefaultMove() {
         Effect effect = new Effect(0);
@@ -20,13 +20,15 @@ public class DefaultMove extends Move {
         Monster source = playerAttack.getCurrentMonster();
         Monster target = playerDefend.getCurrentMonster();
 
-        System.out.printf("Monster milik %s bernama %d.%s MENYERANG %d.%s \n\n", playerAttack.getName(), playerAttack.getListOfMonsters().indexOf(source), source.getName(), playerDefend.getListOfMonsters().indexOf(target), target.getName());
+        System.out.printf("\n--- %s -> MENYERANG -> %s \n", playerAttack.getName().toUpperCase(), playerDefend.getName().toUpperCase());
+        System.out.printf("\nMONSTER %s BERNAMA %d. %s MENYERANG %d. %s \n\n", playerAttack.getName().toUpperCase(), playerAttack.getListOfMonsters().indexOf(source), source.getName().toUpperCase(), playerDefend.getListOfMonsters().indexOf(target), target.getName().toUpperCase());
 
         if (source.getBaseStats().getHealthPoint() <= 0) {
             ifMonsterAlive(source, playerAttack, myObj);
         }
         else {
-            double rdmNumber = (Math.random()*(1-0.85+1)+0.85);
+            double rdmNumber = (Math.random()*(1 - 0.85) + 0.85);
+            System.out.printf("\n -- RND NUM %f -- \n", rdmNumber);
             double effective = 1;
             double burnEffect = 1;
     
@@ -42,16 +44,26 @@ public class DefaultMove extends Move {
     
             double currentEnemyHP;
             double currentSourceHP;
+
+            System.out.printf("\n--- MENYERANG DENGAN %f DAMAGE ---\n", damageAttack);
     
             // Enemy
             currentEnemyHP = target.getBaseStats().getHealthPoint() - damageAttack;
+            System.out.printf("\n--- NYAWA %s MENJADI %f ---\n", target.getName().toUpperCase(), currentEnemyHP);
             if (currentEnemyHP <= 0) {
-                System.out.println("Enemy has died.");
+                for(Monster m : playerDefend.getListOfMonsters()) {
+                    if (m == target) {
+                        System.out.printf("\n-- MONSTER MILIK %s YANG BERNAMA %s BER ID %d TELAH MATI --\n", playerDefend.getName().toUpperCase(),target.getName().toUpperCase(), playerDefend.getListOfMonsters().indexOf(target));
+                    }
+                }
+                target.getBaseStats().setHealthPoint(0);
             } else {
                 if (target.getStatusCondition() == "BURN") {
                     currentEnemyHP = Math.floor(currentEnemyHP * 0.125);
+                    target.getBaseStats().setHealthPoint(currentEnemyHP);
                 } else if (target.getStatusCondition() == "POISON") {
                     currentEnemyHP = Math.floor(currentEnemyHP * 0.0625);
+                    target.getBaseStats().setHealthPoint(currentEnemyHP);
                 } else { // currentEnemyHP >= 0
                     target.getBaseStats().setHealthPoint(currentEnemyHP);
                 }

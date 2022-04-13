@@ -35,7 +35,6 @@ public class StatusMove extends Move {
         return statMove;
     }
 
-
     // CAUTION!!! belom ada efek samsek
     public void setDamage(Player playerAttack, Player playerDefend, Scanner myObj) {
         
