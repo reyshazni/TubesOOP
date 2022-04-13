@@ -1,6 +1,7 @@
 package com.monstersaku.util.Game;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -61,16 +62,28 @@ public class GameView implements TurnOutput {
         // Move move2 = playerList.get(1).getCurrentMove();
         if (player1.getCurrentMove() != null && player2.getCurrentMove() != null) {
             // Cek prioritas setiap move
-            // Asumsi kalo samadengan kita lebih besar move1
-            if (player1.getCurrentMove().getPriority() >= player2.getCurrentMove().getPriority()){
+            if (player1.getCurrentMove().getPriority() > player2.getCurrentMove().getPriority()){
                 // Priority 1 >= 2
                 player1.getCurrentMove().setDamage(player1, player2, myObj);
                 player2.getCurrentMove().setDamage(player2, player1, myObj);
-            } else {
+            } else if (player1.getCurrentMove().getPriority() > player2.getCurrentMove().getPriority()) {
                 // Priority 1 < 2
                 player2.getCurrentMove().setDamage(player2, player1, myObj);
                 player1.getCurrentMove().setDamage(player1, player2, myObj);
+            } else {
+                // Apabila priority sama, maka akan melakukan random
+                Random rdm = new Random();
+                int number = rdm.nextInt(1);
+                if (number == 0) {
+                    // Player 1 dulu baru player 2
+                    player1.getCurrentMove().setDamage(player1, player2, myObj);
+                    player2.getCurrentMove().setDamage(player2, player1, myObj);
+                } else {
+                    player2.getCurrentMove().setDamage(player2, player1, myObj);
+                    player1.getCurrentMove().setDamage(player1, player2, myObj);
+                }
             }
+            // CAUTION : Move kan bukan null, tetapi menjadi move sebelumnya??
         } else if (player1.getCurrentMove() != null) {
             player1.getCurrentMove().setDamage(player1, player2, myObj);
         } else if (player2.getCurrentMove() != null) {
