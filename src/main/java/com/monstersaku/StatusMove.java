@@ -4,9 +4,7 @@ import com.monstersaku.util.Game.*;
 import java.util.*;
 
 public class StatusMove extends Move {
-    private String target;
     private String statusCondition;
-    private Stats statMove;
 
     public StatusMove() {
         super();
@@ -17,22 +15,17 @@ public class StatusMove extends Move {
     }
 
     public StatusMove(int id, String moveType, String name, ElementType elementType, int accuracy, int priority,
-            int ammunition, String target, Effect effect, String statusCondition, Stats statMove) {
-        move(id, moveType, name, elementType, accuracy, priority, ammunition, target, effect);
+            int ammunition, String target, Effect effect, String statusCondition) {
+        super.move(id, moveType, name, elementType, accuracy, priority, ammunition, target, effect);
         this.statusCondition = statusCondition;
-        this.statMove = statMove;
     }
 
-    public String getTarget() {
-        return target;
-    }
+    // public String getTarget() {
+    // return target;
+    // }
 
     public String getStatCondition() {
         return statusCondition;
-    }
-
-    public Stats getStatMove() {
-        return statMove;
     }
 
     // CAUTION!!! belom ada efek samsek
@@ -49,14 +42,9 @@ public class StatusMove extends Move {
             } else if (playerAttack.getCurrentMove().getEffect().getStatusCondition() == "POISON") {
                 target.setStatusConditon("POISON");
             } else {
-                // double buffHP = Math.floor(source.getBaseStats().getHealthPoint() +
-                // (this.statMove.getHealthPoint() * source.getBaseStats().getHealthPoint()) /
-                // 100);
-
-                double buffHP = Math.floor(source.getBaseStats().getHealthPoint());
-                if (this.target.equals("ENEMY")) {
-                    target.getBaseStats().setHealthPoint(Effect.convertedToFactorBuff(
-                            target.getBaseStats().getHealthPoint(), this.getEffect().getHealthPoint()));
+                double buffHP = Math.floor(source.getBaseStats().getHealthPoint()
+                        + (this.getEffect().getHealthPoint() * source.getBaseStats().getHealthPoint()) / 100);
+                if (super.getTarget().equals("ENEMY")) {
                     target.getBaseStats().setAttack(Effect.convertedToFactorBuff(target.getBaseStats().getAttack(),
                             this.getEffect().getAttack()));
                     target.getBaseStats().setDefense(Effect.convertedToFactorBuff(target.getBaseStats().getDefense(),

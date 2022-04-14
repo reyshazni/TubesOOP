@@ -27,7 +27,7 @@ public class DefaultMove extends Move {
             ifMonsterAlive(source, playerAttack, myObj);
         }
         else {
-            double rdmNumber = (Math.random()*(1 - 0.85) + 0.85);
+            double rdmNumber = (new Random().nextInt((int)1.15) + 1);
             System.out.printf("\n -- RND NUM %f -- \n", rdmNumber);
             double effective = 1;
             double burnEffect = 1;
@@ -74,8 +74,8 @@ public class DefaultMove extends Move {
     }
 
     public double getDamageAttack(Monster source, Monster target) {
-        Random rdm = new Random();
-        double rdmNumber = (rdm.nextInt(85 + 1 - 100) + 85) / 100;
+        // Random rdm = new Random();
+        double rdmNumber = (new Random().nextInt((int)1.15) + 1);
         double effective = 1;
         double burnEffect = 1;
         double damageAttack = Math

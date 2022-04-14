@@ -33,8 +33,8 @@ public class SpecialMove extends Move {
             ifMonsterAlive(source, playerAttack, myObj);
         }
         else {
-            Random rdm = new Random();
-            double rdmNumber = (rdm.nextInt(85 + 1 - 100) + 85) / 100;
+            //Random rdm = new Random();
+            double rdmNumber = (new Random().nextInt((int)1.15) + 1);
             double effective = 1;
             double burnEffect = 1;
             double power = super.getEffect().getAttack();
@@ -53,7 +53,7 @@ public class SpecialMove extends Move {
             currentHP = target.getBaseStats().getHealthPoint() - damageAttack;
     
             if (currentHP <= 0) {
-                System.out.println("Enemy has died.");
+                //System.out.println("Enemy has died.");
                 target.getBaseStats().setHealthPoint(0);
             } else {
                 if (target.getStatusCondition() == "BURN" || target.getStatusCondition() == "POISON") {
