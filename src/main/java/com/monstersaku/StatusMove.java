@@ -50,8 +50,21 @@ public class StatusMove extends Move {
             } else if (playerAttack.getCurrentMove().getEffect().getStatusCondition() == "POISON"){
                 target.setStatusConditon("POISON");
             }
+            else {
+                double buffHP = Math.floor(source.getBaseStats().getHealthPoint() + (this.statMove.getHealthPoint() * source.getBaseStats().getHealthPoint()) / 100);
+                if (this.target.equals("ENEMY")) {
+                    target.getBaseStats().setHealthPoint(Effect.convertedToFactorBuff(target.getBaseStats().getHealthPoint(), this.getEffect().getHealthPoint()));
+                    target.getBaseStats().setAttack(Effect.convertedToFactorBuff(target.getBaseStats().getAttack(), this.getEffect().getAttack()));
+                    target.getBaseStats().setDefense(Effect.convertedToFactorBuff(target.getBaseStats().getDefense(), this.getEffect().getDefense()));
+                    target.getBaseStats().setSpecialAttack(Effect.convertedToFactorBuff(target.getBaseStats().getSpecialAttack(), this.getEffect().getSpecialAttack()));
+                    target.getBaseStats().setSpecialDefense(Effect.convertedToFactorBuff(target.getBaseStats().getSpecialDefense(), this.getEffect().getSpecialDefense()));
+                    target.getBaseStats().setSpeed(Effect.convertedToFactorBuff(target.getBaseStats().getSpeed(), this.getEffect().getSpeed()));
+                } else { // target = SOURCE
+                    source.getBaseStats().setHealthPoint(buffHP);
+                }
+            }
             target.EffectStatusCondition(target.getStatusCondition());
             //System.out.println("BELOM ADA EFEK");
-        }
+        } 
     }
 }
