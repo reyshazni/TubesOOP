@@ -36,7 +36,8 @@ public class StatusMove extends Move {
         if (source.getBaseStats().getHealthPoint() <= 0) {
             System.out.println("Monster sudah mati!");
         } else {
-            if (playerAttack.getCurrentMove().getEffect().getStatusCondition() == "BURN") {
+            // After Damage Calculation
+            if (playerAttack.getCurrentMove().getEffect().getStatusCondition() == "BURN"){
                 target.setStatusConditon("BURN");
             } else if (playerAttack.getCurrentMove().getEffect().getStatusCondition() == "POISON") {
                 target.setStatusConditon("POISON");
@@ -59,6 +60,6 @@ public class StatusMove extends Move {
                 }
             }
             target.EffectStatusCondition(target.getStatusCondition());
-        }
+        } 
     }
 }
