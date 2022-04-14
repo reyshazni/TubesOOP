@@ -26,7 +26,7 @@ public class NormalMove extends Move {
             ifMonsterAlive(source, playerAttack, myObj);
         }
         else {
-            double rdmNumber = (Math.random()*(1-0.85+1)+0.85);
+            double rdmNumber = (new Random().nextInt((int)1.15) + 1);
             double burnEffect = 1;
             double power = super.getEffect().getAttack();
     
@@ -46,7 +46,7 @@ public class NormalMove extends Move {
     
             System.out.printf("Power : %f\n", damageAttack);
             if (currentHP <= 0) {
-                System.out.println("Enemy has died.");
+                //System.out.println("Enemy has died.");
                 target.getBaseStats().setHealthPoint(0);
             } else {
                 // bingung
