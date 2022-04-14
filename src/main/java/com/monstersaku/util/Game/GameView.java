@@ -106,7 +106,7 @@ public class GameView implements TurnOutput {
         switch (myObj.next()) {
             case "1":
                 // Moves
-                System.out.printf("--- Pilihe move ---\n");
+                System.out.printf("--- Pilihan move ---\n");
                 currPlayer.getCurrentMonster().showMove();
                 currPlayer.setCurrentMove(myObj);
                 break;

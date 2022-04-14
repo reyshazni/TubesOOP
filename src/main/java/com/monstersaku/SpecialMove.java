@@ -56,12 +56,8 @@ public class SpecialMove extends Move {
                 System.out.println("Enemy has died.");
                 target.getBaseStats().setHealthPoint(0);
             } else {
-                if (target.getStatusCondition() == "BURN") {
-                    currentHP = Math.floor(currentHP * 0.125);
-                    target.getBaseStats().setHealthPoint(currentHP);
-                } else if (target.getStatusCondition() == "POISON") {
-                    currentHP = Math.floor(currentHP * 0.0625);
-                    target.getBaseStats().setHealthPoint(currentHP);
+                if (target.getStatusCondition() == "BURN" || target.getStatusCondition() == "POISON") {
+                    target.EffectStatusCondition(target.getStatusCondition());
                 } else { // currentHP > 0
                     target.getBaseStats().setHealthPoint(currentHP);
                 }

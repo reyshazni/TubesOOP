@@ -11,8 +11,7 @@ public class Monster implements StatusCondition {
     private Stats baseStats;
     private List<Move> moves = new ArrayList<Move>();
     private boolean isAlive;
-    private String statusCondition = "NONE";
-    private boolean isSleeping;
+    private String statusCondition = "-";
     private int sleepDuration;
 
     // Konstruktor untuk read
@@ -130,30 +129,34 @@ public class Monster implements StatusCondition {
     public void EffectStatusCondition(String statusCondition) {
         double maxHP = baseStats.getMaxHealthPoint();
         switch (statusCondition) {
-            case "NONE" :
+            case "-" :
                 System.out.println();
             case "BURN" :
                 System.out.println(this.name + " terkena BURN!");
-                System.out.printf("Health Point %s yang terkena BURN akan berkurang %d setiap Turn!\n", this.name, (int) maxHP * (1/8));
+                System.out.printf("Health Point %s yang terkena BURN akan berkurang %d setiap Turn!\n", this.name, (int) Math.floor(maxHP * (0.125)));
                 burn();
+                break;
             case "POISON" :
-                System.out.println(this.name + "terkena POISON!");
-                System.out.printf("Health Point %s yang terkena POISON akan berkurang %d setiap Turn!\n", this.name, (int) maxHP * (1/16));
+                System.out.println(this.name + " terkena POISON!");
+                System.out.printf("Health Point %s yang terkena POISON akan berkurang %d setiap Turn!\n", this.name, (int) Math.floor(maxHP * (0.0625)));
                 poison();
+                break;
             case "SLEEP" :
-                System.out.println(this.name + "terkena SLEEP!");
+                System.out.println(this.name + " terkena SLEEP!");
                 System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", this.name);
                 sleep();
+                break;
             case "PARALYZE" :
-                System.out.println(this.name + "terkena PARALYZE");
-                System.out.printf("Speed %s yang terkena PARALYZE akan berkurang 50% menjadi %d\n", this.name, (int) maxHP * (1/16));
+                System.out.println(this.name + " terkena PARALYZE");
+                System.out.printf("Speed %s yang terkena PARALYZE akan berkurang 50% menjadi %d\n", this.name, (int) (this.baseStats.getSpeed() *0.5));
                 System.out.printf("Terdapat 25% kemungkinan %s tidak dapat bergerak!\n", this.name);
                 paralyze();
+                break;
         }
     }
 
     public void burn() {
-        double damage =Math.floor((baseStats.getMaxHealthPoint()) * (1 / 8));
+        double damage = Math.floor((baseStats.getMaxHealthPoint()) * (0.125));
         double healthPoint = (baseStats.getHealthPoint());
         if (damage > healthPoint)
         {
@@ -165,7 +168,7 @@ public class Monster implements StatusCondition {
     }
 
     public void poison() {
-        double damage = Math.floor((baseStats.getMaxHealthPoint()) * (1 / 16));
+        double damage = Math.floor((baseStats.getMaxHealthPoint()) * (0.0625));
         double healthPoint = (baseStats.getHealthPoint());
         if (damage > healthPoint)
         {
@@ -178,7 +181,6 @@ public class Monster implements StatusCondition {
 
     public void sleep() {
         int sleepDuration = 1 + (int) (Math.random() * 7);
-        this.isSleeping = true;
         this.sleepDuration = sleepDuration;
         System.out.printf("%s akan terkena SLEEP selama %d Turn.\n", this.name, sleepDuration);
     }
@@ -190,13 +192,16 @@ public class Monster implements StatusCondition {
 
         int randomNum = 1 + (int) (Math.random() * 4);
         if (randomNum == 1) {
-            this.isSleeping = true;
             this.sleepDuration = 1;
             System.out.printf("%s tidak dapat bergerak!\n", this.name);
         }
     }
 
     public void reduceSleepDuration(){
-        this.sleepDuration--;
+        if (this.sleepDuration > 0){
+            this.sleepDuration--;
+        } else {
+            this.statusCondition = "-";
+        }
     }
 }
