@@ -45,6 +45,7 @@ public class StatusMove extends Move {
             ifMonsterAlive(source, playerAttack, myObj);
         }
         else {
+            // After Damage Calculation
             if(playerAttack.getCurrentMove().getEffect().getStatusCondition() == "BURN"){
                 target.setStatusConditon("BURN");
             } else if (playerAttack.getCurrentMove().getEffect().getStatusCondition() == "POISON"){
@@ -64,7 +65,6 @@ public class StatusMove extends Move {
                 }
             }
             target.EffectStatusCondition(target.getStatusCondition());
-            //System.out.println("BELOM ADA EFEK");
         } 
     }
 }
