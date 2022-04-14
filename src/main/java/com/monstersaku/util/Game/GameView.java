@@ -42,12 +42,11 @@ public class GameView implements TurnOutput {
         Turn turn = new Turn(this);
         while (going) {
             turn.startTurn(myObj);
-            if (isNotInfo){
+            if (isNotInfo) {
                 turn.increaseRound();
             } else {
                 isNotInfo = true;
             }
-            
         }
     }
 
@@ -60,7 +59,7 @@ public class GameView implements TurnOutput {
         // Move move2 = playerList.get(1).getCurrentMove();
         if (player1.getCurrentMove() != null && player2.getCurrentMove() != null) {
             // Cek prioritas setiap move
-            if (player1.getCurrentMove().getPriority() > player2.getCurrentMove().getPriority()){
+            if (player1.getCurrentMove().getPriority() > player2.getCurrentMove().getPriority()) {
                 // Priority 1 >= 2
                 player1.getCurrentMove().setDamage(player1, player2, myObj);
                 player2.getCurrentMove().setDamage(player2, player1, myObj);
@@ -113,11 +112,13 @@ public class GameView implements TurnOutput {
             case "2":
                 // Switch
                 System.out.printf("Monster %d Switch\n\n", round);
-                System.out.printf("Monster yang sedang digunakan adalah: %s\n", currPlayer.getCurrentMonster().getName());
+                System.out.printf("Monster yang sedang digunakan adalah: %s\n",
+                        currPlayer.getCurrentMonster().getName());
                 currPlayer.showAvailableMonster();
                 currPlayer.switchMonster(myObj);
                 System.out.printf("Monster baru yang digunakan sekarang adalah: %s, monster ke %d\n\n",
-                        currPlayer.getCurrentMonster().getName(), currPlayer.getListOfMonsters().indexOf(currPlayer.getCurrentMonster())+1);
+                        currPlayer.getCurrentMonster().getName(),
+                        currPlayer.getListOfMonsters().indexOf(currPlayer.getCurrentMonster()) + 1);
                 break;
             case "3":
                 // Monster Info
