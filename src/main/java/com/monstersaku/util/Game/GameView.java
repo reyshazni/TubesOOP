@@ -123,7 +123,7 @@ public class GameView implements TurnOutput {
             case "3":
                 // Monster Info
                 Display.lineBreak();
-                currPlayer.showAvailableMonster();
+                currPlayer.printMyMonster();
                 Display.lineBreak();
                 this.isNotInfo = false;
                 break;
@@ -156,6 +156,14 @@ public class GameView implements TurnOutput {
 
     @Override
     public void checkIfEndGame() {
+        Player player1 = playerList.get(0);
+        Player player2 = playerList.get(1);
+
+        if (player1.getNumOfMonster() == 0 || player2.getNumOfMonster() != 0) {
+            Display.endGame(player1);
+        } else if (player1.getNumOfMonster() != 0 || player2.getNumOfMonster() == 0) {
+            Display.endGame(player2);
+        }
 
     }
 }

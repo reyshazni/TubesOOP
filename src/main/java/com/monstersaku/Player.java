@@ -65,7 +65,7 @@ public class Player {
     // Method return jumlah monster yang masih hidup (update otomatis ketika dirun)
     public int countMonster() {
         for (Monster monster : listOfMonster) {
-            if (monster.getBaseStats().getHealthPoint() != 0) {
+            if (monster.getBaseStats().getHealthPoint() > 0) {
                 numOfMonster += 1;
             } else {
                 numOfMonster += 0;
@@ -79,19 +79,10 @@ public class Player {
         System.out.println("Jumlah Monster dari player " + this.getName().toUpperCase() + ": " + countMonster());
         System.out.println("Berikut adalah monster yang dimiliki player " + this.getName() + ": ");
         for (Monster monster : listOfMonster) {
-            if (monster.getIsAlive()) {
-                System.out.println(" ");
-                monster.showMonsterInfo();
+            if (monster.getBaseStats().getHealthPoint() >= 0) {
                 System.out.println("");
                 System.out.println("----- Current Stats Monster " + monster.getName() + " -----");
                 monster.getBaseStats().showStats();
-                System.out.println("");
-                System.out.println("----- Moves of " + monster.getName() + " -----");
-                for (Move move : monster.getMoves()) {
-                    System.out.println("id move: " + move.getId());
-                    System.out.println("move name: " + move.getName());
-                    System.out.println(" ");
-                }
                 System.out.println(" ");
             }
         }
@@ -104,9 +95,11 @@ public class Player {
     public void showAvailableMonster() {
         System.out.printf("Monster-monster yang kamu miliki : \n");
         for (Monster m : listOfMonster) {
+            double percentage = (m.getBaseStats().getHealthPoint() * 100 / m.getBaseStats().getMaxHealthPoint());
             System.out.printf("--- Monster nomor %d ---\n", listOfMonster.indexOf(m) + 1);
             System.out.printf("Nama : %s\n", m.getName());
-            System.out.printf("HP : %.1f\n", m.getBaseStats().getHealthPoint());
+            System.out.printf("HP   : %.0f%% (%.2f/%.2f)\n", percentage, m.getBaseStats().getHealthPoint(),
+                    m.getBaseStats().getMaxHealthPoint());
             System.out.printf("-----------------------\n");
         }
     }
