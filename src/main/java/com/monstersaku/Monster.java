@@ -27,18 +27,6 @@ public class Monster implements StatusCondition {
         this.baseStats = basesStats;
     }
 
-    // public void copyMonster(Monster m) {
-    //     setId(m.getId());
-    //     setname(m.getName());
-    //     setElementTypes(m.getElementTypes());
-    //     setBaseStats(m.getBaseStats());
-    //     setMoves(m.getMoves());
-    //     setIsAlive(m.getIsAlive());
-    //     setStatusCondiiton(m.getStatusCondition());
-    // }
-
-    
-
     public int getId() {
         return id;
     }
@@ -106,7 +94,10 @@ public class Monster implements StatusCondition {
 
     public void showMove() {
         for (int i = 0; i < this.moves.size(); i++) {
-            System.out.printf("(%d) %s\n", i + 1, this.moves.get(i).getName());
+            if (this.moves.get(i) != null) {
+                System.out.printf("(%d) %s, Ammunition : %d\n", i + 1, this.moves.get(i).getName(),
+                        this.moves.get(i).getAmmunition());
+            }
         }
     }
 
@@ -130,33 +121,35 @@ public class Monster implements StatusCondition {
     public void EffectStatusCondition(String statusCondition) {
         double maxHP = baseStats.getMaxHealthPoint();
         switch (statusCondition) {
-            case "NONE" :
+            case "NONE":
                 System.out.println();
-            case "BURN" :
+            case "BURN":
                 System.out.println(this.name + " terkena BURN!");
-                System.out.printf("Health Point %s yang terkena BURN akan berkurang %d setiap Turn!\n", this.name, (int) maxHP * (1/8));
+                System.out.printf("Health Point %s yang terkena BURN akan berkurang %d setiap Turn!\n", this.name,
+                        (int) maxHP * (1 / 8));
                 burn();
-            case "POISON" :
+            case "POISON":
                 System.out.println(this.name + "terkena POISON!");
-                System.out.printf("Health Point %s yang terkena POISON akan berkurang %d setiap Turn!\n", this.name, (int) maxHP * (1/16));
+                System.out.printf("Health Point %s yang terkena POISON akan berkurang %d setiap Turn!\n", this.name,
+                        (int) maxHP * (1 / 16));
                 poison();
-            case "SLEEP" :
+            case "SLEEP":
                 System.out.println(this.name + "terkena SLEEP!");
                 System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", this.name);
                 sleep();
-            case "PARALYZE" :
+            case "PARALYZE":
                 System.out.println(this.name + "terkena PARALYZE");
-                System.out.printf("Speed %s yang terkena PARALYZE akan berkurang 50% menjadi %d\n", this.name, (int) maxHP * (1/16));
+                System.out.printf("Speed %s yang terkena PARALYZE akan berkurang 50% menjadi %d\n", this.name,
+                        (int) maxHP * (1 / 16));
                 System.out.printf("Terdapat 25% kemungkinan %s tidak dapat bergerak!\n", this.name);
                 paralyze();
         }
     }
 
     public void burn() {
-        double damage =Math.floor((baseStats.getMaxHealthPoint()) * (1 / 8));
+        double damage = Math.floor((baseStats.getMaxHealthPoint()) * (1 / 8));
         double healthPoint = (baseStats.getHealthPoint());
-        if (damage > healthPoint)
-        {
+        if (damage > healthPoint) {
             damage = healthPoint;
         }
 
@@ -167,8 +160,7 @@ public class Monster implements StatusCondition {
     public void poison() {
         double damage = Math.floor((baseStats.getMaxHealthPoint()) * (1 / 16));
         double healthPoint = (baseStats.getHealthPoint());
-        if (damage > healthPoint)
-        {
+        if (damage > healthPoint) {
             damage = healthPoint;
         }
 
@@ -196,7 +188,7 @@ public class Monster implements StatusCondition {
         }
     }
 
-    public void reduceSleepDuration(){
+    public void reduceSleepDuration() {
         this.sleepDuration--;
     }
 }
