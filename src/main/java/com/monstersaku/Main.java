@@ -1,22 +1,17 @@
 package com.monstersaku;
 
-import com.monstersaku.*;
-import com.monstersaku.util.AddListMonsterPool;
-import com.monstersaku.util.MonsterPoolImporter;
-import com.monstersaku.util.Game.Display;
-import com.monstersaku.util.Game.GameView;
-import com.monstersaku.util.Game.Turn;
-import com.monstersaku.util.Game.TurnOutput;
-
-import java.lang.System;
-import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-//import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main{
+import com.monstersaku.util.EffectivityConfig;
+import com.monstersaku.util.MonsterPoolImporter;
+import com.monstersaku.util.MovePoolImporter;
+import com.monstersaku.util.Game.Display;
+import com.monstersaku.util.Game.GameView;
+
+public class Main {
     private static final List<String> CSV_FILE_PATHS = Collections.unmodifiableList(Arrays.asList(
             "configs/monsterpool.csv",
             "configs/movepool.csv",
@@ -24,9 +19,9 @@ public class Main{
 
     public static void readConfig() {
         MonsterPoolImporter.setFileName(CSV_FILE_PATHS.get(0));
-        //CreateObjectMovePool.setFileName(CSV_FILE_PATHS.get(1));
-        //FindEffectivity.setFileName(CSV_FILE_PATHS.get(2));
-    }        
+        MovePoolImporter.setFileName(CSV_FILE_PATHS.get(1));
+        EffectivityConfig.setFileName(CSV_FILE_PATHS.get(2));
+    }
 
     public static void main(String[] args) {
         // Membuat scanner
@@ -35,10 +30,8 @@ public class Main{
         // Membaca Configuration
         readConfig();
 
-        
-
         // Membuat Masukan Game Menu
-        
+
         // Membuat while untuk run game
         while (true) {
             // Membuat command awal
@@ -52,11 +45,11 @@ public class Main{
                     break;
                 case "2":
                     // Show Help
-                    System.out.println("Show Help");
+                    Display.help();
                     break;
                 case "3":
                     // Exit
-                    System.out.println("Terima kasih sudah bermain!");
+                    System.out.println("##### Terima kasih sudah bermain! #####");
                     System.exit(0);
                     break;
                 default:

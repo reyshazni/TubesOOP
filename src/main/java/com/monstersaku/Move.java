@@ -1,5 +1,7 @@
 package com.monstersaku;
+
 import com.monstersaku.util.Game.Effect;
+import java.util.Scanner;
 
 public abstract class Move {
     // Atribut
@@ -14,13 +16,20 @@ public abstract class Move {
     private String target;
     private Effect effect;
 
+    // Konstruktor
+    // Kosong
     public Move() {
-        
+        super();
     }
 
-    // Konstruktor
-    public void move(int id, String moveType, String name, ElementType elementType, int accuracy, int priority, 
-    int ammunition, String target, Effect effect) {
+    // Mengcopy move lain
+    public Move(Move move) {
+        this.copyMove(move);
+    }
+
+    // Konstruktor Penuh
+    public void move(int id, String moveType, String name, ElementType elementType, int accuracy, int priority,
+            int ammunition, String target, Effect effect) {
         this.id = id;
         this.moveType = moveType;
         this.name = name;
@@ -33,11 +42,23 @@ public abstract class Move {
         this.effect = effect;
     }
 
+    public void copyMove(Move move) {
+        this.id = move.getId();
+        this.moveType = move.getMoveType();
+        this.name = move.getName();
+        this.elementType = move.getElementType();
+        this.accuracy = move.getAccuracy();
+        this.priority = move.getPriority();
+        this.ammunition = move.getAmmunition();
+        this.target = move.getTarget();
+        this.effect = move.getEffect();
+    }
+
     // Getter
     public int getId() {
         return id;
     }
-    
+
     public String getMoveType() {
         return moveType;
     }
@@ -110,5 +131,16 @@ public abstract class Move {
     public void setEffect(Effect effect) {
         this.effect = effect;
     }
-}
 
+    public void ifMonsterAlive(Monster monster, Player currPlayer, Scanner myObj) {
+        if (!monster.getIsAlive()) {
+            System.out.printf("Monster yang sedang digunakan adalah: %s\n", currPlayer.getCurrentMonster().getName());
+            currPlayer.showAvailableMonster();
+            currPlayer.switchMonster(myObj);
+            System.out.printf("Monster baru yang digunakan sekarang adalah: %s\n\n",
+                    currPlayer.getCurrentMonster().getName());
+        }
+    }
+
+    public abstract void setDamage(Player playerAttack, Player playerDefend, Scanner myObj);
+}

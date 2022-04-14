@@ -1,14 +1,17 @@
 package com.monstersaku;
+
 import com.monstersaku.util.Game.*;
+import java.util.*;
 
 public class StatusMove extends Move {
-    private String target;
-    private StatusCondition statCondition;
-    private Stats statMove;
     private String statusCondition;
 
-    public StatusMove(){
-        
+    public StatusMove() {
+        super();
+    }
+
+    public StatusMove(Move move) {
+        super(move);
     }
 
     public StatusMove(int id, String moveType, String name, ElementType elementType, int accuracy, int priority,

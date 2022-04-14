@@ -1,6 +1,7 @@
 package com.monstersaku.util.Game;
 
 public class Effect {
+    // Menghitung base power
     private String statusCondition;
     private int[] statsPoint = new int[6];
 
