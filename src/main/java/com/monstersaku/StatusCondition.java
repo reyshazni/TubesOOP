@@ -5,5 +5,4 @@ public interface StatusCondition {
     public void poison();
     public void sleep();
     public void paralyze();
-    public void EffectStatusCondition(String statusCondition);
 }
