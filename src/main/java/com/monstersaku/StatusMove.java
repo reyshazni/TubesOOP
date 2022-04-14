@@ -36,11 +36,17 @@ public class StatusMove extends Move {
         if (source.getBaseStats().getHealthPoint() <= 0) {
             System.out.println("Monster sudah mati!");
         } else {
-            // After Damage Calculation
-            if (playerAttack.getCurrentMove().getEffect().getStatusCondition() == "BURN"){
-                target.setStatusConditon("BURN");
-            } else if (playerAttack.getCurrentMove().getEffect().getStatusCondition() == "POISON") {
-                target.setStatusConditon("POISON");
+            if (target.getStatusCondition() == "NONE"){
+                System.out.println(playerAttack.getCurrentMove().getEffect().getStatusCondition());
+                if (playerAttack.getCurrentMove().getEffect().getStatusCondition().equals("BURN")){
+                    target.setStatusConditon("BURN");
+                } else if (playerAttack.getCurrentMove().getEffect().getStatusCondition().equals("POISON")) {
+                    target.setStatusConditon("POISON");
+                } else if (playerAttack.getCurrentMove().getEffect().getStatusCondition().equals("SLEEP")){
+                    target.setStatusConditon("SLEEP");
+                } else if (playerAttack.getCurrentMove().getEffect().getStatusCondition().equals("PARALYZE")){
+                    target.setStatusConditon("PARALYZE");
+                }
             } else {
                 double buffHP = Math.floor(source.getBaseStats().getHealthPoint()
                         + (this.getEffect().getHealthPoint() * source.getBaseStats().getHealthPoint()) / 100);
@@ -59,7 +65,6 @@ public class StatusMove extends Move {
                     source.getBaseStats().setHealthPoint(buffHP);
                 }
             }
-            target.EffectStatusCondition(target.getStatusCondition());
         } 
     }
 }

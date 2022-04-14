@@ -13,5 +13,5 @@ public interface TurnOutput {
 
     public void checkIfMonsterDie(Scanner myObj);
 
-    public void checkEffectStatusCondition();
+    public void afterDamageCalculation();
 }
