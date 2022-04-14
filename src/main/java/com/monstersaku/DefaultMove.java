@@ -32,18 +32,17 @@ public class DefaultMove extends Move {
         double currentEnemyHP;
         double currentSourceHP;
 
-        // Enemy
-        currentEnemyHP = 
-        target.getBaseStats().getHealthPoint() - damageAttack;
-        if (currentEnemyHP <= 0) {
-            System.out.println("Enemy has died.");
-        } else {
-            if (target.getStatusCondition() == "BURN") {
-                currentEnemyHP = Math.floor(currentEnemyHP * 0.125);
-            } else if (target.getStatusCondition() == "POISON") {
-                currentEnemyHP = Math.floor(currentEnemyHP * 0.0625);
-            } else { // currentEnemyHP >= 0
-                target.getBaseStats().setHealthPoint(currentEnemyHP);
+        if (source.getBaseStats().getHealthPoint() <= 0) {
+            ifMonsterAlive(source, playerAttack, myObj);
+        }
+        else {
+            double rdmNumber = (new Random().nextInt((int)1.15) + 1);
+            System.out.printf("\n -- RND NUM %f -- \n", rdmNumber);
+            double effective = 1;
+            double burnEffect = 1;
+    
+            for (ElementType et : target.getElementTypes()) {
+                effective = com.monstersaku.util.EffectivityConfig.getEffectivity(this.getElementType(), et);
             }
         }
 
@@ -54,10 +53,10 @@ public class DefaultMove extends Move {
             source.getBaseStats().setHealthPoint(currentSourceHP);
         }
     }
-    
-    public double getDamageAttack(Monster source, Monster target){
-        Random rdm = new Random();
-        double rdmNumber = (rdm.nextInt(85 + 1 - 100) + 85) / 100;
+
+    public double getDamageAttack(Monster source, Monster target) {
+        // Random rdm = new Random();
+        double rdmNumber = (new Random().nextInt((int)1.15) + 1);
         double effective = 1;
         double burnEffect = 1;
         double damageAttack = 

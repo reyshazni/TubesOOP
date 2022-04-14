@@ -48,6 +48,35 @@ public class SpecialMove extends Move {
                 currentHP = Math.floor(currentHP * 0.0625);
             } else { // currentHP > 0
                 target.getBaseStats().setHealthPoint(currentHP);
+        else {
+            //Random rdm = new Random();
+            double rdmNumber = (new Random().nextInt((int)1.15) + 1);
+            double effective = 1;
+            double burnEffect = 1;
+            double power = super.getEffect().getAttack();
+    
+            for (ElementType et : target.getElementTypes()) {
+                effective = com.monstersaku.util.EffectivityConfig.getEffectivity(this.getElementType(), et);
+            }
+            if (source.getStatusCondition() == "BURN") {
+                burnEffect = 0.5;
+            }
+            double damageAttack = Math.floor(power
+                    * (source.getBaseStats().getSpecialAttack() / target.getBaseStats().getSpecialDefense() + 2)
+                    * rdmNumber * effective * burnEffect);
+    
+            double currentHP;
+            currentHP = target.getBaseStats().getHealthPoint() - damageAttack;
+    
+            if (currentHP <= 0) {
+                //System.out.println("Enemy has died.");
+                target.getBaseStats().setHealthPoint(0);
+            } else {
+                if (target.getStatusCondition() == "BURN" || target.getStatusCondition() == "POISON") {
+                    target.EffectStatusCondition(target.getStatusCondition());
+                } else { // currentHP > 0
+                    target.getBaseStats().setHealthPoint(currentHP);
+                }
             }
         }
     }       

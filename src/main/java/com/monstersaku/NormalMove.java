@@ -43,12 +43,35 @@ public class NormalMove extends Move {
             System.out.println("Enemy has died.");
         } 
         else {
-            if (target.getStatusCondition() == "BURN") {
-                currentHP = Math.floor(currentHP * 0.125);
-            } else if (target.getStatusCondition() == "POISON") {
-                currentHP = Math.floor(currentHP * 0.0625);
-            } else { // currentHP > 0
-                target.getBaseStats().setHealthPoint(currentHP);
+            double rdmNumber = (new Random().nextInt((int)1.15) + 1);
+            double burnEffect = 1;
+            double power = super.getEffect().getAttack();
+    
+            double effective = 1;
+            for (ElementType et : target.getElementTypes()) {
+                effective = com.monstersaku.util.EffectivityConfig.getEffectivity(this.getElementType(), et);
+            }
+            if (source.getStatusCondition() == "BURN") {
+                burnEffect = 0.5;
+            }
+            double damageAttack = Math
+                    .floor((power * (source.getBaseStats().getAttack() / target.getBaseStats().getDefense() + 2)
+                            * rdmNumber * effective * burnEffect));
+    
+            double currentHP;
+            currentHP = target.getBaseStats().getHealthPoint() - damageAttack;
+    
+            System.out.printf("Power : %f\n", damageAttack);
+            if (currentHP <= 0) {
+                //System.out.println("Enemy has died.");
+                target.getBaseStats().setHealthPoint(0);
+            } else {
+                // bingung
+                if (target.getStatusCondition() == "BURN" || target.getStatusCondition() == "POISON") {
+                    target.EffectStatusCondition(target.getStatusCondition());
+                } else { // currentHP > 0
+                    target.getBaseStats().setHealthPoint(currentHP);
+                }
             }
         }
     }
