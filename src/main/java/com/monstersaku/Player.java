@@ -102,6 +102,10 @@ public class Player {
             System.out.printf("Nama : %s\n", m.getName());
             System.out.printf("HP   : %.0f%% (%.2f/%.2f)\n", percentage, m.getBaseStats().getHealthPoint(),
                     m.getBaseStats().getMaxHealthPoint());
+            if (percentage > 100) {
+                System.out.printf("Monster memiliki shield sebesar %.1f\n",
+                        (m.getBaseStats().getHealthPoint() - m.getBaseStats().getMaxHealthPoint()));
+            }
             System.out.printf("-----------------------\n");
         }
     }

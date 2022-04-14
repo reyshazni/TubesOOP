@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import com.monstersaku.Monster;
 import com.monstersaku.Player;
+import com.monstersaku.StatusCondition;
 import com.monstersaku.util.AddListMonsterPool;
 import com.monstersaku.util.MonsterPoolImporter;
 
@@ -196,6 +197,51 @@ public class GameView implements TurnOutput {
             player2.switchMonster(myObj);
             System.out.printf("Monster baru yang digunakan sekarang adalah: %s\n\n",
                     player2.getCurrentMonster().getName());
+        }
+    }
+
+    public void checkEffectStatusCondition() {
+        Player player1 = playerList.get(0);
+        Player player2 = playerList.get(1);
+
+        for (Monster m : player1.getListOfMonsters()) {
+            String statusCondition1 = m.getStatusCondition();
+            switch (statusCondition1) {
+                case "NONE":
+                    System.out.println();
+                case "BURN":
+                    System.out.println();
+                    break;
+                case "POISON":
+                    System.out.println();
+                    break;
+                case "SLEEP":
+                    System.out.println();
+                    break;
+                case "PARALYZE":
+                    System.out.println();
+                    break;
+            }
+        }
+
+        for (Monster n : player2.getListOfMonsters()) {
+            String statusCondition2 = n.getStatusCondition();
+            switch (statusCondition2) {
+                case "NONE":
+                    System.out.println();
+                case "BURN":
+                    System.out.println();
+                    break;
+                case "POISON":
+                    System.out.println();
+                    break;
+                case "SLEEP":
+                    System.out.println();
+                    break;
+                case "PARALYZE":
+                    System.out.println();
+                    break;
+            }
         }
     }
 }
