@@ -28,14 +28,13 @@ public class StatusMove extends Move {
         return statusCondition;
     }
 
-    // CAUTION!!! belom ada efek samsek
     public void setDamage(Player playerAttack, Player playerDefend, Scanner myObj) {
 
         Monster source = playerAttack.getCurrentMonster();
         Monster target = playerDefend.getCurrentMonster();
 
         if (source.getBaseStats().getHealthPoint() <= 0) {
-            ifMonsterAlive(source, playerAttack, myObj);
+            System.out.println("Monster sudah mati!");
         } else {
             if (playerAttack.getCurrentMove().getEffect().getStatusCondition() == "BURN") {
                 target.setStatusConditon("BURN");
