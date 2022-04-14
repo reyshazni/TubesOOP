@@ -49,7 +49,7 @@ public class Main {
                     break;
                 case "3":
                     // Exit
-                    System.out.println("Terima kasih sudah bermain!");
+                    System.out.println("##### Terima kasih sudah bermain! #####");
                     System.exit(0);
                     break;
                 default:

@@ -58,12 +58,8 @@ public class DefaultMove extends Move {
                 }
                 target.getBaseStats().setHealthPoint(0);
             } else {
-                if (target.getStatusCondition() == "BURN") {
-                    currentEnemyHP = Math.floor(currentEnemyHP * 0.125);
-                    target.getBaseStats().setHealthPoint(currentEnemyHP);
-                } else if (target.getStatusCondition() == "POISON") {
-                    currentEnemyHP = Math.floor(currentEnemyHP * 0.0625);
-                    target.getBaseStats().setHealthPoint(currentEnemyHP);
+                if (target.getStatusCondition() == "BURN" || target.getStatusCondition() == "POISON") {
+                    target.EffectStatusCondition(target.getStatusCondition());
                 } else { // currentEnemyHP >= 0
                     target.getBaseStats().setHealthPoint(currentEnemyHP);
                 }
