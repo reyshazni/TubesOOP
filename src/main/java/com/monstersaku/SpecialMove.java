@@ -21,24 +21,23 @@ public class SpecialMove extends Move {
     }
 
     // public int getBasePower() {
-    //     return basePower;
+    // return basePower;
     // }
 
     public void setDamage(Player playerAttack, Player playerDefend, Scanner myObj) {
-        
+
         Monster source = playerAttack.getCurrentMonster();
         Monster target = playerDefend.getCurrentMonster();
 
         if (source.getBaseStats().getHealthPoint() <= 0) {
-            ifMonsterAlive(source, playerAttack, myObj);
-        }
-        else {
-            //Random rdm = new Random();
-            double rdmNumber = (new Random().nextInt((int)1.15) + 1);
+            System.out.println("Monster sudah mati!");
+        } else {
+            // Random rdm = new Random();
+            double rdmNumber = (new Random().nextInt((int) 1.15) + 1);
             double effective = 1;
             double burnEffect = 1;
             double power = super.getEffect().getAttack();
-    
+
             for (ElementType et : target.getElementTypes()) {
                 effective = com.monstersaku.util.EffectivityConfig.getEffectivity(this.getElementType(), et);
             }
@@ -48,12 +47,12 @@ public class SpecialMove extends Move {
             double damageAttack = Math.floor(power
                     * (source.getBaseStats().getSpecialAttack() / target.getBaseStats().getSpecialDefense() + 2)
                     * rdmNumber * effective * burnEffect);
-    
+
             double currentHP;
             currentHP = target.getBaseStats().getHealthPoint() - damageAttack;
-    
+
             if (currentHP <= 0) {
-                //System.out.println("Enemy has died.");
+                System.out.println("Enemy has died.");
                 target.getBaseStats().setHealthPoint(0);
             } else {
                 if (target.getStatusCondition() == "BURN" || target.getStatusCondition() == "POISON") {

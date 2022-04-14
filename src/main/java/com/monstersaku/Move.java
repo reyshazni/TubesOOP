@@ -134,7 +134,9 @@ public abstract class Move {
 
     public void ifMonsterAlive(Monster monster, Player currPlayer, Scanner myObj) {
         if (!monster.getIsAlive()) {
-            System.out.printf("Monster yang sedang digunakan adalah: %s\n", currPlayer.getCurrentMonster().getName());
+            System.out.printf("\nMonster dari %s yang sudah mati adalah: %s\n", currPlayer.getName(),
+                    currPlayer.getCurrentMonster().getName());
+            System.out.printf("%s harus mengganti hero!!\n");
             currPlayer.showAvailableMonster();
             currPlayer.switchMonster(myObj);
             System.out.printf("Monster baru yang digunakan sekarang adalah: %s\n\n",

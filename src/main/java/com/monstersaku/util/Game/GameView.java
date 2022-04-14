@@ -29,7 +29,8 @@ public class GameView implements TurnOutput {
         // Memasukkan nama player
         System.out.println("\n--- Memulai Game Baru! ---");
         for (int i = 0; i < 2; i++) {
-            System.out.printf("Masukkan Nama Player %d: \n", i + 1);
+            System.out.printf("Masukkan nama player %d: \n", i + 1);
+            System.out.print("->> ");
             String name = myObj.next();
             Player player = new Player(name);
             addPlayer(player);
@@ -63,7 +64,7 @@ public class GameView implements TurnOutput {
                 // Priority 1 >= 2
                 player1.getCurrentMove().setDamage(player1, player2, myObj);
                 player2.getCurrentMove().setDamage(player2, player1, myObj);
-            } else if (player1.getCurrentMove().getPriority() > player2.getCurrentMove().getPriority()) {
+            } else if (player1.getCurrentMove().getPriority() < player2.getCurrentMove().getPriority()) {
                 // Priority 1 < 2
                 player2.getCurrentMove().setDamage(player2, player1, myObj);
                 player1.getCurrentMove().setDamage(player1, player2, myObj);
@@ -80,13 +81,12 @@ public class GameView implements TurnOutput {
                     player1.getCurrentMove().setDamage(player1, player2, myObj);
                 }
             }
-            // CAUTION : Move kan bukan null, tetapi menjadi move sebelumnya??
         } else if (player1.getCurrentMove() != null) {
             player1.getCurrentMove().setDamage(player1, player2, myObj);
         } else if (player2.getCurrentMove() != null) {
             player2.getCurrentMove().setDamage(player2, player1, myObj);
         }
-        System.out.printf("\nMove dilakukan\n");
+        System.out.printf("\n-- Battle Process --\n\n");
         if (player1.getCurrentMove() != null) {
             System.out.printf("Move yang dilakukan Player 1 : %s\n", player1.getCurrentMove().getName());
         }
@@ -100,12 +100,12 @@ public class GameView implements TurnOutput {
     public void playerTurn(Scanner myObj, Player player, int round) {
         Player currPlayer = player;
 
-        System.out.printf("\nMasukkan inputmu, %s !!\n", currPlayer.getName());
+        System.out.printf("Masukkan inputmu, %s !!\n", currPlayer.getName());
         Display.menuDalamTurn();
         switch (myObj.next()) {
             case "1":
                 // Moves
-                System.out.printf("--- Pilihan move ---\n");
+                System.out.printf("\n--- Pilihan move ---\n");
                 currPlayer.getCurrentMonster().showMove();
                 currPlayer.setCurrentMove(myObj);
                 break;
@@ -123,6 +123,7 @@ public class GameView implements TurnOutput {
             case "3":
                 // Monster Info
                 Display.lineBreak();
+                System.out.printf("Current Monster : %s", currPlayer.getCurrentMonster().getName());
                 currPlayer.printMyMonster();
                 Display.lineBreak();
                 this.isNotInfo = false;
@@ -159,11 +160,42 @@ public class GameView implements TurnOutput {
         Player player1 = playerList.get(0);
         Player player2 = playerList.get(1);
 
-        if (player1.getNumOfMonster() == 0 || player2.getNumOfMonster() != 0) {
+        System.out.println("Monster Player 1 : " + player1.countMonster());
+        System.out.println("Monster Player 2 : " + player2.countMonster());
+
+        if (player1.countMonster() == 0 && player2.countMonster() != 0) {
             Display.endGame(player1);
-        } else if (player1.getNumOfMonster() != 0 || player2.getNumOfMonster() == 0) {
+        } else if (player1.countMonster() != 0 && player2.countMonster() == 0) {
             Display.endGame(player2);
+        } else if (player1.countMonster() == 0 && player2.countMonster() == 0) {
+            System.out.println("TIDAK ADA PEMENANG!");
+            System.exit(0);
         }
 
+    }
+
+    public void checkIfMonsterDie(Scanner myObj) {
+        Player player1 = playerList.get(0);
+        Player player2 = playerList.get(1);
+
+        if (player1.getCurrentMonster().getBaseStats().getHealthPoint() <= 0) {
+            System.out.printf("Monster dari %s yang sudah mati adalah: %s\n", player1.getName(),
+                    player1.getCurrentMonster().getName());
+            System.out.printf("%s harus mengganti hero!!\n", player1.getName());
+            player1.showAvailableMonster();
+            player1.switchMonster(myObj);
+            System.out.printf("Monster baru yang digunakan sekarang adalah: %s\n\n",
+                    player1.getCurrentMonster().getName());
+        }
+
+        if (player2.getCurrentMonster().getBaseStats().getHealthPoint() <= 0) {
+            System.out.printf("Monster dari %s yang sudah mati adalah: %s\n", player2.getName(),
+                    player2.getCurrentMonster().getName());
+            System.out.printf("%s harus mengganti hero!!\n", player2.getName());
+            player2.showAvailableMonster();
+            player2.switchMonster(myObj);
+            System.out.printf("Monster baru yang digunakan sekarang adalah: %s\n\n",
+                    player2.getCurrentMonster().getName());
+        }
     }
 }

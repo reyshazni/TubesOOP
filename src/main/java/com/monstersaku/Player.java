@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.monstersaku.Monster;
+import com.monstersaku.util.Game.Display;
 import com.monstersaku.*;
 
 public class Player {
@@ -64,6 +65,7 @@ public class Player {
 
     // Method return jumlah monster yang masih hidup (update otomatis ketika dirun)
     public int countMonster() {
+        numOfMonster = 0;
         for (Monster monster : listOfMonster) {
             if (monster.getBaseStats().getHealthPoint() > 0) {
                 numOfMonster += 1;
@@ -105,7 +107,8 @@ public class Player {
     }
 
     public void switchMonster(Scanner myObj) {
-        System.out.printf("Kamu mau pilih monster nomor berapa?? -> ");
+        System.out.println("Pilih Monster Baru :");
+        System.out.print("->> ");
         int num;
         while (true) {
             num = myObj.nextInt();
@@ -113,7 +116,6 @@ public class Player {
                 break;
             } else {
                 System.out.println("Monster yang kamu pilih sudah mati! Pilih monster lainnya!");
-                showAvailableMonster();
                 switchMonster(myObj);
                 break;
             }
@@ -125,16 +127,22 @@ public class Player {
     }
 
     public void setCurrentMove(Scanner myObj) {
-        System.out.printf("Pilih nomor berapa? --> ");
+        System.out.println("Pilih nomor berapa?");
+        System.out.print("->> ");
         int num = myObj.nextInt();
-        if (currentMonster.getMoves().get(num - 1).getAmmunition() > 0) {
-            this.currMove = currentMonster.getMoves().get(num - 1);
-            this.currMove.setAmmunition(this.currMove.getAmmunition() - 1);
+        Display.lineBreak();
+        if (num > 0 && num <= (currentMonster.getMoves().size())) {
+            if (currentMonster.getMoves().get(num - 1).getAmmunition() > 0) {
+                this.currMove = currentMonster.getMoves().get(num - 1);
+                this.currMove.setAmmunition(this.currMove.getAmmunition() - 1);
+            } else {
+                System.out.println("Ammunition Sudah Habis!, Pilih Move Lain!\n");
+                setCurrentMove(myObj);
+            }
         } else {
-            System.out.println("Ammunition Sudah Habis!, Pilih Move Lain!\n");
+            System.out.println("Masukkan Input dengan Benar!");
             setCurrentMove(myObj);
         }
-
     }
 
     public Move getCurrentMove() {
