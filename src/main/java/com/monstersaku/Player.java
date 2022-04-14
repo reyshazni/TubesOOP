@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.monstersaku.Monster;
+import com.monstersaku.util.Game.Display;
 import com.monstersaku.*;
 
 public class Player {
@@ -48,7 +49,8 @@ public class Player {
 
     public void setMonsters(List<Monster> monsters) {
         this.listOfMonster = monsters;
-        System.out.printf("MONSTER PERTAMA YANG DIGUNAKAN OLEH %s ->> %s\n\n", getName().toUpperCase(), monsters.get(0).getName().toUpperCase());
+        System.out.printf("MONSTER PERTAMA YANG DIGUNAKAN OLEH %s ->> %s\n\n", getName().toUpperCase(),
+                monsters.get(0).getName().toUpperCase());
         setCurrentMonster(monsters.get(0));
     }
 
@@ -63,8 +65,9 @@ public class Player {
 
     // Method return jumlah monster yang masih hidup (update otomatis ketika dirun)
     public int countMonster() {
+        numOfMonster = 0;
         for (Monster monster : listOfMonster) {
-            if (monster.getBaseStats().getHealthPoint() != 0) {
+            if (monster.getBaseStats().getHealthPoint() > 0) {
                 numOfMonster += 1;
             } else {
                 numOfMonster += 0;
@@ -78,19 +81,10 @@ public class Player {
         System.out.println("Jumlah Monster dari player " + this.getName().toUpperCase() + ": " + countMonster());
         System.out.println("Berikut adalah monster yang dimiliki player " + this.getName() + ": ");
         for (Monster monster : listOfMonster) {
-            if (monster.getIsAlive()) {
-                System.out.println(" ");
-                monster.showMonsterInfo();
+            if (monster.getBaseStats().getHealthPoint() >= 0) {
                 System.out.println("");
                 System.out.println("----- Current Stats Monster " + monster.getName() + " -----");
                 monster.getBaseStats().showStats();
-                System.out.println("");
-                System.out.println("----- Moves of " + monster.getName() + " -----");
-                for (Move move : monster.getMoves()) {
-                    System.out.println("id move: " + move.getId());
-                    System.out.println("move name: " + move.getName());
-                    System.out.println(" ");
-                }
                 System.out.println(" ");
             }
         }
@@ -103,25 +97,33 @@ public class Player {
     public void showAvailableMonster() {
         System.out.printf("Monster-monster yang kamu miliki : \n");
         for (Monster m : listOfMonster) {
+            double percentage = (m.getBaseStats().getHealthPoint() * 100 / m.getBaseStats().getMaxHealthPoint());
             System.out.printf("--- Monster nomor %d ---\n", listOfMonster.indexOf(m) + 1);
             System.out.printf("Nama : %s\n", m.getName());
-            System.out.printf("HP : %.1f\n", m.getBaseStats().getHealthPoint());
+            System.out.printf("HP   : %.0f%% (%.2f/%.2f)\n", percentage, m.getBaseStats().getHealthPoint(),
+                    m.getBaseStats().getMaxHealthPoint());
+            if (percentage > 100) {
+                System.out.printf("Monster memiliki shield sebesar %.1f\n",
+                        (m.getBaseStats().getHealthPoint() - m.getBaseStats().getMaxHealthPoint()));
+            }
             System.out.printf("-----------------------\n");
         }
     }
 
     public void switchMonster(Scanner myObj) {
-        System.out.printf("Kamu mau pilih monster nomor berapa?? -> ");
+        System.out.println("Pilih Monster Baru :");
+        System.out.print("->> ");
         int num;
         while (true) {
             num = myObj.nextInt();
             if (listOfMonster.get(num - 1).getBaseStats().getHealthPoint() > 0) {
                 break;
+            } else {
+                System.out.println("Monster yang kamu pilih sudah mati! Pilih monster lainnya!");
+                switchMonster(myObj);
+                break;
             }
         }
-
-        // CAUTION!!!
-        // Belom tambahin kondisi kalo nyawa monster 0, gabisa ganti monster tsb.
         Monster monster = listOfMonster.get(num - 1);
 
         currentMonster = monster;
@@ -129,9 +131,22 @@ public class Player {
     }
 
     public void setCurrentMove(Scanner myObj) {
-        System.out.printf("Pilih nomor berapa? --> ");
+        System.out.println("Pilih nomor berapa?");
+        System.out.print("->> ");
         int num = myObj.nextInt();
-        this.currMove = currentMonster.getMoves().get(num-1);
+        Display.lineBreak();
+        if (num > 0 && num <= (currentMonster.getMoves().size())) {
+            if (currentMonster.getMoves().get(num - 1).getAmmunition() > 0) {
+                this.currMove = currentMonster.getMoves().get(num - 1);
+                this.currMove.setAmmunition(this.currMove.getAmmunition() - 1);
+            } else {
+                System.out.println("Ammunition Sudah Habis!, Pilih Move Lain!\n");
+                setCurrentMove(myObj);
+            }
+        } else {
+            System.out.println("Masukkan Input dengan Benar!");
+            setCurrentMove(myObj);
+        }
     }
 
     public Move getCurrentMove() {

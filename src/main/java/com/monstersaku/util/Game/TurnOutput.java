@@ -10,4 +10,8 @@ public interface TurnOutput {
     public void playerTurn(Scanner myObj, Player player, int round);
 
     public void checkIfEndGame();
+
+    public void checkIfMonsterDie(Scanner myObj);
+
+    public void checkEffectStatusCondition();
 }
