@@ -2,7 +2,6 @@ package com.monstersaku;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Monster implements StatusCondition {
     private int id;
@@ -10,8 +9,9 @@ public class Monster implements StatusCondition {
     private List<ElementType> elementTypes = new ArrayList<ElementType>();
     private Stats baseStats;
     private List<Move> moves = new ArrayList<Move>();
-    private boolean isAlive;
-    private String statusCondition;
+    private boolean isAlive = true;
+    private String statusCondition = "NONE";
+    private int sleepDuration;
 
     // Konstruktor untuk read
     public Monster() {
@@ -24,18 +24,6 @@ public class Monster implements StatusCondition {
         this.elementTypes = elementTypes;
         this.baseStats = basesStats;
     }
-
-    // public void copyMonster(Monster m) {
-    //     setId(m.getId());
-    //     setname(m.getName());
-    //     setElementTypes(m.getElementTypes());
-    //     setBaseStats(m.getBaseStats());
-    //     setMoves(m.getMoves());
-    //     setIsAlive(m.getIsAlive());
-    //     setStatusCondiiton(m.getStatusCondition());
-    // }
-
-    
 
     public int getId() {
         return id;
@@ -89,6 +77,10 @@ public class Monster implements StatusCondition {
         this.isAlive = isAlive;
     }
 
+    public int getSleepDuration(){
+        return this.sleepDuration;
+    }
+
     public void showMonsterInfo() {
         System.out.println("Id Monster : " + this.id);
         System.out.println("Nama : " + this.name);
@@ -104,7 +96,10 @@ public class Monster implements StatusCondition {
 
     public void showMove() {
         for (int i = 0; i < this.moves.size(); i++) {
-            System.out.printf("(%d) %s\n", i + 1, this.moves.get(i).getName());
+            if (this.moves.get(i) != null) {
+                System.out.printf("(%d) %s, Ammunition : %d\n", i + 1, this.moves.get(i).getName(),
+                        this.moves.get(i).getAmmunition());
+            }
         }
     }
 
@@ -121,55 +116,55 @@ public class Monster implements StatusCondition {
         }
     }
 
-    public void setStatusCondiiton(String statusCondition) {
+    public void setStatusConditon(String statusCondition) {
         this.statusCondition = statusCondition;
     }
 
-    public void EffectStatusCondition() {
-        if (statusCondition.equals("BURN")) {
-            burn();
-            System.out.println(this.name + " got burn");
-        } else if (statusCondition.equals("POISON")) {
-            poison();
-            System.out.println(this.name + " got poison");
-        } else if (statusCondition.equals("SLEEP")) {
-            sleep();
-            System.out.println(this.name + " got sleep");
-        } else if (statusCondition.equals("PARALYZE")) {
-            paralyze();
-            System.out.println(this.name + " got paralyze");
-        }
-    }
-
     public void burn() {
-        double damage = (baseStats.getMaxHealthPoint()) * (1 / 8);
-        baseStats.setHealthPoint(baseStats.getHealthPoint() - damage);
+        double damage = Math.floor((baseStats.getMaxHealthPoint()) * (0.125));
+        double healthPoint = (baseStats.getHealthPoint());
+        if (damage > healthPoint) {
+            damage = healthPoint;
+        }
 
-        // terus ini damage outputnya berkurang 50% tapi bingung gimana -- bantu jawab
-        // uda diimplementasiin di move
+        // Set healthPoint setelah terkena damage burn
+        baseStats.setHealthPoint(baseStats.getHealthPoint() - damage);
     }
 
     public void poison() {
-        double damage = (baseStats.getMaxHealthPoint()) * (1 / 16);
-        baseStats.setHealthPoint(baseStats.getHealthPoint() - damage);
+        double damage = Math.floor((baseStats.getMaxHealthPoint()) * (0.0625));
+        double healthPoint = (baseStats.getHealthPoint());
+        if (damage > healthPoint) {
+            damage = healthPoint;
+        }
+
+        // Set healthPoint setelah terkena damage poison
+        baseStats.setHealthPoint(healthPoint - damage);
     }
 
-    public int sleep() {
-        int sleepTurn = 1 + (int) (Math.random() * 7);
-        return sleepTurn;
+    public void sleep() {
+        int sleepDuration = 1 + (int) (Math.random() * 7);
+        this.sleepDuration = sleepDuration;
+        System.out.printf("%s akan terkena SLEEP selama %d Turn.\n", this.name, sleepDuration);
     }
 
     public void paralyze() {
+        // Set speed setelah terkena paralyze
         double speed = (baseStats.getSpeed() * 0.5);
         baseStats.setSpeed(speed);
 
         int randomNum = 1 + (int) (Math.random() * 4);
         if (randomNum == 1) {
-            // gabisa gerak
+            this.sleepDuration = 1;
+            System.out.printf("%s tidak dapat bergerak!\n", this.name);
         }
     }
 
-    public void setStatusCondition(String statusCondition) {
-        this.statusCondition = statusCondition;
+    public void reduceSleepDuration() {
+        if (this.sleepDuration > 0) {
+            this.sleepDuration--;
+        } else {
+            this.statusCondition = "NONE";
+        }
     }
 }
