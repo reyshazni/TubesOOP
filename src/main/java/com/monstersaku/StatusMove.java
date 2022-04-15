@@ -37,7 +37,6 @@ public class StatusMove extends Move {
             System.out.println("Monster sudah mati!");
         } else {
             if (target.getStatusCondition() == "NONE"){
-                System.out.println(playerAttack.getCurrentMove().getEffect().getStatusCondition());
                 if (playerAttack.getCurrentMove().getEffect().getStatusCondition().equals("BURN")){
                     target.setStatusConditon("BURN");
                 } else if (playerAttack.getCurrentMove().getEffect().getStatusCondition().equals("POISON")) {
@@ -48,6 +47,7 @@ public class StatusMove extends Move {
                     target.setStatusConditon("PARALYZE");
                 }
             } else {
+                System.out.printf("%s tidak bisa diberikan ke monster lawan karena sudah lawan memiliki status condition!\n", playerAttack.getCurrentMove().getEffect().getStatusCondition());
                 double buffHP = Math.floor(source.getBaseStats().getHealthPoint()
                         + (this.getEffect().getHealthPoint() * source.getBaseStats().getHealthPoint()) / 100);
                 if (super.getTarget().equals("ENEMY")) {

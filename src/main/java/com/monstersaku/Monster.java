@@ -146,17 +146,19 @@ public class Monster implements StatusCondition {
         int sleepDuration = 1 + (int) (Math.random() * 7);
         this.sleepDuration = sleepDuration;
         System.out.printf("%s akan terkena SLEEP selama %d Turn.\n", this.name, sleepDuration);
+        System.out.println();
     }
 
     public void paralyze() {
         // Set speed setelah terkena paralyze
         double speed = (baseStats.getSpeed() * 0.5);
-        baseStats.setSpeed(speed);
+        this.baseStats.setSpeed(speed);
 
         int randomNum = 1 + (int) (Math.random() * 4);
         if (randomNum == 1) {
             this.sleepDuration = 1;
             System.out.printf("%s tidak dapat bergerak!\n", this.name);
+            System.out.println();
         }
     }
 
