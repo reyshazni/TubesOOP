@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import com.monstersaku.Monster;
 import com.monstersaku.Player;
-import com.monstersaku.StatusCondition;
 import com.monstersaku.util.AddListMonsterPool;
 import com.monstersaku.util.MonsterPoolImporter;
 
@@ -72,7 +71,7 @@ public class GameView implements TurnOutput {
             } else {
                 // Apabila priority sama, maka akan melakukan random
                 Random rdm = new Random();
-                int number = rdm.nextInt(1);
+                int number = rdm.nextInt(2);
                 if (number == 0) {
                     // Player 1 dulu baru player 2
                     player1.getCurrentMove().setDamage(player1, player2, myObj);
@@ -172,8 +171,8 @@ public class GameView implements TurnOutput {
         Player player1 = playerList.get(0);
         Player player2 = playerList.get(1);
 
-        System.out.println("Monster Player 1 : " + player1.countMonster());
-        System.out.println("Monster Player 2 : " + player2.countMonster());
+        System.out.println("Jumlah Monster Player 1 : " + player1.countMonster());
+        System.out.println("Jumlah Monster Player 2 : " + player2.countMonster());
         Display.lineBreak();
 
         if (player1.countMonster() == 0 && player2.countMonster() != 0) {
