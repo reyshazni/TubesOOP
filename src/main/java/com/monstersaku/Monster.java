@@ -164,7 +164,7 @@ public class Monster implements StatusCondition {
 
     public void reduceSleepDuration() {
         if (this.sleepDuration > 0) {
-            this.sleepDuration--;
+            this.sleepDuration = this.sleepDuration - 1;
         } else {
             this.statusCondition = "NONE";
         }

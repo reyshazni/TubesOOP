@@ -235,7 +235,7 @@ public class GameView implements TurnOutput {
                     m.poison();
                     break;
                 case "SLEEP":
-                    if (player1.getCurrentMonster().getSleepDuration() == 0){
+                    if (m.getSleepDuration() == 0){
                         System.out.println();
                         System.out.println(m.getName() + " terkena SLEEP!");
                         System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", m.getName());
@@ -284,7 +284,7 @@ public class GameView implements TurnOutput {
                     n.poison();
                     break;
                 case "SLEEP":
-                    if (player2.getCurrentMonster().getSleepDuration() == 0){
+                    if (n.getSleepDuration() == 0){
                         System.out.println();
                         System.out.println(n.getName() + " terkena SLEEP!");
                         System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", n.getName());
