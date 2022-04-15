@@ -20,10 +20,6 @@ public class StatusMove extends Move {
         this.statusCondition = statusCondition;
     }
 
-    // public String getTarget() {
-    // return target;
-    // }
-
     public String getStatCondition() {
         return statusCondition;
     }

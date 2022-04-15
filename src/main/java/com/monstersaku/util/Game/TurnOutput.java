@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.monstersaku.Player;
 
+// Interface untuk mengatur class turn
 public interface TurnOutput {
     public void didStartAttacking(Scanner myObj);
 

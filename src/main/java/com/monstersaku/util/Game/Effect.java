@@ -1,7 +1,8 @@
 package com.monstersaku.util.Game;
 
+
+// Class untuk menghitung effect dan mengatur statsbuff
 public class Effect {
-    // Menghitung base power
     private String statusCondition;
     private int[] statsPoint = new int[6];
 
@@ -34,7 +35,6 @@ public class Effect {
         this.statsPoint = statsPoint;
     }
 
-    // All Getter Method
     public int getHealthPoint() {
         return statsPoint[0];
     }

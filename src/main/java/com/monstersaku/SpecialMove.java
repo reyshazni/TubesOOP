@@ -4,7 +4,6 @@ import java.util.*;
 import com.monstersaku.util.Game.*;
 
 public class SpecialMove extends Move {
-    // private int basePower;
 
     public SpecialMove() {
         super();
@@ -17,12 +16,7 @@ public class SpecialMove extends Move {
     public SpecialMove(int id, String moveType, String name, ElementType elementType, int accuracy, int priority,
             int ammunition, String target, Effect effect) {
         move(id, moveType, name, elementType, accuracy, priority, ammunition, target, effect);
-        // this.basePower = basePower;
     }
-
-    // public int getBasePower() {
-    // return basePower;
-    // }
 
     public void setDamage(Player playerAttack, Player playerDefend, Scanner myObj) {
 
@@ -32,7 +26,6 @@ public class SpecialMove extends Move {
         if (source.getBaseStats().getHealthPoint() <= 0) {
             System.out.println("Monster sudah mati!");
         } else {
-            // Random rdm = new Random();
             double rdmNumber = (new Random().nextInt((int) 1.15) + 1);
             double effective = 1;
             double burnEffect = 1;

@@ -6,6 +6,7 @@ import java.util.List;
 import com.monstersaku.Main;
 import com.monstersaku.ElementType;
 
+// Class untuk melakukan impost effectivity config
 public class EffectivityConfig {
     private static String fileName;
 

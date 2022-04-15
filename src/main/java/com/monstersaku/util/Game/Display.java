@@ -2,6 +2,7 @@ package com.monstersaku.util.Game;
 
 import com.monstersaku.Player;
 
+// Class untuk membuat tampilan menjadi reusable
 public class Display {
     public static void menuAwal() {
         printArt();

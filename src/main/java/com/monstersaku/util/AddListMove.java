@@ -10,6 +10,7 @@ import com.monstersaku.NormalMove;
 import com.monstersaku.SpecialMove;
 import com.monstersaku.StatusMove;
 
+// Class untuk membuat list move untuk monster
 public class AddListMove {
     // Menambahkan List Move ke monster
     public static void add(Monster monster, int[] moves, List<Move> movePool) {

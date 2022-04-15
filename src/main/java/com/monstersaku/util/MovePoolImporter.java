@@ -13,6 +13,7 @@ import com.monstersaku.SpecialMove;
 import com.monstersaku.StatusMove;
 import com.monstersaku.util.Game.Effect;
 
+// Class untuk import movepool
 public class MovePoolImporter {
     // Membuat wadah untuk menempatkan fileName
     private static String fileName;
