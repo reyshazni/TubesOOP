@@ -12,6 +12,7 @@ import com.monstersaku.util.MonsterPoolImporter;
 
 public class GameView implements TurnOutput {
     private static List<Player> playerList = new ArrayList<Player>();
+    private int turnGame;
 
     public boolean isNotInfo = true;
 
@@ -45,6 +46,7 @@ public class GameView implements TurnOutput {
             turn.startTurn(myObj);
             if (isNotInfo) {
                 turn.increaseRound();
+                turnGame = turn.getTurn();
             } else {
                 isNotInfo = true;
             }
@@ -139,7 +141,7 @@ public class GameView implements TurnOutput {
                 case "4":
                     // Game Info
                     Display.lineBreak();
-                    System.out.printf("Game %d Info\n\n", round);
+                    gameInfo();
                     Display.lineBreak();
                     this.isNotInfo = false;
                     break;
@@ -171,10 +173,6 @@ public class GameView implements TurnOutput {
         Player player1 = playerList.get(0);
         Player player2 = playerList.get(1);
 
-        System.out.println("Jumlah Monster Player 1 : " + player1.countMonster());
-        System.out.println("Jumlah Monster Player 2 : " + player2.countMonster());
-        Display.lineBreak();
-
         if (player1.countMonster() == 0 && player2.countMonster() != 0) {
             Display.endGame(player2);
         } else if (player1.countMonster() != 0 && player2.countMonster() == 0) {
@@ -191,6 +189,7 @@ public class GameView implements TurnOutput {
         Player player2 = playerList.get(1);
 
         if (player1.getCurrentMonster().getBaseStats().getHealthPoint() <= 0) {
+            player1.getCurrentMonster().setIsAlive(false);
             System.out.printf("Monster dari %s yang sudah mati adalah: %s\n", player1.getName(),
                     player1.getCurrentMonster().getName());
             System.out.printf("%s harus mengganti hero!!\n", player1.getName());
@@ -201,6 +200,7 @@ public class GameView implements TurnOutput {
         }
 
         if (player2.getCurrentMonster().getBaseStats().getHealthPoint() <= 0) {
+            player2.getCurrentMonster().setIsAlive(false);
             System.out.printf("Monster dari %s yang sudah mati adalah: %s\n", player2.getName(),
                     player2.getCurrentMonster().getName());
             System.out.printf("%s harus mengganti hero!!\n", player2.getName());
@@ -341,7 +341,7 @@ public class GameView implements TurnOutput {
             case "4":
                 // Game Info
                 Display.lineBreak();
-                System.out.printf("Game %d Info\n\n", round);
+                gameInfo();
                 Display.lineBreak();
                 this.isNotInfo = false;
                 break;
@@ -363,5 +363,56 @@ public class GameView implements TurnOutput {
                 this.isNotInfo = false;
                 break;
         }
+    }
+
+    public void gameInfo() {
+        Player player1 = playerList.get(0);
+        Player player2 = playerList.get(1);
+
+        System.out.printf("Ronde Game : %d\n\n", (this.turnGame+1));
+        // Player 1
+        System.out.printf("--- Berikut merupakan informasi player %s ---\n", player1.getName());
+        System.out.printf("Monster player %s yang sedang dipakai: %s\n", player1.getName(), player1.getCurrentMonster().getName());
+        System.out.printf("Monster player %s yang sedang tidak dipakai: ", player1.getName());
+        int i = 1;
+        for (Monster m : player1.getListOfMonsters()) {
+            if (m != player1.getCurrentMonster() && m.getIsAlive()){
+                System.out.printf("\n%d. %s ",i, m.getName());
+                i++;
+            }
+        }
+        Display.lineBreak();
+        System.out.printf("Monster player %s yang sudah mati: ", player1.getName());
+        i = 1;
+        for (Monster n : player1.getListOfMonsters()) {
+            if (!n.getIsAlive()){
+                System.out.printf("\n%d. %s ",i, n.getName());
+                i++;
+            }
+        }
+        Display.lineBreak();
+        Display.lineBreak();
+
+        // Player 2
+        System.out.printf("--- Berikut merupakan informasi player %s ---\n", player2.getName());
+        System.out.printf("Monster player %s yang sedang dipakai: %s\n", player2.getName(), player2.getCurrentMonster().getName());
+        System.out.printf("Monster player %s yang sedang tidak dipakai: ", player2.getName());
+        i = 1;
+        for (Monster o : player2.getListOfMonsters()) {
+            if (o != player2.getCurrentMonster() && o.getIsAlive()){
+                System.out.printf("\n%d. %s ",i, o.getName());
+                i++;
+            }
+        }
+        Display.lineBreak();
+        System.out.printf("Monster player %s yang sudah mati: ", player2.getName());
+        i = 1;
+        for (Monster p : player2.getListOfMonsters()) {
+            if (!p.getIsAlive()){
+                System.out.printf("\n%d. %s ",i, p.getName());
+                i++;
+            }
+        }
+        Display.lineBreak();
     }
 }

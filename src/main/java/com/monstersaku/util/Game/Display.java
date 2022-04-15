@@ -8,33 +8,33 @@ public class Display {
         System.out.println("\nSELAMAT DATANG DI GAME MONSTER SAKU!!!");
         System.out.println("");
         System.out.println("Pilih command berikut!!");
-        System.out.println("1.START GAME");
-        System.out.println("2.HELP");
-        System.out.println("3.EXIT GAME");
+        System.out.println("(1) START GAME");
+        System.out.println("(2) HELP");
+        System.out.println("(3) EXIT GAME");
         System.out.println("Masukkan Command: ");
         System.out.print("->> ");
     }
 
     public static void menuDalamTurn() {
-        System.out.println("GAME MENU");
-        System.out.println("1. MOVE");
-        System.out.println("2. SWITCH");
-        System.out.println("3. MONSTER INFO");
-        System.out.println("4. GAME INFO");
-        System.out.println("5. HELP");
-        System.out.println("6. EXIT");
+        System.out.println("--- Game Menu ---");
+        System.out.println("(1) MOVE");
+        System.out.println("(2) SWITCH");
+        System.out.println("(3) MONSTER INFO");
+        System.out.println("(4) GAME INFO");
+        System.out.println("(5) HELP");
+        System.out.println("(6) EXIT");
         System.out.println("Masukkan Command: ");
         System.out.print("->> ");
     }
 
     public static void menuDalamTurnBurned(){
-        System.out.println("GAME MENU");
-        System.out.println("1. MOVE (Tidak bisa move karena sedang terkena efek)");
-        System.out.println("2. SWITCH");
-        System.out.println("3. MONSTER INFO");
-        System.out.println("4. GAME INFO");
-        System.out.println("5. HELP");
-        System.out.println("6. EXIT");
+        System.out.println("--- Game Menu ---");
+        System.out.println("(1) MOVE (Tidak bisa move karena sedang terkena efek)");
+        System.out.println("(2) SWITCH");
+        System.out.println("(3) MONSTER INFO");
+        System.out.println("(4) GAME INFO");
+        System.out.println("(5) HELP");
+        System.out.println("(6) EXIT");
         System.out.println("Masukkan Command: ");
         System.out.print("->> ");
     }

@@ -2,7 +2,6 @@ package com.monstersaku;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Monster implements StatusCondition {
     private int id;
@@ -10,7 +9,7 @@ public class Monster implements StatusCondition {
     private List<ElementType> elementTypes = new ArrayList<ElementType>();
     private Stats baseStats;
     private List<Move> moves = new ArrayList<Move>();
-    private boolean isAlive;
+    private boolean isAlive = true;
     private String statusCondition = "NONE";
     private int sleepDuration;
 

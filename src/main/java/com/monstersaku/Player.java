@@ -76,7 +76,7 @@ public class Player {
 
     public void printMyMonster() {
         System.out.println();
-        System.out.println("Jumlah Monster dari player " + this.getName().toUpperCase() + ": " + countMonster());
+        System.out.println("Jumlah Monster dari player " + this.getName() + ": " + countMonster());
         System.out.println("Berikut adalah monster yang dimiliki player " + this.getName() + ": ");
         for (Monster monster : listOfMonster) {
             if (monster.getBaseStats().getHealthPoint() >= 0) {

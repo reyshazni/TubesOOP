@@ -24,40 +24,39 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        // Membuat scanner
-        Scanner myObj = new Scanner(System.in);
+        try (// Membuat scanner
+        Scanner myObj = new Scanner(System.in)) {
+            // Membaca Configuration
+            readConfig();
 
-        // Membaca Configuration
-        readConfig();
-
-        // Membuat Masukan Game Menu
-
-        // Membuat while untuk run game
-        while (true) {
-            // Membuat command awal
-            Display.menuAwal();
-            String inputGameMenu = myObj.next();
-            switch (inputGameMenu) {
-                case "1":
-                    // Memasukkan List Monster
-                    GameView gameView = new GameView();
-                    gameView.startGame(myObj);
-                    break;
-                case "2":
-                    // Show Help
-                    Display.help();
-                    break;
-                case "3":
-                    // Exit
-                    System.out.println("##### Terima kasih sudah bermain! #####");
-                    System.exit(0);
-                    break;
-                default:
-                    // Invalid
-                    System.out.println("Command Tidak Sesuai");
-                    Display.menuAwal();
-                    inputGameMenu = myObj.next();
-                    break;
+            // Membuat while untuk run game
+            while (true) {
+                // Membuat command awal
+                Display.menuAwal();
+                String inputGameMenu;
+                inputGameMenu = myObj.next();
+                switch (inputGameMenu) {
+                    case "1":
+                        // Memasukkan List Monster
+                        GameView gameView = new GameView();
+                        gameView.startGame(myObj);
+                        break;
+                    case "2":
+                        // Show Help
+                        Display.help();
+                        break;
+                    case "3":
+                        // Exit
+                        System.out.println("##### Terima kasih sudah bermain! #####");
+                        System.exit(0);
+                        break;
+                    default:
+                        // Invalid
+                        System.out.println("Command Tidak Sesuai");
+                        Display.menuAwal();
+                        inputGameMenu = myObj.next();
+                        break;
+                }
             }
         }
     }
