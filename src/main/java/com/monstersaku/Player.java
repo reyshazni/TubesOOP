@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.monstersaku.Monster;
 import com.monstersaku.util.Game.Display;
-import com.monstersaku.*;
 
 public class Player {
     private String name;

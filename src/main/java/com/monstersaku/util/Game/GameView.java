@@ -95,69 +95,75 @@ public class GameView implements TurnOutput {
 
             System.out.printf("Move yang dilakukan Player 2 : %s\n", player2.getCurrentMove().getName());
         }
+        System.out.printf("Status P1 : %s\n", player1.getCurrentMonster().getStatusCondition());
+        System.out.printf("Status P2 : %s\n", player2.getCurrentMonster().getStatusCondition());
     }
 
     @Override  
     public void playerTurn(Scanner myObj, Player player, int round) {
         Player currPlayer = player;
         // Mengurangi sleepduration monster
-        decreaseSleepDuration(currPlayer);
-        System.out.printf("Masukkan inputmu, %s !!\n", currPlayer.getName());
-        Display.menuDalamTurn();
-        switch (myObj.next()) {
-            case "1":
-                // Moves
-                if(!isMonsterSleeping(currPlayer)){
-                    System.out.printf("\n--- Pilihan move ---\n");
-                    currPlayer.getCurrentMonster().showMove();
-                    currPlayer.setCurrentMove(myObj);
-                }
-                // NOTE : Ini harusnya kalo monsternya sleep harusnya bisa pilih menu lagi buat switch
-                playerTurnBurned(myObj, currPlayer, round);
-                break;
-            case "2":
-                // Switch
-                System.out.printf("Monster %d Switch\n\n", round);
-                System.out.printf("Monster yang sedang digunakan adalah: %s\n",
-                        currPlayer.getCurrentMonster().getName());
-                currPlayer.showAvailableMonster();
-                currPlayer.switchMonster(myObj);
-                System.out.printf("Monster baru yang digunakan sekarang adalah: %s, monster ke %d\n\n",
-                        currPlayer.getCurrentMonster().getName(),
-                        currPlayer.getListOfMonsters().indexOf(currPlayer.getCurrentMonster()) + 1);
-                break;
-            case "3":
-                // Monster Info
-                Display.lineBreak();
-                System.out.printf("Current Monster : %s", currPlayer.getCurrentMonster().getName());
-                currPlayer.printMyMonster();
-                Display.lineBreak();
-                this.isNotInfo = false;
-                break;
-            case "4":
-                // Game Info
-                Display.lineBreak();
-                System.out.printf("Game %d Info\n\n", round);
-                Display.lineBreak();
-                this.isNotInfo = false;
-                break;
-            case "5":
-                // Help
-                Display.lineBreak();
-                Display.helpTurn();
-                Display.lineBreak();
-                this.isNotInfo = false;
-                break;
-            case "6":
-                // Exit
-                System.out.println("##### Terima kasih sudah bermain! #####");
-                System.exit(0);
-                break;
-            default:
-                // CAUTION : bikin biar bisa ngulang kalo salah input
-                System.out.printf("\nMasukkan input dengan benar!\n");
-                this.isNotInfo = false;
-                break;
+        if (!isMonsterSleeping(currPlayer)) {
+            decreaseSleepDuration(currPlayer);
+            System.out.printf("Masukkan inputmu, %s !!\n", currPlayer.getName());
+            Display.menuDalamTurn();
+            switch (myObj.next()) {
+                case "1":
+                    // Moves
+                    if(!isMonsterSleeping(currPlayer)){
+                        System.out.printf("\n--- Pilihan move ---\n");
+                        currPlayer.getCurrentMonster().showMove();
+                        currPlayer.setCurrentMove(myObj);
+                    } else {
+                        // NOTE : Ini harusnya kalo monsternya sleep harusnya bisa pilih menu lagi buat switch
+                    }
+                    break;
+                case "2":
+                    // Switch
+                    System.out.printf("Monster %d Switch\n\n", round);
+                    System.out.printf("Monster yang sedang digunakan adalah: %s\n",
+                            currPlayer.getCurrentMonster().getName());
+                    currPlayer.showAvailableMonster();
+                    currPlayer.switchMonster(myObj);
+                    System.out.printf("Monster baru yang digunakan sekarang adalah: %s, monster ke %d\n\n",
+                            currPlayer.getCurrentMonster().getName(),
+                            currPlayer.getListOfMonsters().indexOf(currPlayer.getCurrentMonster()) + 1);
+                    break;
+                case "3":
+                    // Monster Info
+                    Display.lineBreak();
+                    System.out.printf("Current Monster : %s", currPlayer.getCurrentMonster().getName());
+                    currPlayer.printMyMonster();
+                    Display.lineBreak();
+                    this.isNotInfo = false;
+                    break;
+                case "4":
+                    // Game Info
+                    Display.lineBreak();
+                    System.out.printf("Game %d Info\n\n", round);
+                    Display.lineBreak();
+                    this.isNotInfo = false;
+                    break;
+                case "5":
+                    // Help
+                    Display.lineBreak();
+                    Display.helpTurn();
+                    Display.lineBreak();
+                    this.isNotInfo = false;
+                    break;
+                case "6":
+                    // Exit
+                    System.out.println("##### Terima kasih sudah bermain! #####");
+                    System.exit(0);
+                    break;
+                default:
+                    // CAUTION : bikin biar bisa ngulang kalo salah input
+                    System.out.printf("\nMasukkan input dengan benar!\n");
+                    this.isNotInfo = false;
+                    break;
+            }
+        } else {
+            playerTurnBurned(myObj, currPlayer, round);
         }
     }
 
