@@ -30,7 +30,6 @@ public class DefaultMove extends Move {
             System.out.println("Monster sudah mati!");
         } else {
             double rdmNumber = (new Random().nextInt((int) 1.15) + 1);
-            System.out.printf("\n -- RND NUM %f -- \n", rdmNumber);
             double effective = 1;
             double burnEffect = 1;
 
@@ -52,7 +51,6 @@ public class DefaultMove extends Move {
 
             // Enemy
             currentEnemyHP = target.getBaseStats().getHealthPoint() - damageAttack;
-            System.out.printf("\n--- NYAWA %s MENJADI %f ---\n", target.getName().toUpperCase(), currentEnemyHP);
             if (currentEnemyHP <= 0) {
                 for (Monster m : playerDefend.getListOfMonsters()) {
                     if (m == target) {

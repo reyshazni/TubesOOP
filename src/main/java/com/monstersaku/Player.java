@@ -80,10 +80,10 @@ public class Player {
         System.out.println("Berikut adalah monster yang dimiliki player " + this.getName() + ": ");
         for (Monster monster : listOfMonster) {
             if (monster.getBaseStats().getHealthPoint() >= 0) {
-                System.out.println("");
+                Display.lineBreak();
                 System.out.println("----- Current Stats Monster " + monster.getName() + " -----");
                 monster.getBaseStats().showStats();
-                System.out.println(" ");
+                Display.lineBreak();
             }
         }
     }
