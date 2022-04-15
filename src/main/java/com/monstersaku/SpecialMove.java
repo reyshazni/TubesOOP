@@ -52,7 +52,7 @@ public class SpecialMove extends Move {
             currentHP = target.getBaseStats().getHealthPoint() - damageAttack;
 
             if (currentHP <= 0) {
-                System.out.println("Enemy has died.");
+                // System.out.println("Enemy has died.");
                 target.getBaseStats().setHealthPoint(0);
             } else {
                 target.getBaseStats().setHealthPoint(currentHP);
