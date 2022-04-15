@@ -204,7 +204,7 @@ public class GameView implements TurnOutput {
         }
     }
 
-    public void afterDamageCalculation() {
+    public void effectStatusCondition() {
         Player player1 = playerList.get(0);
         Player player2 = playerList.get(1);
 
@@ -215,11 +215,13 @@ public class GameView implements TurnOutput {
                 case "NONE":
                     break;
                 case "BURN":
+                    // After damage calculation
                     System.out.println(m.getName() + " terkena BURN!");
                     System.out.printf("Health Point %s yang terkena BURN akan berkurang %d setiap Turn!\n", m.getName(), (int) Math.floor(maxHP * (0.125)));
                     m.burn();
                     break;
                 case "POISON":
+                    // After damage calculation
                     System.out.println(m.getName() + " terkena POISON!");
                     System.out.printf("Health Point %s yang terkena POISON akan berkurang %d setiap Turn!\n", m.getName(), (int) Math.floor(maxHP * (0.0625)));
                     m.poison();
@@ -245,11 +247,13 @@ public class GameView implements TurnOutput {
                 case "NONE":
                     break;
                 case "BURN":
+                    // After damage calculation
                     System.out.println(n.getName() + " terkena BURN!");
                     System.out.printf("Health Point %s yang terkena BURN akan berkurang %d setiap Turn!\n", n.getName(), (int) Math.floor(maxHP * (0.125)));
                     n.burn();
                     break;
                 case "POISON":
+                    // After damage calculation
                     System.out.println(n.getName() + " terkena POISON!");
                     System.out.printf("Health Point %s yang terkena POISON akan berkurang %d setiap Turn!\n", n.getName(), (int) Math.floor(maxHP * (0.0625)));
                     n.poison();

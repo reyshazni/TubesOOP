@@ -40,7 +40,7 @@ public class Turn {
             System.out.printf("");
             this.output.didStartAttacking(myObj);
             this.output.checkIfEndGame();
-            this.output.afterDamageCalculation();
+            this.output.effectStatusCondition();
             this.output.checkIfMonsterDie(myObj);
             setTurn(getTurn() + 1);
         }
