@@ -33,7 +33,7 @@ public class StatusMove extends Move {
         Monster source = playerAttack.getCurrentMonster();
         Monster target = playerDefend.getCurrentMonster();
 
-        if (source.getBaseStats().getHealthPoint() <= 0) {
+        if (source.getInitStats().getHealthPoint() <= 0) {
             System.out.println("Monster sudah mati!");
         } else {
             if (target.getStatusCondition() == "NONE"){
@@ -48,21 +48,21 @@ public class StatusMove extends Move {
                 }
             } else {
                 System.out.printf("%s tidak bisa diberikan ke monster lawan karena sudah lawan memiliki status condition!\n", playerAttack.getCurrentMove().getEffect().getStatusCondition());
-                double buffHP = Math.floor(source.getBaseStats().getHealthPoint()
-                        + (this.getEffect().getHealthPoint() * source.getBaseStats().getHealthPoint()) / 100);
+                double buffHP = Math.floor(source.getInitStats().getHealthPoint()
+                        + (this.getEffect().getHealthPoint() * source.getInitStats().getHealthPoint()) / 100);
                 if (super.getTarget().equals("ENEMY")) {
-                    target.getBaseStats().setAttack(Effect.convertedToFactorBuff(target.getBaseStats().getAttack(),
+                    target.getInitStats().setAttack(Effect.convertedToFactorBuff(target.getInitStats().getAttack(),
                             this.getEffect().getAttack()));
-                    target.getBaseStats().setDefense(Effect.convertedToFactorBuff(target.getBaseStats().getDefense(),
+                    target.getInitStats().setDefense(Effect.convertedToFactorBuff(target.getInitStats().getDefense(),
                             this.getEffect().getDefense()));
-                    target.getBaseStats().setSpecialAttack(Effect.convertedToFactorBuff(
-                            target.getBaseStats().getSpecialAttack(), this.getEffect().getSpecialAttack()));
-                    target.getBaseStats().setSpecialDefense(Effect.convertedToFactorBuff(
-                            target.getBaseStats().getSpecialDefense(), this.getEffect().getSpecialDefense()));
-                    target.getBaseStats().setSpeed(Effect.convertedToFactorBuff(target.getBaseStats().getSpeed(),
+                    target.getInitStats().setSpecialAttack(Effect.convertedToFactorBuff(
+                            target.getInitStats().getSpecialAttack(), this.getEffect().getSpecialAttack()));
+                    target.getInitStats().setSpecialDefense(Effect.convertedToFactorBuff(
+                            target.getInitStats().getSpecialDefense(), this.getEffect().getSpecialDefense()));
+                    target.getInitStats().setSpeed(Effect.convertedToFactorBuff(target.getInitStats().getSpeed(),
                             this.getEffect().getSpeed()));
                 } else { // target = SOURCE
-                    source.getBaseStats().setHealthPoint(buffHP);
+                    source.getInitStats().setHealthPoint(buffHP);
                 }
             }
         } 

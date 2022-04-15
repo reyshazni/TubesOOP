@@ -39,15 +39,15 @@ public class MonsterPoolImporter {
                     ElementType elt = ElementType.valueOf(el);
                     eltype.add(elt);
                 }
-                // BASESTATS
+                // initStats
                 String[] bs = (line[3]).split(",");
-                int[] baseStats = { 0, 0, 0, 0, 0, 0 };
+                int[] initStats = { 0, 0, 0, 0, 0, 0 };
                 for (int i = 0; i < 6; i++) {
-                    baseStats[i] = Integer.valueOf(bs[i]);
+                    initStats[i] = Integer.valueOf(bs[i]);
                 }
-                Stats readBaseStats = new Stats(baseStats[0], baseStats[0], baseStats[1], baseStats[2], baseStats[3],
-                        baseStats[4], baseStats[5]);
-                Monster readMonster = new Monster(id, name, eltype, readBaseStats);
+                Stats readInitStats = new Stats(initStats[0], initStats[0], initStats[1], initStats[2], initStats[3],
+                        initStats[4], initStats[5]);
+                Monster readMonster = new Monster(id, name, eltype, readInitStats);
                 // MOVE
                 String[] movstr = ((line[4]).split(","));
                 // mau ubah string array to int array

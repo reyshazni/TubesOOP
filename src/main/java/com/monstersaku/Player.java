@@ -47,7 +47,7 @@ public class Player {
 
     public void setMonsters(List<Monster> monsters) {
         this.listOfMonster = monsters;
-        System.out.printf("MONSTER PERTAMA YANG DIGUNAKAN OLEH %s ->> %s\n\n", getName().toUpperCase(),
+        System.out.printf("Monster pertama yang digunakan oleh %s ->> %s\n\n", getName(),
                 monsters.get(0).getName().toUpperCase());
         setCurrentMonster(monsters.get(0));
     }

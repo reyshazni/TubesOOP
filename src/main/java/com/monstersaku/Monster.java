@@ -7,6 +7,7 @@ public class Monster implements StatusCondition {
     private int id;
     private String name;
     private List<ElementType> elementTypes = new ArrayList<ElementType>();
+    private Stats initStats;
     private Stats baseStats;
     private List<Move> moves = new ArrayList<Move>();
     private boolean isAlive = true;
@@ -17,60 +18,73 @@ public class Monster implements StatusCondition {
     public Monster() {
 
     }
-
-    public Monster(int id, String name, List<ElementType> elementTypes, Stats basesStats) {
+    
+    public Monster(int id, String name, List<ElementType> elementTypes, Stats initStats) {
         this.id = id;
         this.name = name;
         this.elementTypes = elementTypes;
-        this.baseStats = basesStats;
+        this.initStats = initStats;
+        copyBaseStats();
+    }
+
+    public void copyBaseStats(){
+        this.baseStats = this.initStats;
     }
 
     public int getId() {
         return id;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public List<ElementType> getElementTypes() {
         return elementTypes;
     }
-
+    
     public List<Move> getMoves() {
         return moves;
     }
-
+    
     public Stats getBaseStats() {
         return baseStats;
     }
-
+    
+    public Stats getInitStats() {
+        return initStats;
+    }
+    
     public boolean getIsAlive() {
         return isAlive;
     }
-
+    
     public String getStatusCondition() {
         return statusCondition;
     }
-
+    
     public void setId(int id) {
         this.id = id;
     }
-
+    
     public void setname(String name) {
         this.name = name;
     }
-
+    
     public void setElementTypes(List<ElementType> elementTypes) {
         this.elementTypes = elementTypes;
     }
-
+    
     public void setMoves(List<Move> moves) {
         this.moves = moves;
     }
-
+    
     public void setBaseStats(Stats baseStats) {
         this.baseStats = baseStats;
+    }
+
+    public void setInitStats(Stats initStats) {
+        this.initStats =  initStats;
     }
 
     public void setIsAlive(boolean isAlive) {

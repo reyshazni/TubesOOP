@@ -96,8 +96,8 @@ public class GameView implements TurnOutput {
 
             System.out.printf("Move yang dilakukan Player 2 : %s\n", player2.getCurrentMove().getName());
         }
-        System.out.printf("Status P1 : %s\n", player1.getCurrentMonster().getStatusCondition());
-        System.out.printf("Status P2 : %s\n", player2.getCurrentMonster().getStatusCondition());
+        System.out.printf("Status Player 1 : %s\n", player1.getCurrentMonster().getStatusCondition());
+        System.out.printf("Status Player 2 : %s\n", player2.getCurrentMonster().getStatusCondition());
     }
 
     @Override  
@@ -220,44 +220,52 @@ public class GameView implements TurnOutput {
                     break;
                 case "BURN":
                     // After damage calculation
-                    System.out.println();
-                    System.out.println(m.getName() + " terkena BURN!");
-                    System.out.printf("Health Point %s yang terkena BURN akan berkurang %d setiap Turn!\n", m.getName(), (int) Math.floor(maxHP * (0.125)));
-                    System.out.println();
-                    m.burn();
+                    if (player1.getCurrentMonster() == m) {
+                        System.out.println();
+                        System.out.println(m.getName() + " terkena BURN!");
+                        System.out.printf("Health Point %s yang terkena BURN akan berkurang %d setiap Turn!\n", m.getName(), (int) Math.floor(maxHP * (0.125)));
+                        System.out.println();
+                        m.burn();
+                    }
                     break;
                 case "POISON":
                     // After damage calculation
-                    System.out.println();
-                    System.out.println(m.getName() + " terkena POISON!");
-                    System.out.printf("Health Point %s yang terkena POISON akan berkurang %d setiap Turn!\n", m.getName(), (int) Math.floor(maxHP * (0.0625)));
-                    System.out.println();
-                    m.poison();
+                    if (player1.getCurrentMonster() == m) {
+                        System.out.println();
+                        System.out.println(m.getName() + " terkena POISON!");
+                        System.out.printf("Health Point %s yang terkena POISON akan berkurang %d setiap Turn!\n", m.getName(), (int) Math.floor(maxHP * (0.0625)));
+                        System.out.println();
+                        m.poison();
+                    }
                     break;
                 case "SLEEP":
-                    if (m.getSleepDuration() == 0){
-                        System.out.println();
-                        System.out.println(m.getName() + " terkena SLEEP!");
-                        System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", m.getName());
-                        System.out.println();
-                        m.sleep();
-                    } else {
-                        System.out.println();
-                        System.out.println(m.getName() + " terkena SLEEP!");
-                        System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", m.getName());
-                        System.out.printf("Monster %s milik %s tidak dapat bergerak selama %d Turn!\n", m.getName(), player1.getName(), m.getSleepDuration());
-                        System.out.println();
+                    if (player1.getCurrentMonster() == m) {
+                        if (m.getSleepDuration() == 0){
+                            System.out.println();
+                            System.out.println(m.getName() + " terkena SLEEP!");
+                            System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", m.getName());
+                            System.out.println();
+                            m.sleep();
+                        } else {
+                            System.out.println();
+                            System.out.println(m.getName() + " terkena SLEEP!");
+                            System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", m.getName());
+                            System.out.printf("Monster %s milik %s tidak dapat bergerak selama %d Turn!\n", m.getName(), player1.getName(), m.getSleepDuration());
+                            System.out.println();
+                        }
                     }
                     break;
                 case "PARALYZE":
-                    System.out.println();
-                    double speed = m.getBaseStats().getSpeed();
-                    System.out.println(m.getName() + " terkena PARALYZE");
-                    System.out.printf("Speed %s yang terkena PARALYZE akan berkurang 50 persen menjadi %d\n", m.getName(), (int) (speed * 0.5));
-                    System.out.printf("Terdapat 25 persen kemungkinan %s tidak dapat bergerak!\n", m.getName());
-                    System.out.println();
-                    m.paralyze();
-                    break;
+                    if (player1.getCurrentMonster() == m) {
+                        System.out.println();
+                        double speed = m.getBaseStats().getSpeed();
+                        System.out.println(m.getName() + " terkena PARALYZE");
+                        System.out.printf("Speed %s yang terkena PARALYZE akan berkurang 50 persen menjadi %d\n", m.getName(), (int) (speed * 0.5));
+                        System.out.printf("Terdapat 25 persen kemungkinan %s tidak dapat bergerak!\n", m.getName());
+                        System.out.println();
+                        m.paralyze();
+                        break;
+                    }
             }
         }
 
@@ -269,44 +277,52 @@ public class GameView implements TurnOutput {
                     break;
                 case "BURN":
                     // After damage calculation
-                    System.out.println();
-                    System.out.println(n.getName() + " terkena BURN!");
-                    System.out.printf("Health Point %s yang terkena BURN akan berkurang %d setiap Turn!\n", n.getName(), (int) Math.floor(maxHP * (0.125)));
-                    System.out.println();
-                    n.burn();
+                    if (player2.getCurrentMonster() == n) {
+                        System.out.println();
+                        System.out.println(n.getName() + " terkena BURN!");
+                        System.out.printf("Health Point %s yang terkena BURN akan berkurang %d setiap Turn!\n", n.getName(), (int) Math.floor(maxHP * (0.125)));
+                        System.out.println();
+                        n.burn();
+                    }
                     break;
                 case "POISON":
                     // After damage calculation
-                    System.out.println();
-                    System.out.println(n.getName() + " terkena POISON!");
-                    System.out.printf("Health Point %s yang terkena POISON akan berkurang %d setiap Turn!\n", n.getName(), (int) Math.floor(maxHP * (0.0625)));
-                    System.out.println();
-                    n.poison();
+                    if (player2.getCurrentMonster() == n){
+                        System.out.println();
+                        System.out.println(n.getName() + " terkena POISON!");
+                        System.out.printf("Health Point %s yang terkena POISON akan berkurang %d setiap Turn!\n", n.getName(), (int) Math.floor(maxHP * (0.0625)));
+                        System.out.println();
+                        n.poison();
+                    }
                     break;
                 case "SLEEP":
-                    if (n.getSleepDuration() == 0){
-                        System.out.println();
-                        System.out.println(n.getName() + " terkena SLEEP!");
-                        System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", n.getName());
-                        System.out.println();
-                        n.sleep();
-                    } else {
-                        System.out.println();
-                        System.out.println(n.getName() + " terkena SLEEP!");
-                        System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", n.getName());
-                        System.out.printf("Monster %s milik %s tidak dapat bergerak selama %d Turn!\n", n.getName(), n.getName(), n.getSleepDuration());
-                        System.out.println();
+                    if (player2.getCurrentMonster() == n) {
+                        if (n.getSleepDuration() == 0){
+                            System.out.println();
+                            System.out.println(n.getName() + " terkena SLEEP!");
+                            System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", n.getName());
+                            System.out.println();
+                            n.sleep();
+                        } else {
+                            System.out.println();
+                            System.out.println(n.getName() + " terkena SLEEP!");
+                            System.out.printf("Segala Move yang dipilih oleh %s tidak akan dieksekusi!\n", n.getName());
+                            System.out.printf("Monster %s milik %s tidak dapat bergerak selama %d Turn!\n", n.getName(), n.getName(), n.getSleepDuration());
+                            System.out.println();
+                        }
                     }
                     break;
                 case "PARALYZE":
-                    System.out.println();
-                    double speed = n.getBaseStats().getSpeed();
-                    System.out.println(n.getName() + " terkena PARALYZE");
-                    System.out.printf("Speed %s yang terkena PARALYZE akan berkurang 50 persen menjadi %d\n", n.getName(), (int) (speed * 0.5));
-                    System.out.printf("Terdapat 25 persen kemungkinan %s tidak dapat bergerak!\n", n.getName());
-                    System.out.println();
-                    n.paralyze();
-                    break;
+                    if (player2.getCurrentMonster() == n) {
+                        System.out.println();
+                        double speed = n.getBaseStats().getSpeed();
+                        System.out.println(n.getName() + " terkena PARALYZE");
+                        System.out.printf("Speed %s yang terkena PARALYZE akan berkurang 50 persen menjadi %d\n", n.getName(), (int) (speed * 0.5));
+                        System.out.printf("Terdapat 25 persen kemungkinan %s tidak dapat bergerak!\n", n.getName());
+                        System.out.println();
+                        n.paralyze();
+                        break;
+                    }
             }
         }
     }

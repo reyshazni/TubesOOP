@@ -20,15 +20,14 @@ public class AddListMonsterPool {
             Collections.shuffle(monsterListFull);
             Monster m = copyMonster(monsterListFull.get(0));
             m.setMoves(monsterListFull.get(0).getMoves());
-            // m.copyMonster(monsterListFull.get(0));
             monsterList.add(m);
         }
         player.setMonsters(monsterList);
     }
 
     public static Monster copyMonster(Monster m) {
-        Stats base = m.getBaseStats();
-        Stats copyStats = new Stats(base.getMaxHealthPoint(), base.getHealthPoint(), base.getAttack(), base.getDefense(), base.getSpecialAttack(), base.getSpecialDefense(), base.getSpeed());
+        Stats init = m.getInitStats();
+        Stats copyStats = new Stats(init.getMaxHealthPoint(), init.getHealthPoint(), init.getAttack(), init.getDefense(), init.getSpecialAttack(), init.getSpecialDefense(), init.getSpeed());
         Monster copy = new Monster (m.getId(), m.getName(), m.getElementTypes(), copyStats);
         return copy;
     }
