@@ -8,8 +8,7 @@ import com.monstersaku.Monster;
 import com.monstersaku.Stats;
 import com.monstersaku.Player;
 
-/* Membuat List Monster Secara Random Untuk Player */
-
+// Class untuk membuat list monster secara random untuk player
 public class AddListMonsterPool {
     public static void AddMonsters(Player player, List<Monster> monsterPool) {
         List<Monster> monsterList = new ArrayList<Monster>();

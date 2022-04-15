@@ -10,6 +10,7 @@ import com.monstersaku.Monster;
 import com.monstersaku.Move;
 import com.monstersaku.Stats;
 
+// Class untuk import monsterpool
 public class MonsterPoolImporter {
     // Membuat wadah untuk menempatkan fileName
     private static String fileName;

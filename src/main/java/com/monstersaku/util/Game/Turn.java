@@ -2,6 +2,7 @@ package com.monstersaku.util.Game;
 
 import java.util.Scanner;
 
+// Class untuk mengatur turn dan round dari game
 public class Turn {
     private int turn = 1;
     private int round = 1;

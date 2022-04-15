@@ -10,6 +10,7 @@ import com.monstersaku.Player;
 import com.monstersaku.util.AddListMonsterPool;
 import com.monstersaku.util.MonsterPoolImporter;
 
+// Class untuk menampilkan permainan
 public class GameView implements TurnOutput {
     private static List<Player> playerList = new ArrayList<Player>();
     private int turnGame;
