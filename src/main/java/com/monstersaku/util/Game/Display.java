@@ -88,6 +88,7 @@ public class Display {
     public static void endGame(Player players) {
         System.out.println("--- GAME OVER ---");
         System.out.println("CONGRATULATIONS!! " + players.getName() + " WON!!");
+        System.out.println("##### Terima kasih sudah bermain! #####");
         System.exit(0);
     }
 

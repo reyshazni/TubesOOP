@@ -174,11 +174,12 @@ public class GameView implements TurnOutput {
 
         System.out.println("Monster Player 1 : " + player1.countMonster());
         System.out.println("Monster Player 2 : " + player2.countMonster());
+        Display.lineBreak();
 
         if (player1.countMonster() == 0 && player2.countMonster() != 0) {
-            Display.endGame(player1);
-        } else if (player1.countMonster() != 0 && player2.countMonster() == 0) {
             Display.endGame(player2);
+        } else if (player1.countMonster() != 0 && player2.countMonster() == 0) {
+            Display.endGame(player1);
         } else if (player1.countMonster() == 0 && player2.countMonster() == 0) {
             System.out.println("TIDAK ADA PEMENANG!");
             System.exit(0);
