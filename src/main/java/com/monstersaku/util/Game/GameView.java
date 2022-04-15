@@ -7,12 +7,12 @@ import java.util.Scanner;
 
 import com.monstersaku.Monster;
 import com.monstersaku.Player;
-import com.monstersaku.StatusCondition;
 import com.monstersaku.util.AddListMonsterPool;
 import com.monstersaku.util.MonsterPoolImporter;
 
 public class GameView implements TurnOutput {
     private static List<Player> playerList = new ArrayList<Player>();
+    private int turnGame;
 
     public boolean isNotInfo = true;
 
@@ -46,6 +46,7 @@ public class GameView implements TurnOutput {
             turn.startTurn(myObj);
             if (isNotInfo) {
                 turn.increaseRound();
+                turnGame = turn.getTurn();
             } else {
                 isNotInfo = true;
             }
@@ -72,7 +73,7 @@ public class GameView implements TurnOutput {
             } else {
                 // Apabila priority sama, maka akan melakukan random
                 Random rdm = new Random();
-                int number = rdm.nextInt(1);
+                int number = rdm.nextInt(2);
                 if (number == 0) {
                     // Player 1 dulu baru player 2
                     player1.getCurrentMove().setDamage(player1, player2, myObj);
@@ -95,68 +96,75 @@ public class GameView implements TurnOutput {
 
             System.out.printf("Move yang dilakukan Player 2 : %s\n", player2.getCurrentMove().getName());
         }
+        System.out.printf("Status P1 : %s\n", player1.getCurrentMonster().getStatusCondition());
+        System.out.printf("Status P2 : %s\n", player2.getCurrentMonster().getStatusCondition());
     }
 
     @Override  
     public void playerTurn(Scanner myObj, Player player, int round) {
         Player currPlayer = player;
         // Mengurangi sleepduration monster
-        decreaseSleepDuration(currPlayer);
-        System.out.printf("Masukkan inputmu, %s !!\n", currPlayer.getName());
-        Display.menuDalamTurn();
-        switch (myObj.next()) {
-            case "1":
-                // Moves
-                if(!isMonsterSleeping(currPlayer)){
-                    System.out.printf("\n--- Pilihan move ---\n");
-                    currPlayer.getCurrentMonster().showMove();
-                    currPlayer.setCurrentMove(myObj);
-                }
-                // NOTE : Ini harusnya kalo monsternya sleep harusnya bisa pilih menu lagi buat switch
-                break;
-            case "2":
-                // Switch
-                System.out.printf("Monster %d Switch\n\n", round);
-                System.out.printf("Monster yang sedang digunakan adalah: %s\n",
-                        currPlayer.getCurrentMonster().getName());
-                currPlayer.showAvailableMonster();
-                currPlayer.switchMonster(myObj);
-                System.out.printf("Monster baru yang digunakan sekarang adalah: %s, monster ke %d\n\n",
-                        currPlayer.getCurrentMonster().getName(),
-                        currPlayer.getListOfMonsters().indexOf(currPlayer.getCurrentMonster()) + 1);
-                break;
-            case "3":
-                // Monster Info
-                Display.lineBreak();
-                System.out.printf("Current Monster : %s", currPlayer.getCurrentMonster().getName());
-                currPlayer.printMyMonster();
-                Display.lineBreak();
-                this.isNotInfo = false;
-                break;
-            case "4":
-                // Game Info
-                Display.lineBreak();
-                System.out.printf("Game %d Info\n\n", round);
-                Display.lineBreak();
-                this.isNotInfo = false;
-                break;
-            case "5":
-                // Help
-                Display.lineBreak();
-                Display.helpTurn();
-                Display.lineBreak();
-                this.isNotInfo = false;
-                break;
-            case "6":
-                // Exit
-                System.out.println("##### Terima kasih sudah bermain! #####");
-                System.exit(0);
-                break;
-            default:
-                // CAUTION : bikin biar bisa ngulang kalo salah input
-                System.out.printf("\nMasukkan input dengan benar!\n");
-                this.isNotInfo = false;
-                break;
+        if (!isMonsterSleeping(currPlayer)) {
+            decreaseSleepDuration(currPlayer);
+            System.out.printf("Masukkan inputmu, %s !!\n", currPlayer.getName());
+            Display.menuDalamTurn();
+            switch (myObj.next()) {
+                case "1":
+                    // Moves
+                    if(!isMonsterSleeping(currPlayer)){
+                        System.out.printf("\n--- Pilihan move ---\n");
+                        currPlayer.getCurrentMonster().showMove();
+                        currPlayer.setCurrentMove(myObj);
+                    } else {
+                        // NOTE : Ini harusnya kalo monsternya sleep harusnya bisa pilih menu lagi buat switch
+                    }
+                    break;
+                case "2":
+                    // Switch
+                    System.out.printf("Monster %d Switch\n\n", round);
+                    System.out.printf("Monster yang sedang digunakan adalah: %s\n",
+                            currPlayer.getCurrentMonster().getName());
+                    currPlayer.showAvailableMonster();
+                    currPlayer.switchMonster(myObj);
+                    System.out.printf("Monster baru yang digunakan sekarang adalah: %s, monster ke %d\n\n",
+                            currPlayer.getCurrentMonster().getName(),
+                            currPlayer.getListOfMonsters().indexOf(currPlayer.getCurrentMonster()) + 1);
+                    break;
+                case "3":
+                    // Monster Info
+                    Display.lineBreak();
+                    System.out.printf("Current Monster : %s", currPlayer.getCurrentMonster().getName());
+                    currPlayer.printMyMonster();
+                    Display.lineBreak();
+                    this.isNotInfo = false;
+                    break;
+                case "4":
+                    // Game Info
+                    Display.lineBreak();
+                    gameInfo();
+                    Display.lineBreak();
+                    this.isNotInfo = false;
+                    break;
+                case "5":
+                    // Help
+                    Display.lineBreak();
+                    Display.helpTurn();
+                    Display.lineBreak();
+                    this.isNotInfo = false;
+                    break;
+                case "6":
+                    // Exit
+                    System.out.println("##### Terima kasih sudah bermain! #####");
+                    System.exit(0);
+                    break;
+                default:
+                    // CAUTION : bikin biar bisa ngulang kalo salah input
+                    System.out.printf("\nMasukkan input dengan benar!\n");
+                    this.isNotInfo = false;
+                    break;
+            }
+        } else {
+            playerTurnBurned(myObj, currPlayer, round);
         }
     }
 
@@ -165,13 +173,10 @@ public class GameView implements TurnOutput {
         Player player1 = playerList.get(0);
         Player player2 = playerList.get(1);
 
-        System.out.println("Monster Player 1 : " + player1.countMonster());
-        System.out.println("Monster Player 2 : " + player2.countMonster());
-
         if (player1.countMonster() == 0 && player2.countMonster() != 0) {
-            Display.endGame(player1);
-        } else if (player1.countMonster() != 0 && player2.countMonster() == 0) {
             Display.endGame(player2);
+        } else if (player1.countMonster() != 0 && player2.countMonster() == 0) {
+            Display.endGame(player1);
         } else if (player1.countMonster() == 0 && player2.countMonster() == 0) {
             System.out.println("TIDAK ADA PEMENANG!");
             System.exit(0);
@@ -184,6 +189,8 @@ public class GameView implements TurnOutput {
         Player player2 = playerList.get(1);
 
         if (player1.getCurrentMonster().getBaseStats().getHealthPoint() <= 0) {
+            player1.getCurrentMonster().setStatusConditon("NONE");
+            player1.getCurrentMonster().setIsAlive(false);
             System.out.printf("Monster dari %s yang sudah mati adalah: %s\n", player1.getName(),
                     player1.getCurrentMonster().getName());
             System.out.printf("%s harus mengganti hero!!\n", player1.getName());
@@ -194,6 +201,8 @@ public class GameView implements TurnOutput {
         }
 
         if (player2.getCurrentMonster().getBaseStats().getHealthPoint() <= 0) {
+            player2.getCurrentMonster().setStatusConditon("NONE");
+            player2.getCurrentMonster().setIsAlive(false);
             System.out.printf("Monster dari %s yang sudah mati adalah: %s\n", player2.getName(),
                     player2.getCurrentMonster().getName());
             System.out.printf("%s harus mengganti hero!!\n", player2.getName());
@@ -288,5 +297,127 @@ public class GameView implements TurnOutput {
                 m.reduceSleepDuration();
             }
         }
+    }
+
+    public void checkIfMonsterExceedMaxHP() {
+        Player player1 = playerList.get(0);
+        Player player2 = playerList.get(1);
+
+        for (Monster m : player1.getListOfMonsters()) {
+            if (m.getBaseStats().getHealthPoint() > m.getBaseStats().getMaxHealthPoint()) {
+                m.getBaseStats().setHealthPoint(m.getBaseStats().getMaxHealthPoint());
+            }
+        }
+
+        for (Monster n : player2.getListOfMonsters()) {
+            if (n.getBaseStats().getHealthPoint() > n.getBaseStats().getMaxHealthPoint()) {
+                n.getBaseStats().setHealthPoint(n.getBaseStats().getMaxHealthPoint());
+            }
+        }
+    }
+
+    public void playerTurnBurned(Scanner myObj, Player currPlayer, int round) {
+        decreaseSleepDuration(currPlayer);
+        System.out.printf("Masukkan inputmu, %s !!\n", currPlayer.getName());
+        Display.menuDalamTurnBurned();
+        switch (myObj.next()) {
+            case "1":
+                System.out.println("Melanjutkan permainan");
+                break;
+            case "2":
+                // Switch
+                System.out.printf("Monster %d Switch\n\n", round);
+                System.out.printf("Monster yang sedang digunakan adalah: %s\n",
+                        currPlayer.getCurrentMonster().getName());
+                currPlayer.showAvailableMonster();
+                currPlayer.switchMonster(myObj);
+                System.out.printf("Monster baru yang digunakan sekarang adalah: %s, monster ke %d\n\n",
+                        currPlayer.getCurrentMonster().getName(),
+                        currPlayer.getListOfMonsters().indexOf(currPlayer.getCurrentMonster()) + 1);
+                break;
+            case "3":
+                // Monster Info
+                Display.lineBreak();
+                System.out.printf("Current Monster : %s", currPlayer.getCurrentMonster().getName());
+                currPlayer.printMyMonster();
+                Display.lineBreak();
+                this.isNotInfo = false;
+                break;
+            case "4":
+                // Game Info
+                Display.lineBreak();
+                gameInfo();
+                Display.lineBreak();
+                this.isNotInfo = false;
+                break;
+            case "5":
+                // Help
+                Display.lineBreak();
+                Display.helpTurn();
+                Display.lineBreak();
+                this.isNotInfo = false;
+                break;
+            case "6":
+                // Exit
+                System.out.println("##### Terima kasih sudah bermain! #####");
+                System.exit(0);
+                break;
+            default:
+                // CAUTION : bikin biar bisa ngulang kalo salah input
+                System.out.printf("\nMasukkan input dengan benar!\n");
+                this.isNotInfo = false;
+                break;
+        }
+    }
+
+    public void gameInfo() {
+        Player player1 = playerList.get(0);
+        Player player2 = playerList.get(1);
+
+        System.out.printf("Ronde Game : %d\n\n", (this.turnGame+1));
+        // Player 1
+        System.out.printf("--- Berikut merupakan informasi player %s ---\n", player1.getName());
+        System.out.printf("Monster player %s yang sedang dipakai: %s\n", player1.getName(), player1.getCurrentMonster().getName());
+        System.out.printf("Monster player %s yang sedang tidak dipakai: ", player1.getName());
+        int i = 1;
+        for (Monster m : player1.getListOfMonsters()) {
+            if (m != player1.getCurrentMonster() && m.getIsAlive()){
+                System.out.printf("\n%d. %s ",i, m.getName());
+                i++;
+            }
+        }
+        Display.lineBreak();
+        System.out.printf("Monster player %s yang sudah mati: ", player1.getName());
+        i = 1;
+        for (Monster n : player1.getListOfMonsters()) {
+            if (!n.getIsAlive()){
+                System.out.printf("\n%d. %s ",i, n.getName());
+                i++;
+            }
+        }
+        Display.lineBreak();
+        Display.lineBreak();
+
+        // Player 2
+        System.out.printf("--- Berikut merupakan informasi player %s ---\n", player2.getName());
+        System.out.printf("Monster player %s yang sedang dipakai: %s\n", player2.getName(), player2.getCurrentMonster().getName());
+        System.out.printf("Monster player %s yang sedang tidak dipakai: ", player2.getName());
+        i = 1;
+        for (Monster o : player2.getListOfMonsters()) {
+            if (o != player2.getCurrentMonster() && o.getIsAlive()){
+                System.out.printf("\n%d. %s ",i, o.getName());
+                i++;
+            }
+        }
+        Display.lineBreak();
+        System.out.printf("Monster player %s yang sudah mati: ", player2.getName());
+        i = 1;
+        for (Monster p : player2.getListOfMonsters()) {
+            if (!p.getIsAlive()){
+                System.out.printf("\n%d. %s ",i, p.getName());
+                i++;
+            }
+        }
+        Display.lineBreak();
     }
 }

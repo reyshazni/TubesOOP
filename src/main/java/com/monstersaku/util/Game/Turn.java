@@ -42,6 +42,7 @@ public class Turn {
             this.output.checkIfEndGame();
             this.output.effectStatusCondition();
             this.output.checkIfMonsterDie(myObj);
+            this.output.checkIfMonsterExceedMaxHP();
             setTurn(getTurn() + 1);
         }
     }

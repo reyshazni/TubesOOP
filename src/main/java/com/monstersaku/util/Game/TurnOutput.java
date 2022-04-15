@@ -14,4 +14,6 @@ public interface TurnOutput {
     public void checkIfMonsterDie(Scanner myObj);
 
     public void effectStatusCondition();
+
+    public void checkIfMonsterExceedMaxHP();
 }
