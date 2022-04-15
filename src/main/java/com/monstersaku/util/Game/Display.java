@@ -27,6 +27,18 @@ public class Display {
         System.out.print("->> ");
     }
 
+    public static void menuDalamTurnBurned(){
+        System.out.println("GAME MENU");
+        System.out.println("1. MOVE (Tidak bisa move karena sedang terkena efek)");
+        System.out.println("2. SWITCH");
+        System.out.println("3. MONSTER INFO");
+        System.out.println("4. GAME INFO");
+        System.out.println("5. HELP");
+        System.out.println("6. EXIT");
+        System.out.println("Masukkan Command: ");
+        System.out.print("->> ");
+    }
+
     public static void help() {
         System.out.println("<<<>>> HELP <<<>>>");
         System.out.println("[Deskripsi Game]");
