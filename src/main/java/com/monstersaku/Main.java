@@ -22,7 +22,7 @@ public class Main {
     public static void readConfig() {
         // Monsterpool dapat berubah untuk memenuhi testing konfigurasi
         // Pilihan pool dapat diganti menggunakan index 0, 1, dan 2.
-        MonsterPoolImporter.setFileName(CSV_FILE_PATHS.get(1));
+        MonsterPoolImporter.setFileName(CSV_FILE_PATHS.get(0));
         MovePoolImporter.setFileName(CSV_FILE_PATHS.get(3));
         EffectivityConfig.setFileName(CSV_FILE_PATHS.get(4));
     }
