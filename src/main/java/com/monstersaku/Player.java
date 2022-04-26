@@ -112,20 +112,25 @@ public class Player {
         System.out.println("Pilih Monster Baru :");
         System.out.print("->> ");
         int num;
-        while (true) {
-            num = myObj.nextInt();
-            if (listOfMonster.get(num - 1).getBaseStats().getHealthPoint() > 0) {
-                break;
-            } else {
-                System.out.println("Monster yang kamu pilih sudah mati! Pilih monster lainnya!");
-                switchMonster(myObj);
-                break;
+        num = myObj.nextInt();
+        if ((num >= 1) && (num<=6)){
+            while (true) {
+                if (listOfMonster.get(num - 1).getBaseStats().getHealthPoint() > 0) {
+                    break;
+                } else {
+                    System.out.println("Monster yang kamu pilih sudah mati! Pilih monster lainnya!\n");
+                    switchMonster(myObj);
+                    break;
+                }
             }
+            Monster monster = listOfMonster.get(num - 1);
+    
+            currentMonster = monster;
+            currMove = null;
+        } else {
+            System.out.println("Monster tidak tersedia! Pilih monster lainnya!\n");
+            switchMonster(myObj);
         }
-        Monster monster = listOfMonster.get(num - 1);
-
-        currentMonster = monster;
-        currMove = null;
     }
 
     public void setCurrentMove(Scanner myObj) {

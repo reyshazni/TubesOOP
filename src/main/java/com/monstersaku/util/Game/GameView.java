@@ -99,6 +99,7 @@ public class GameView implements TurnOutput {
         }
         System.out.printf("Status Player 1 : %s\n", player1.getCurrentMonster().getStatusCondition());
         System.out.printf("Status Player 2 : %s\n", player2.getCurrentMonster().getStatusCondition());
+        Display.lineBreak();
     }
 
     @Override  
