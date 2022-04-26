@@ -14,13 +14,17 @@ import com.monstersaku.util.Game.GameView;
 public class Main {
     private static final List<String> CSV_FILE_PATHS = Collections.unmodifiableList(Arrays.asList(
             "configs/monsterpool.csv",
+            "configs/monsterpool-4moves.csv",
+            "configs/monsterpool-movetest.csv",
             "configs/movepool.csv",
             "configs/element-type-effectivity-chart.csv"));
 
     public static void readConfig() {
-        MonsterPoolImporter.setFileName(CSV_FILE_PATHS.get(0));
-        MovePoolImporter.setFileName(CSV_FILE_PATHS.get(1));
-        EffectivityConfig.setFileName(CSV_FILE_PATHS.get(2));
+        // Monsterpool dapat berubah untuk memenuhi testing konfigurasi
+        // Pilihan pool dapat diganti menggunakan index 0, 1, dan 2.
+        MonsterPoolImporter.setFileName(CSV_FILE_PATHS.get(1));
+        MovePoolImporter.setFileName(CSV_FILE_PATHS.get(3));
+        EffectivityConfig.setFileName(CSV_FILE_PATHS.get(4));
     }
 
     public static void main(String[] args) {
